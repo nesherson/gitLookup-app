@@ -1,17 +1,25 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-const SearchField = () => {
+const SearchField = (props) => {
+  const [value, setValue] = useState('');
+
   return (
-    <div class='searchField'>
-      <form>
+    <div>
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          props.onSubmit(value);
+        }}
+      >
         <label htmlFor=''>github.com/</label>
         <input
           type='text'
           id='username'
           name='username'
           placeholder='Enter Github Username'
+          value={value}
+          onChange={(e) => setValue(e.target.value)}
         />
-        <input type='submit' value='search' />
       </form>
     </div>
   );
