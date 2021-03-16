@@ -1,28 +1,29 @@
-import React, { useState } from 'react';
+import React from 'react';
 
-const SearchField = (props) => {
-  const [value, setValue] = useState('');
+export const SearchField = ({ handleInputChange, inputValue }) => {
+  const handleChange = (e) => {
+    handleInputChange(e);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    alert('Form submitted!');
+  };
 
   return (
     <div>
-      <form
-        onSubmit={(e) => {
-          e.preventDefault();
-          props.onSubmit(value);
-        }}
-      >
+      <form onSubmit={handleSubmit}>
         <label htmlFor=''>github.com/</label>
         <input
           type='text'
           id='username'
           name='username'
           placeholder='Enter Github Username'
-          value={value}
-          onChange={(e) => setValue(e.target.value)}
+          value={inputValue}
+          onChange={handleChange}
         />
+        <input type='submit' value='Submit' />
       </form>
     </div>
   );
 };
-
-export default SearchField;

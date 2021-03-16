@@ -6,7 +6,7 @@ const Heading = styled.h1`
   font-size: 3.2rem;
 `;
 
-const Logo = () => {
+export const Logo = () => {
   return (
     <div>
       <Heading>gitLookup</Heading>
@@ -14,5 +14,3 @@ const Logo = () => {
     </div>
   );
 };
-
-export default Logo;
