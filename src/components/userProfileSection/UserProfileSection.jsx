@@ -10,7 +10,7 @@ const Wrapper = Styled.div`
     width: 280px;
 `;
 
-export const UserProfileDetails = () => {
+export const UserProfileSection = () => {
   return (
     <Wrapper>
       <About />

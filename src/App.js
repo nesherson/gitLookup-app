@@ -1,15 +1,21 @@
 import React, { useState } from 'react';
-import styled from 'styled-components';
+import Styled from 'styled-components';
 import { Logo } from './components/Logo';
 import { SearchField } from './components/SearchField';
-import { UserProfileDetails } from './components/userProfileDetails/UserProfileDetails';
+import { UserProfileSection } from './components/userProfileSection/UserProfileSection';
+import { UserActivitySection } from './components/userActivitySection/UserActivitySection';
 
-const Wrapper = styled.div`
+const Wrapper = Styled.div`
   min-height: calc(100vh - 100px);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+`;
+
+const UserWrapper = Styled.div`
+  display: flex;
+  
 `;
 
 function App() {
@@ -22,7 +28,7 @@ function App() {
     setSearchInput(target.value);
   };
 
-  const fetchData = async (url = '') => {
+  const fetchData = () => {
     fetch('https://api.github.com/users/nesherson')
       .then((resp) => resp.json())
       .then((data) => {
@@ -41,7 +47,10 @@ function App() {
         handleInputChange={handleInputChange}
         fetchData={fetchData}
       />
-      <UserProfileDetails />
+      <UserWrapper>
+        <UserProfileSection />
+        <UserActivitySection />
+      </UserWrapper>
     </Wrapper>
   );
 }
