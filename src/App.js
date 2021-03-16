@@ -2,8 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Logo } from './components/Logo';
 import { SearchField } from './components/SearchField';
-import { User } from './components/User';
-import { UserProfileDetails } from './components/UserProfileDetails';
+import { UserProfileDetails } from './components/userProfileDetails/UserProfileDetails';
 
 const Wrapper = styled.div`
   min-height: calc(100vh - 100px);

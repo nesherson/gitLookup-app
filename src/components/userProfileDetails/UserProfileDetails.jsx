@@ -1,7 +1,9 @@
 import React from 'react';
 import Styled from 'styled-components';
-import { UserName } from './UserName';
+import { About } from './About';
 import { UserStats } from './UserStats';
+import { UserLanguages } from './UserLanguages';
+import { UserDates } from './UserDates';
 
 const Wrapper = Styled.div`
     border: 1px solid #000;
@@ -11,8 +13,10 @@ const Wrapper = Styled.div`
 export const UserProfileDetails = () => {
   return (
     <Wrapper>
-      <UserName />
+      <About />
       <UserStats />
+      <UserLanguages />
+      <UserDates />
     </Wrapper>
   );
 };

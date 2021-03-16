@@ -3,19 +3,22 @@ import Styled from 'styled-components';
 
 const Heading = Styled.h3`
   font-size: 1.15rem;
-  Wrapper
+  font-weight: 500;
+  margin: 5px 10px;
 `;
 
 const StatNumber = Styled.p`
-
+  margin: 5px 10px;
 `;
 
 const StatsWrapper = Styled.div`
   display: flex;
+  justify-content: space-between;
 `;
 
 const Wrapper = Styled.div`
-  padding: 15px;
+  padding: 12px;
+  border-bottom: 1px solid #000;
 `;
 
 export const UserStats = () => {

@@ -3,7 +3,7 @@ import Styled from 'styled-components';
 
 const Avatar = Styled.div`
     background-color: red;
-    padding: 15px;
+    
 `;
 
 const Heading = Styled.h1`
@@ -14,9 +14,10 @@ const Wrapper = Styled.div`
     display: flex;
     flex-direction: row;
     border-bottom: 1px solid #000;
+    padding: 12px;
 `;
 
-export const UserName = () => {
+export const About = () => {
   return (
     <Wrapper>
       <Avatar>Picture</Avatar>
