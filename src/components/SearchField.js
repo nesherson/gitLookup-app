@@ -22,14 +22,14 @@ const SearchLabel = styled.label`
   padding: 7px;
 `;
 
-export const SearchField = ({ handleInputChange, inputValue }) => {
+export const SearchField = ({ handleInputChange, inputValue, fetchData }) => {
   const handleChange = (e) => {
     handleInputChange(e);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    alert('Form submitted!');
+    fetchData('nesherson');
   };
 
   return (

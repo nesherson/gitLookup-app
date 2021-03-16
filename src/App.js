@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Logo } from './components/Logo';
 import { SearchField } from './components/SearchField';
+import { User } from './components/User';
+import { UserProfileDetails } from './components/UserProfileDetails';
 
 const Wrapper = styled.div`
   min-height: calc(100vh - 100px);
@@ -13,6 +15,7 @@ const Wrapper = styled.div`
 
 function App() {
   const [searchInput, setSearchInput] = useState('');
+  const [fetchedUser, setFetchedUser] = useState({});
 
   console.log(searchInput);
 
@@ -20,15 +23,26 @@ function App() {
     setSearchInput(target.value);
   };
 
+  const fetchData = async (url = '') => {
+    fetch('https://api.github.com/users/nesherson')
+      .then((resp) => resp.json())
+      .then((data) => {
+        setFetchedUser(data);
+      });
+  };
+
   const handleDataFetch = () => {};
 
+  console.log(fetchedUser);
   return (
     <Wrapper>
       <Logo />
       <SearchField
         inputValue={searchInput}
         handleInputChange={handleInputChange}
+        fetchData={fetchData}
       />
+      <UserProfileDetails />
     </Wrapper>
   );
 }
