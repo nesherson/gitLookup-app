@@ -10,10 +10,12 @@ const Wrapper = Styled.div`
     width: 280px;
 `;
 
-export const UserProfileSection = () => {
+export const UserProfileSection = (props) => {
+  const userAbout = props.about;
+
   return (
     <Wrapper>
-      <About />
+      <About about={userAbout} />
       <UserStats />
       <UserLanguages />
       <UserDates />

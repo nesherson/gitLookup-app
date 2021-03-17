@@ -15,7 +15,6 @@ const Wrapper = Styled.div`
 
 const UserWrapper = Styled.div`
   display: flex;
-  
 `;
 
 function App() {
@@ -39,6 +38,12 @@ function App() {
   const handleDataFetch = () => {};
 
   console.log(fetchedUser);
+
+  const userAbout = {
+    userName: fetchedUser.name,
+    profilePicture: fetchedUser.avatar_url,
+    profileUrl: fetchedUser.html_url,
+  };
   return (
     <Wrapper>
       <Logo />
@@ -48,7 +53,7 @@ function App() {
         fetchData={fetchData}
       />
       <UserWrapper>
-        <UserProfileSection />
+        <UserProfileSection about={userAbout} />
         <UserActivitySection />
       </UserWrapper>
     </Wrapper>
