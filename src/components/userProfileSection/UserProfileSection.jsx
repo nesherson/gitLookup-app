@@ -14,13 +14,14 @@ export const UserProfileSection = (props) => {
   const userAbout = props.about;
   const userStats = props.stats;
   const languages = props.languages;
+  const userDates = props.dates;
 
   return (
     <Wrapper>
       <About about={userAbout} />
       <UserStats stats={userStats} />
       <UserLanguages languages={languages} />
-      <UserDates />
+      <UserDates dates={userDates} />
     </Wrapper>
   );
 };

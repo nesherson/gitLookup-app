@@ -66,8 +66,6 @@ function App() {
           return arr.indexOf(lang) === i;
         });
 
-  console.log(languages);
-
   const userAbout = {
     userName: aboutUser.name,
     profilePicture: aboutUser.avatar_url,
@@ -79,6 +77,22 @@ function App() {
     following: aboutUser.following,
     stars: stars,
     forks: forks,
+  };
+
+  const userDates = {
+    createdAt: new Date(aboutUser.created_at).toLocaleDateString('en-GB', {
+      weekday: 'long',
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+    }),
+    location: aboutUser.location,
+    updatedAt: new Date(aboutUser.updated_at).toLocaleDateString('en-GB', {
+      weekday: 'long',
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+    }),
   };
 
   return (
@@ -94,6 +108,7 @@ function App() {
           about={userAbout}
           stats={userStats}
           languages={languages}
+          dates={userDates}
         />
         <UserActivitySection />
       </UserWrapper>

@@ -25,18 +25,20 @@ const Wrapper = Styled.div`
     padding: 12px;
 `;
 
-export const UserDates = () => {
+export const UserDates = (props) => {
+  const userDates = props.dates;
+
   return (
     <Wrapper>
       <StatsWrapper>
         <Heading>Joined</Heading>
-        <Text>Aug 30, 2015</Text>
+        <Text>{userDates.createdAt}</Text>
       </StatsWrapper>
       <StatsWrapper>
         <Heading>Location</Heading>
-        <Text>India</Text>
+        <Text>{userDates.location}</Text>
       </StatsWrapper>
-      <TextSpan>Last Updated on Mar 14, 2021</TextSpan>
+      <TextSpan>Last Updated on {userDates.updatedAt}</TextSpan>
     </Wrapper>
   );
 };
