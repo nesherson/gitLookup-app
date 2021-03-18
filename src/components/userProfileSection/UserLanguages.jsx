@@ -1,7 +1,7 @@
 import React from 'react';
 import Styled from 'styled-components';
 
-const Wrapper = Styled.div`
+const List = Styled.ul`
     padding: 12px;
     display: flex;
     flex-wrap: wrap;
@@ -15,14 +15,15 @@ const Item = Styled.span`
     font-size: 0.9rem;
 `;
 
-export const UserLanguages = () => {
+export const UserLanguages = (props) => {
+  const languages = props.languages;
+
   return (
-    <Wrapper>
-      <Item>C++</Item>
-      <Item>Python</Item>
-      <Item>JavaScript</Item>
-      <Item>Ruby</Item>
-      <Item>CSS</Item>
-    </Wrapper>
+    <List>
+      {languages &&
+        languages.map((lang) => {
+          return <Item key={lang}>{lang}</Item>;
+        })}
+    </List>
   );
 };

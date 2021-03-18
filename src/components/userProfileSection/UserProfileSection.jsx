@@ -13,12 +13,13 @@ const Wrapper = Styled.div`
 export const UserProfileSection = (props) => {
   const userAbout = props.about;
   const userStats = props.stats;
+  const languages = props.languages;
 
   return (
     <Wrapper>
       <About about={userAbout} />
       <UserStats stats={userStats} />
-      <UserLanguages />
+      <UserLanguages languages={languages} />
       <UserDates />
     </Wrapper>
   );

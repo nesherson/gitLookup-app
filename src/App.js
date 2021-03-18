@@ -52,7 +52,21 @@ function App() {
     : userRepos.reduce((acc, repo) => {
         return (acc += repo.forks_count);
       }, 0);
-  console.log(forks);
+
+  const languages = !userRepos
+    ? null
+    : userRepos
+        .map((repo) => {
+          return repo.language;
+        })
+        .filter((lang) => {
+          if (lang !== null) return lang;
+        })
+        .filter((lang, i, arr) => {
+          return arr.indexOf(lang) === i;
+        });
+
+  console.log(languages);
 
   const userAbout = {
     userName: aboutUser.name,
@@ -76,7 +90,11 @@ function App() {
         fetchData={fetchData}
       />
       <UserWrapper>
-        <UserProfileSection about={userAbout} stats={userStats} />
+        <UserProfileSection
+          about={userAbout}
+          stats={userStats}
+          languages={languages}
+        />
         <UserActivitySection />
       </UserWrapper>
     </Wrapper>
