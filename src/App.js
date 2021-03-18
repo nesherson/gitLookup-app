@@ -19,7 +19,8 @@ const UserWrapper = Styled.div`
 
 function App() {
   const [searchInput, setSearchInput] = useState('');
-  const [fetchedUser, setFetchedUser] = useState({});
+  const [aboutUser, setAboutUser] = useState({});
+  const [userRepos, setUserRepos] = useState(null);
 
   console.log(searchInput);
 
@@ -28,22 +29,44 @@ function App() {
   };
 
   const fetchData = () => {
-    fetch('https://api.github.com/users/nesherson')
+    fetch('https://api.github.com/users/himanshub16')
       .then((resp) => resp.json())
       .then((data) => {
-        setFetchedUser(data);
+        setAboutUser(data);
       });
+    fetch('https://api.github.com/users/himanshub16/repos')
+      .then((resp) => resp.json())
+      .then((data) => setUserRepos(data));
   };
 
-  const handleDataFetch = () => {};
+  console.log(userRepos);
 
-  console.log(fetchedUser);
+  const stars = !userRepos
+    ? null
+    : userRepos.reduce((acc, repo) => {
+        return (acc += repo.stargazers_count);
+      }, 0);
+
+  const forks = !userRepos
+    ? null
+    : userRepos.reduce((acc, repo) => {
+        return (acc += repo.forks_count);
+      }, 0);
+  console.log(forks);
 
   const userAbout = {
-    userName: fetchedUser.name,
-    profilePicture: fetchedUser.avatar_url,
-    profileUrl: fetchedUser.html_url,
+    userName: aboutUser.name,
+    profilePicture: aboutUser.avatar_url,
+    profileUrl: aboutUser.html_url,
   };
+
+  const userStats = {
+    followers: aboutUser.followers,
+    following: aboutUser.following,
+    stars: stars,
+    forks: forks,
+  };
+
   return (
     <Wrapper>
       <Logo />
@@ -53,7 +76,7 @@ function App() {
         fetchData={fetchData}
       />
       <UserWrapper>
-        <UserProfileSection about={userAbout} />
+        <UserProfileSection about={userAbout} stats={userStats} />
         <UserActivitySection />
       </UserWrapper>
     </Wrapper>

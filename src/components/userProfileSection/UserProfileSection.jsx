@@ -12,11 +12,12 @@ const Wrapper = Styled.div`
 
 export const UserProfileSection = (props) => {
   const userAbout = props.about;
+  const userStats = props.stats;
 
   return (
     <Wrapper>
       <About about={userAbout} />
-      <UserStats />
+      <UserStats stats={userStats} />
       <UserLanguages />
       <UserDates />
     </Wrapper>

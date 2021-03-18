@@ -21,27 +21,29 @@ const Wrapper = Styled.div`
   border-bottom: 1px solid #000;
 `;
 
-export const UserStats = () => {
+export const UserStats = (props) => {
+  const userStats = props.stats;
+
   return (
     <Wrapper>
       <StatsWrapper>
         <Heading>Followers</Heading>
-        <StatNumber>242</StatNumber>
+        <StatNumber>{userStats.followers}</StatNumber>
       </StatsWrapper>
 
       <StatsWrapper>
         <Heading>Following</Heading>
-        <StatNumber>30</StatNumber>
+        <StatNumber>{userStats.following}</StatNumber>
       </StatsWrapper>
 
       <StatsWrapper>
         <Heading>Stars received</Heading>
-        <StatNumber>570</StatNumber>
+        <StatNumber>{userStats.stars}</StatNumber>
       </StatsWrapper>
 
       <StatsWrapper>
         <Heading>Forks By Users</Heading>
-        <StatNumber>136</StatNumber>
+        <StatNumber>{userStats.forks}</StatNumber>
       </StatsWrapper>
     </Wrapper>
   );

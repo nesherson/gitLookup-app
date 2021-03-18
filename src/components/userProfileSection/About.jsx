@@ -31,7 +31,7 @@ export const About = (props) => {
       <Avatar>
         <ProfilePicture
           src={`${userAbout.profilePicture}`}
-          alt='Diamod shaped abstract figure'
+          alt={!userAbout.profilePicture ? '' : 'Diamod shaped abstract figure'}
         />
       </Avatar>
       <div>
