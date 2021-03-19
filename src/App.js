@@ -21,6 +21,7 @@ function App() {
   const [searchInput, setSearchInput] = useState('');
   const [aboutUser, setAboutUser] = useState({});
   const [userRepos, setUserRepos] = useState(null);
+  const [userActivity, setUserActivity] = useState([]);
 
   console.log(searchInput);
 
@@ -37,9 +38,10 @@ function App() {
     fetch(`https://api.github.com/users/${searchInput}/repos`)
       .then((resp) => resp.json())
       .then((data) => setUserRepos(data));
+    fetch(`https://api.github.com/users/${searchInput}/events`)
+      .then((resp) => resp.json())
+      .then((data) => setUserActivity(data));
   };
-
-  console.log(userRepos);
 
   const stars = !userRepos
     ? null
@@ -95,6 +97,26 @@ function App() {
     }),
   };
 
+  const activities = !userRepos
+    ? null
+    : userActivity.map((activity) => {
+        return {
+          type: activity.type,
+          name: activity.repo.name,
+          repoUrl: `https://github.com/${activity.repo.name}`,
+          commentUrl:
+            activity.type === 'IssueCommentEvent'
+              ? activity.payload.comment.html_url
+              : null,
+          issueUrl:
+            activity.type === 'IssuesEvent'
+              ? activity.payload.issue.html_url
+              : null,
+        };
+      });
+
+  console.log(activities);
+
   return (
     <Wrapper>
       <Logo />
@@ -110,7 +132,7 @@ function App() {
           languages={languages}
           dates={userDates}
         />
-        <UserActivitySection />
+        <UserActivitySection activities={activities} />
       </UserWrapper>
     </Wrapper>
   );

@@ -1,4 +1,5 @@
 import React from 'react';
+import { ActivityList } from './ActivityList';
 import Styled from 'styled-components';
 
 const Heading = Styled.h3`
@@ -17,19 +18,13 @@ const Wrapper = Styled.div`
 
 `;
 
-const ActivityList = Styled.div`
-    padding: 12px;
-`;
+export const UserActivitySection = (props) => {
+  const activities = props.activities;
 
-export const UserActivitySection = () => {
   return (
     <Wrapper>
       <Heading>LATEST ACTIVITIES</Heading>
-      <ActivityList>
-        <p>Starred a repo</p>
-        <p>Created a comment</p>
-        <p>Oppened an issue</p>
-      </ActivityList>
+      <ActivityList activities={activities} />
     </Wrapper>
   );
 };
