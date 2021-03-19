@@ -29,12 +29,12 @@ function App() {
   };
 
   const fetchData = () => {
-    fetch('https://api.github.com/users/himanshub16')
+    fetch(`https://api.github.com/users/${searchInput}`)
       .then((resp) => resp.json())
       .then((data) => {
         setAboutUser(data);
       });
-    fetch('https://api.github.com/users/himanshub16/repos')
+    fetch(`https://api.github.com/users/${searchInput}/repos`)
       .then((resp) => resp.json())
       .then((data) => setUserRepos(data));
   };
