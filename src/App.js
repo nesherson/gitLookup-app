@@ -23,8 +23,6 @@ function App() {
   const [userRepos, setUserRepos] = useState(null);
   const [userActivity, setUserActivity] = useState([]);
 
-  console.log(searchInput);
-
   const handleInputChange = ({ target }) => {
     setSearchInput(target.value);
   };
@@ -32,9 +30,7 @@ function App() {
   const fetchData = () => {
     fetch(`https://api.github.com/users/${searchInput}`)
       .then((resp) => resp.json())
-      .then((data) => {
-        setAboutUser(data);
-      });
+      .then((data) => setAboutUser(data));
     fetch(`https://api.github.com/users/${searchInput}/repos`)
       .then((resp) => resp.json())
       .then((data) => setUserRepos(data));
@@ -101,17 +97,11 @@ function App() {
     ? null
     : userActivity.map((activity) => {
         return {
+          author: activity.repo.name,
           type: activity.type,
           name: activity.repo.name,
-          repoUrl: `https://github.com/${activity.repo.name}`,
-          commentUrl:
-            activity.type === 'IssueCommentEvent'
-              ? activity.payload.comment.html_url
-              : null,
-          issueUrl:
-            activity.type === 'IssuesEvent'
-              ? activity.payload.issue.html_url
-              : null,
+          repo: `https://github.com/${activity.repo.name}`,
+          payload: activity.payload,
         };
       });
 
