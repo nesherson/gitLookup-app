@@ -3,11 +3,10 @@ import { ActivityList } from './ActivityList';
 import Styled from 'styled-components';
 
 const Heading = Styled.h3`
-  font-size: 1.45rem;
+  font-size: 1.25rem;
   font-weight: 500;
-  margin-top: 15px;
-  margin-bottom: 0px;
-  padding: 12px;
+  margin: 10px 0 0 0;
+  padding: 12px 25px;
   border-bottom: 1px solid #000;
 `;
 

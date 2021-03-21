@@ -22,14 +22,23 @@ const SearchLabel = styled.label`
   padding: 7px;
 `;
 
-export const SearchField = ({ handleInputChange, inputValue, fetchData }) => {
+export const SearchField = ({
+  handleInputChange,
+  handleEmptyInput,
+  inputValue,
+  fetchData,
+}) => {
   const handleChange = (e) => {
     handleInputChange(e);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    fetchData('nesherson');
+    if (!handleEmptyInput(inputValue)) {
+      fetchData();
+    } else {
+      return;
+    }
   };
 
   return (

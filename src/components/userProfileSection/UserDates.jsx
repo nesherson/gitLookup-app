@@ -2,18 +2,18 @@ import React from 'react';
 import Styled from 'styled-components';
 
 const Heading = Styled.h4`
-    font-size: 0.95rem;
-    font-weight: 500;
-    margin: 3px 10px;
+    font-size: 0.80rem;
+    font-weight: 600;
+    margin: 0 10px;
 `;
 
 const Text = Styled.p`
-    font-size: 1.05rem;
+    font-size: 0.95rem;
     margin: 3px 10px;
 `;
 
 const TextSpan = Styled.span`
-    font-size: 1.05rem;
+    font-size: 0.95rem;
     margin: 5px 10px;
 `;
 
@@ -26,19 +26,26 @@ const Wrapper = Styled.div`
 `;
 
 export const UserDates = (props) => {
-  const userDates = props.dates;
+  const userDates =
+    props.dates.createdAt === 'Invalid Date' ||
+    props.dates.updatedAt === 'Invalid Date'
+      ? null
+      : props.dates;
 
   return (
     <Wrapper>
       <StatsWrapper>
         <Heading>Joined</Heading>
-        <Text>{userDates.createdAt}</Text>
+        {/* <Text>{userDates && userDates.createdAt}</Text> */}
+        <Text>Apr 7, 2017</Text>
       </StatsWrapper>
       <StatsWrapper>
         <Heading>Location</Heading>
-        <Text>{userDates.location}</Text>
+        {/* <Text>{userDates && userDates.location}</Text> */}
+        <Text>Ireland</Text>
       </StatsWrapper>
-      <TextSpan>Last Updated on {userDates.updatedAt}</TextSpan>
+      {/* <TextSpan>Last Updated on {userDates && userDates.updatedAt}</TextSpan> */}
+      <TextSpan>Last Updated on Mar 20, 2021</TextSpan>
     </Wrapper>
   );
 };

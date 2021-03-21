@@ -1,8 +1,8 @@
 import React from 'react';
 import Styled from 'styled-components';
 
-const Heading = Styled.h3`
-  font-size: 1.15rem;
+const Stat = Styled.h3`
+  font-size: 1rem;
   font-weight: 500;
   margin: 5px 10px;
 `;
@@ -27,23 +27,27 @@ export const UserStats = (props) => {
   return (
     <Wrapper>
       <StatsWrapper>
-        <Heading>Followers</Heading>
-        <StatNumber>{userStats.followers}</StatNumber>
+        <Stat>Followers</Stat>
+        {/* <StatNumber>{userStats.followers}</StatNumber> */}
+        <StatNumber>55</StatNumber>
       </StatsWrapper>
 
       <StatsWrapper>
-        <Heading>Following</Heading>
-        <StatNumber>{userStats.following}</StatNumber>
+        <Stat>Following</Stat>
+        {/* <StatNumber>{userStats.following}</StatNumber> */}
+        <StatNumber>16</StatNumber>
       </StatsWrapper>
 
       <StatsWrapper>
-        <Heading>Stars received</Heading>
-        <StatNumber>{userStats.stars}</StatNumber>
+        <Stat>Stars received</Stat>
+        {/* <StatNumber>{userStats.stars}</StatNumber> */}
+        <StatNumber>135</StatNumber>
       </StatsWrapper>
 
       <StatsWrapper>
-        <Heading>Forks By Users</Heading>
-        <StatNumber>{userStats.forks}</StatNumber>
+        <Stat>Forks By Users</Stat>
+        {/* <StatNumber>{userStats.forks}</StatNumber> */}
+        <StatNumber>68</StatNumber>
       </StatsWrapper>
     </Wrapper>
   );

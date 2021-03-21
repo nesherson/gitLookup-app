@@ -15,16 +15,28 @@ const Wrapper = Styled.div`
 
 const UserWrapper = Styled.div`
   display: flex;
+  align-items: flex-start;
 `;
 
 function App() {
   const [searchInput, setSearchInput] = useState('');
+  const [isInputEmpty, setIsInputEmpty] = useState(false);
   const [aboutUser, setAboutUser] = useState({});
   const [userRepos, setUserRepos] = useState(null);
   const [userActivity, setUserActivity] = useState([]);
 
   const handleInputChange = ({ target }) => {
     setSearchInput(target.value);
+  };
+
+  const handleEmptyInput = (input) => {
+    if (input === '') {
+      setIsInputEmpty(true);
+      return true;
+    } else {
+      setIsInputEmpty(false);
+      return false;
+    }
   };
 
   const fetchData = () => {
@@ -64,20 +76,21 @@ function App() {
           return arr.indexOf(lang) === i;
         });
 
-  const userAbout = {
+  const user = {
     userName: aboutUser.name,
     profilePicture: aboutUser.avatar_url,
     profileUrl: aboutUser.html_url,
+    blog: aboutUser.blog ? aboutUser.blog : null,
   };
 
-  const userStats = {
+  const stats = {
     followers: aboutUser.followers,
     following: aboutUser.following,
     stars: stars,
     forks: forks,
   };
 
-  const userDates = {
+  const dates = {
     createdAt: new Date(aboutUser.created_at).toLocaleDateString('en-GB', {
       weekday: 'long',
       year: 'numeric',
@@ -105,8 +118,6 @@ function App() {
         };
       });
 
-  console.log(activities);
-
   return (
     <Wrapper>
       <Logo />
@@ -114,16 +125,21 @@ function App() {
         inputValue={searchInput}
         handleInputChange={handleInputChange}
         fetchData={fetchData}
+        handleEmptyInput={handleEmptyInput}
       />
-      <UserWrapper>
-        <UserProfileSection
-          about={userAbout}
-          stats={userStats}
-          languages={languages}
-          dates={userDates}
-        />
-        <UserActivitySection activities={activities} />
-      </UserWrapper>
+      {isInputEmpty ? (
+        <h2>Please enter a username!</h2>
+      ) : (
+        <UserWrapper>
+          <UserProfileSection
+            about={user}
+            stats={stats}
+            languages={languages}
+            dates={dates}
+          />
+          <UserActivitySection activities={activities} />
+        </UserWrapper>
+      )}
     </Wrapper>
   );
 }
