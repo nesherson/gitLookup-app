@@ -4,18 +4,23 @@ import styled from 'styled-components';
 const SearchInput = styled.input`
   padding: 7px;
   font-size: 1.02rem;
-  border: 1px solid #f2f2f2;
+  border: 1px solid #d9d9d9;
+  border-radius: 3px;
   width: 350px;
   &:focus {
     outline: none;
-    border-color: red;
+    border-color: #705df2;
   }
 `;
 
 const SearchButton = styled.button`
-  font-size: 1.02rem;
-  padding: 8px 25px;
-  border: 1px solid #f2f2f2;
+  font-size: 1rem;
+  letter-spacing: 1px;
+  padding: 8px 30px;
+  border: none;
+  border-radius: 3px;
+  background-color: #705df2;
+  color: #fff;
 `;
 
 const SearchLabel = styled.label`

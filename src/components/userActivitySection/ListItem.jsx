@@ -2,7 +2,7 @@ import React from 'react';
 import Styled from 'styled-components';
 
 const Item = Styled.li`
-    border-bottom: 1px solid #000;
+    border-bottom: 1px solid #d9d9d9;
     padding-bottom: 10px;
     margin: 10px 20px 0 20px;
 `;

@@ -6,8 +6,11 @@ import { UserLanguages } from './UserLanguages';
 import { UserDates } from './UserDates';
 
 const Wrapper = Styled.div`
-    border: 1px solid #000;
+    
+    border: 1px solid #d9d9d9;
     width: 280px;
+    border-radius: 15px;
+    box-shadow: 0px 50px 60px rgba(0,0,0,0.1);
 `;
 
 export const UserProfileSection = (props) => {

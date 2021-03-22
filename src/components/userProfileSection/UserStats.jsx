@@ -18,7 +18,7 @@ const StatsWrapper = Styled.div`
 
 const Wrapper = Styled.div`
   padding: 12px;
-  border-bottom: 1px solid #000;
+  border-bottom: 1px solid #d9d9d9;
 `;
 
 export const UserStats = (props) => {

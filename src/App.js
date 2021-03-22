@@ -16,6 +16,7 @@ const Wrapper = Styled.div`
 const UserWrapper = Styled.div`
   display: flex;
   align-items: flex-start;
+  margin-top: 50px;
 `;
 
 function App() {

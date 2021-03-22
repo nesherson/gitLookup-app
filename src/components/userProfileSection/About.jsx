@@ -16,6 +16,7 @@ const Heading = Styled.h1`
 const Link = Styled.a`
   margin: 0 5px;
   font-size: 0.92rem;
+  color: #705df2;
 `;
 
 const ProfilePicture = Styled.img`
@@ -32,7 +33,7 @@ const UserName = Styled.div`
 const Wrapper = Styled.div`
     display: flex;
     flex-direction: row;
-    border-bottom: 1px solid #000;
+    border-bottom: 1px solid #d9d9d9;
     padding: 14px;
 `;
 
@@ -61,7 +62,7 @@ export const About = (props) => {
         {true ? (
           <Link href={userAbout.blog} target='_blank' rel='noopener noreferrer'>
             {/* {userAbout.blog} */}
-            https://www.userblog.com
+            userblog.com
           </Link>
         ) : null}
       </UserName>

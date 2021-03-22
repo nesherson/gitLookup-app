@@ -12,6 +12,12 @@ const Text = Styled.p`
     margin: 3px 10px;
 `;
 
+const LocationText = Styled.p`
+  font-size: 0.95rem;
+  margin: 3px 10px;
+  color: #705df2;
+`;
+
 const TextSpan = Styled.span`
     font-size: 0.95rem;
     margin: 5px 10px;
@@ -42,7 +48,7 @@ export const UserDates = (props) => {
       <StatsWrapper>
         <Heading>Location</Heading>
         {/* <Text>{userDates && userDates.location}</Text> */}
-        <Text>Ireland</Text>
+        <LocationText>Ireland</LocationText>
       </StatsWrapper>
       {/* <TextSpan>Last Updated on {userDates && userDates.updatedAt}</TextSpan> */}
       <TextSpan>Last Updated on Mar 20, 2021</TextSpan>
