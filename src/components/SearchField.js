@@ -7,6 +7,7 @@ const SearchInput = styled.input`
   border: 1px solid #d9d9d9;
   border-radius: 3px;
   width: 350px;
+  min-width: 280px;
   &:focus {
     outline: none;
     border-color: #705df2;
@@ -21,10 +22,17 @@ const SearchButton = styled.button`
   border-radius: 3px;
   background-color: #705df2;
   color: #fff;
+  @media (max-width: 768px) {
+    display: block;
+    margin: 10px auto 0 auto;
+  }
 `;
 
 const SearchLabel = styled.label`
   padding: 7px;
+  @media (max-width: 768px) {
+    display: none;
+  }
 `;
 
 export const SearchField = ({

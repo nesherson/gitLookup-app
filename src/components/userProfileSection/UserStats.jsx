@@ -5,10 +5,12 @@ const Stat = Styled.h3`
   font-size: 1rem;
   font-weight: 500;
   margin: 5px 10px;
+  color: #4d4d4d;
 `;
 
 const StatNumber = Styled.p`
   margin: 5px 10px;
+  color: #333333;
 `;
 
 const StatsWrapper = Styled.div`

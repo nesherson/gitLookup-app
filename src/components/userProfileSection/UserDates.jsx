@@ -5,11 +5,13 @@ const Heading = Styled.h4`
     font-size: 0.80rem;
     font-weight: 600;
     margin: 0 10px;
+    color: #4d4d4d;
 `;
 
 const Text = Styled.p`
     font-size: 0.95rem;
     margin: 3px 10px;
+    color: #333333;
 `;
 
 const LocationText = Styled.p`
@@ -21,6 +23,7 @@ const LocationText = Styled.p`
 const TextSpan = Styled.span`
     font-size: 0.95rem;
     margin: 5px 10px;
+    color: #aaa;
 `;
 
 const StatsWrapper = Styled.div`

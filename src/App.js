@@ -17,6 +17,11 @@ const UserWrapper = Styled.div`
   display: flex;
   align-items: flex-start;
   margin-top: 50px;
+  max-width: 980px;
+  @media (max-width: 768px) {
+    flex-direction: column;
+    width: 100%;
+  }
 `;
 
 function App() {

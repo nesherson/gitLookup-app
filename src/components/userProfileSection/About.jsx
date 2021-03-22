@@ -1,5 +1,6 @@
 import React from 'react';
 import Styled from 'styled-components';
+import { Link } from '../userActivitySection/Link';
 
 const Avatar = Styled.div`
     width: 44px;
@@ -13,12 +14,6 @@ const Heading = Styled.h1`
     margin: 0 5px;
 `;
 
-const Link = Styled.a`
-  margin: 0 5px;
-  font-size: 0.92rem;
-  color: #705df2;
-`;
-
 const ProfilePicture = Styled.img`
     width: 44px;
     height: auto;
@@ -28,6 +23,7 @@ const ProfilePicture = Styled.img`
 const UserName = Styled.div`
   display: flex;
   flex-wrap: wrap;
+  max-width: 150px;
 `;
 
 const Wrapper = Styled.div`
@@ -51,16 +47,14 @@ export const About = (props) => {
       </Avatar>
       <UserName>
         <Heading>{/*userAbout.userName*/}Nesad Omeragic</Heading>
-        <a
+        <Link
           // href={userAbout.profileUrl}
-          href='#'
-          target='_blank'
-          rel='noopener noreferrer'
+          url='#'
         >
           ↗
-        </a>
+        </Link>
         {true ? (
-          <Link href={userAbout.blog} target='_blank' rel='noopener noreferrer'>
+          <Link href={userAbout.blog} type='blog'>
             {/* {userAbout.blog} */}
             userblog.com
           </Link>

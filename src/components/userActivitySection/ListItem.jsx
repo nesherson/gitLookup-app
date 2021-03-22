@@ -1,10 +1,27 @@
 import React from 'react';
 import Styled from 'styled-components';
+import { Link } from './Link';
+import Star from '../icons/star.svg';
+import Comment from '../icons/comment.svg';
+import Plus from '../icons/plus.svg';
+import Trash from '../icons/trash.svg';
+import Branch from '../icons/branch.svg';
 
 const Item = Styled.li`
     border-bottom: 1px solid #d9d9d9;
     padding-bottom: 10px;
     margin: 10px 20px 0 20px;
+    color: #4d4d4d;
+    display: flex;
+`;
+
+const Text = Styled.p`
+  margin: 5px 0;
+`;
+
+const Icon = Styled.img`
+  padding-right: 5px;
+  vertical-align: text-top;
 `;
 
 export const ListItem = ({ activity }) => {
@@ -12,38 +29,35 @@ export const ListItem = ({ activity }) => {
     case 'WatchEvent':
       return (
         <Item>
-          Starred a repo{' '}
-          <a href={activity.repo} target='_blank' rel='noopener noreferrer'>
-            {activity.name}
-          </a>
+          <Icon src={Star} alt='' />
+          <Text>
+            Starred a repo{' '}
+            <Link url={activity.repo} color='#705df2'>
+              {activity.name}
+            </Link>
+          </Text>
         </Item>
       );
     case 'IssueCommentEvent':
       const commentUrl = activity.payload.comment.html_url;
       return (
         <Item>
-          Created a{' '}
-          <a href={commentUrl} target='_blank' rel='noopener noreferrer'>
-            comment
-          </a>{' '}
-          on an issue in{' '}
-          <a href={activity.repo} target='_blank' rel='noopener noreferrer'>
-            {activity.name}
-          </a>
+          <Text>
+            <Icon src={Comment} alt='' />
+            Created a <Link url={commentUrl}>comment</Link> on an issue in{' '}
+            <Link url={activity.repo}>{activity.name}</Link>
+          </Text>
         </Item>
       );
     case 'IssuesEvent':
       const issueUrl = activity.payload.issue.html_url;
       return (
         <Item>
-          Opened an{' '}
-          <a href={issueUrl} target='_blank' rel='noopener noreferrer'>
-            issue
-          </a>{' '}
-          in{' '}
-          <a href={activity.repo} target='_blank' rel='noopener noreferrer'>
-            {activity.name}
-          </a>
+          <Text>
+            <Icon src={Plus} alt='' />
+            Opened an <Link url={issueUrl}>issue</Link> in{' '}
+            <Link url={activity.repo}>{activity.name}</Link>
+          </Text>
         </Item>
       );
     case 'PushEvent':
@@ -56,14 +70,11 @@ export const ListItem = ({ activity }) => {
 
       return (
         <Item>
-          Pushed {pushSize} commit to{' '}
-          <a href={branchUrl} target='_blank' rel='noopener noreferrer'>
-            {branch}
-          </a>{' '}
-          in{' '}
-          <a href={activity.repo} target='_blank' rel='noopener noreferrer'>
-            {activity.name}
-          </a>
+          <Text>
+            <Icon src={Plus} alt='' />
+            Pushed {pushSize} commit to <Link url={branchUrl}>{branch}</Link> in{' '}
+            <Link url={activity.repo}>{activity.name}</Link>
+          </Text>
         </Item>
       );
 
@@ -71,14 +82,11 @@ export const ListItem = ({ activity }) => {
       const pullReq = activity.payload.pull_request.html_url;
       return (
         <Item>
-          Closed a{' '}
-          <a href={pullReq} target='_blank' rel='noopener noreferrer'>
-            pull request
-          </a>{' '}
-          in{' '}
-          <a href={activity.repo} target='_blank' rel='noopener noreferrer'>
-            {activity.name}
-          </a>
+          <Text>
+            <Icon src={Trash} alt='' />
+            Closed a <Link url={pullReq}>pull request</Link> in{' '}
+            <Link url={activity.repo}>{activity.name}</Link>
+          </Text>
         </Item>
       );
     case 'CreateEvent':
@@ -87,23 +95,21 @@ export const ListItem = ({ activity }) => {
         const branchUrl = `https://github.com/${activity.author}/tree/${ref}`;
         return (
           <Item>
-            Created a branch{' '}
-            <a href={branchUrl} target='_blank' rel='noopener noreferrer'>
-              {ref}
-            </a>{' '}
-            in{' '}
-            <a href={activity.repo} target='_blank' rel='noopener noreferrer'>
-              {activity.name}
-            </a>
+            <Text>
+              <Icon src={Branch} alt='' />
+              Created a branch <Link url={branchUrl}>{ref}</Link> in{' '}
+              <Link url={activity.repo}>{activity.name}</Link>
+            </Text>
           </Item>
         );
       } else {
         return (
           <Item>
-            Created a repository{' '}
-            <a href={activity.repo} target='_blank' rel='noopener noreferrer'>
-              {activity.name}
-            </a>
+            <Text>
+              <Icon src={Plus} alt='' />
+              Created a repository{' '}
+              <Link url={activity.repo}>{activity.name}</Link>
+            </Text>
           </Item>
         );
       }
