@@ -8,7 +8,7 @@ const Anchor = Styled.a`
 
 const BlogAnchor = Styled(Anchor)`
   margin: 0 5px;
-  font-size: 0.92rem;   
+  font-size: 0.85rem;   
 `;
 
 export const Link = (props) => {

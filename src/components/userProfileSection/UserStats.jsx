@@ -30,26 +30,22 @@ export const UserStats = (props) => {
     <Wrapper>
       <StatsWrapper>
         <Stat>Followers</Stat>
-        {/* <StatNumber>{userStats.followers}</StatNumber> */}
-        <StatNumber>55</StatNumber>
+        <StatNumber>{userStats.followers}</StatNumber>
       </StatsWrapper>
 
       <StatsWrapper>
         <Stat>Following</Stat>
-        {/* <StatNumber>{userStats.following}</StatNumber> */}
-        <StatNumber>16</StatNumber>
+        <StatNumber>{userStats.following}</StatNumber>
       </StatsWrapper>
 
       <StatsWrapper>
         <Stat>Stars received</Stat>
-        {/* <StatNumber>{userStats.stars}</StatNumber> */}
-        <StatNumber>135</StatNumber>
+        <StatNumber>{userStats.stars}</StatNumber>
       </StatsWrapper>
 
       <StatsWrapper>
         <Stat>Forks By Users</Stat>
-        {/* <StatNumber>{userStats.forks}</StatNumber> */}
-        <StatNumber>68</StatNumber>
+        <StatNumber>{userStats.forks}</StatNumber>
       </StatsWrapper>
     </Wrapper>
   );

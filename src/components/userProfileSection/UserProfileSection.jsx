@@ -9,7 +9,7 @@ const Wrapper = Styled.div`
     border: 1px solid #d9d9d9;
     width: 28%;
     min-width: 280px;
-    border-radius: 15px;
+    border-radius: 5px;
     box-shadow: 0px 50px 60px rgba(0,0,0,0.1);
     margin: 0 10px 0 15px;
     @media (max-width: 768px) {

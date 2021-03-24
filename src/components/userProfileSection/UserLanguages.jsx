@@ -23,16 +23,10 @@ export const UserLanguages = (props) => {
 
   return (
     <List>
-      {/* {languages &&
+      {languages &&
         languages.map((lang) => {
           return <Item key={lang}>{lang}</Item>;
-        })} */}
-      <Item>C++</Item>
-      <Item>C#</Item>
-      <Item>JavaScript</Item>
-      <Item>HTML</Item>
-      <Item>CSS</Item>
-      <Item>Kotlin</Item>
+        })}
     </List>
   );
 };

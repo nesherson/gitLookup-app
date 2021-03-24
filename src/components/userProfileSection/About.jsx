@@ -39,26 +39,18 @@ export const About = (props) => {
   return (
     <Wrapper>
       <Avatar>
-        <ProfilePicture
-          // src={`${userAbout.profilePicture}`}
-          // alt={!userAbout.profilePicture ? '' : 'Diamod shaped abstract figure'}
-          src={'https://avatars.githubusercontent.com/u/36080467?v=4'}
-        />
+        <ProfilePicture src={`${userAbout.profilePicture}`} alt={''} />
       </Avatar>
       <UserName>
-        <Heading>{/*userAbout.userName*/}Nesad Omeragic</Heading>
-        <Link
-          // href={userAbout.profileUrl}
-          url='#'
-        >
-          ↗
-        </Link>
-        {true ? (
-          <Link href={userAbout.blog} type='blog'>
-            {/* {userAbout.blog} */}
-            userblog.com
+        <Heading>{userAbout.userName}</Heading>
+        <Link url={userAbout.profileUrl}>↗</Link>
+        {userAbout.blog ? (
+          <Link url={userAbout.blog} type='blog'>
+            {userAbout.blog}
           </Link>
-        ) : null}
+        ) : (
+          ''
+        )}
       </UserName>
     </Wrapper>
   );

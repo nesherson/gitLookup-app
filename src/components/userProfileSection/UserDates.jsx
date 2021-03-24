@@ -45,16 +45,13 @@ export const UserDates = (props) => {
     <Wrapper>
       <StatsWrapper>
         <Heading>Joined</Heading>
-        {/* <Text>{userDates && userDates.createdAt}</Text> */}
-        <Text>Apr 7, 2017</Text>
+        <Text>{userDates && userDates.createdAt}</Text>
       </StatsWrapper>
       <StatsWrapper>
         <Heading>Location</Heading>
-        {/* <Text>{userDates && userDates.location}</Text> */}
-        <LocationText>Ireland</LocationText>
+        <Text>{userDates && userDates.location}</Text>
       </StatsWrapper>
-      {/* <TextSpan>Last Updated on {userDates && userDates.updatedAt}</TextSpan> */}
-      <TextSpan>Last Updated on Mar 20, 2021</TextSpan>
+      <TextSpan>Last Updated on {userDates && userDates.updatedAt}</TextSpan>
     </Wrapper>
   );
 };

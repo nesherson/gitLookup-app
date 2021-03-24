@@ -6,23 +6,34 @@ import { SearchField } from './components/SearchField';
 import { UserProfileSection } from './components/userProfileSection/UserProfileSection';
 import { UserActivitySection } from './components/userActivitySection/UserActivitySection';
 
-const Wrapper = Styled.div`
-  min-height: calc(100vh - 100px);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-`;
-
 const UserWrapper = Styled.div`
   display: flex;
   align-items: flex-start;
-  margin-top: 50px;
-  max-width: 980px;
+  
+  
   @media (max-width: 768px) {
     flex-direction: column;
     width: 100%;
   }
+`;
+
+const Header = Styled.header`
+  display: flex;
+  justify-content: space-between;
+  margin: 35px 15px 15px 15px;
+`;
+
+const FirstSection = Styled.div`
+  min-height: calc(100vh - 100px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;  
+`;
+
+const SecondSection = Styled.div`
+  margin: 0 auto;
+  max-width: 980px;
 `;
 
 function App() {
@@ -106,7 +117,6 @@ function App() {
     }),
     location: aboutUser.location,
     updatedAt: new Date(aboutUser.updated_at).toLocaleDateString('en-GB', {
-      weekday: 'long',
       year: 'numeric',
       month: 'long',
       day: 'numeric',
@@ -127,28 +137,44 @@ function App() {
 
   return (
     <Router>
-      <Wrapper>
-        <Logo />
-        <SearchField
-          inputValue={searchInput}
-          handleInputChange={handleInputChange}
-          fetchData={fetchData}
-          handleEmptyInput={handleEmptyInput}
-        />
+      <Route exact path='/'>
+        <FirstSection>
+          <Logo />
+          <SearchField
+            inputValue={searchInput}
+            handleInputChange={handleInputChange}
+            fetchData={fetchData}
+            handleEmptyInput={handleEmptyInput}
+          />
+        </FirstSection>
+      </Route>
+      <Route path='/:id'>
         {isInputEmpty ? (
           <h2>Please enter a username!</h2>
         ) : (
-          <UserWrapper>
-            <UserProfileSection
-              about={user}
-              stats={stats}
-              languages={languages}
-              dates={dates}
-            />
-            <UserActivitySection activities={activities} />
-          </UserWrapper>
+          <SecondSection>
+            <Header>
+              <Logo type='result' />
+              <SearchField
+                inputValue={searchInput}
+                handleInputChange={handleInputChange}
+                fetchData={fetchData}
+                handleEmptyInput={handleEmptyInput}
+                type='result'
+              />
+            </Header>
+            <UserWrapper>
+              <UserProfileSection
+                about={user}
+                stats={stats}
+                languages={languages}
+                dates={dates}
+              />
+              <UserActivitySection activities={activities} />
+            </UserWrapper>
+          </SecondSection>
         )}
-      </Wrapper>
+      </Route>
     </Router>
   );
 }

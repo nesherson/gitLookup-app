@@ -14,7 +14,7 @@ const Heading = Styled.h3`
 const Wrapper = Styled.div`
     border: 1px solid #d9d9d9;
     margin: 0px 15px 0 10px;  
-    border-radius: 15px;
+    border-radius: 5px;
     box-shadow: 0px 50px 60px rgba(0,0,0,0.1);
     width: 70%;
     @media (max-width: 768px) {
