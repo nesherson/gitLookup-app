@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 import Styled from 'styled-components';
 import { Logo } from './components/Logo';
 import { SearchField } from './components/SearchField';
@@ -125,28 +126,30 @@ function App() {
       });
 
   return (
-    <Wrapper>
-      <Logo />
-      <SearchField
-        inputValue={searchInput}
-        handleInputChange={handleInputChange}
-        fetchData={fetchData}
-        handleEmptyInput={handleEmptyInput}
-      />
-      {isInputEmpty ? (
-        <h2>Please enter a username!</h2>
-      ) : (
-        <UserWrapper>
-          <UserProfileSection
-            about={user}
-            stats={stats}
-            languages={languages}
-            dates={dates}
-          />
-          <UserActivitySection activities={activities} />
-        </UserWrapper>
-      )}
-    </Wrapper>
+    <Router>
+      <Wrapper>
+        <Logo />
+        <SearchField
+          inputValue={searchInput}
+          handleInputChange={handleInputChange}
+          fetchData={fetchData}
+          handleEmptyInput={handleEmptyInput}
+        />
+        {isInputEmpty ? (
+          <h2>Please enter a username!</h2>
+        ) : (
+          <UserWrapper>
+            <UserProfileSection
+              about={user}
+              stats={stats}
+              languages={languages}
+              dates={dates}
+            />
+            <UserActivitySection activities={activities} />
+          </UserWrapper>
+        )}
+      </Wrapper>
+    </Router>
   );
 }
 
