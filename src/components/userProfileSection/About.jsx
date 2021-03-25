@@ -23,7 +23,7 @@ const ProfilePicture = Styled.img`
 const UserName = Styled.div`
   display: flex;
   flex-wrap: wrap;
- 
+  padding: 5px 0;
 `;
 
 const Wrapper = Styled.div`

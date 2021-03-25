@@ -58,16 +58,22 @@ function App() {
   };
 
   const fetchData = () => {
+    const MAX_REPOS = 100;
+
     fetch(`https://api.github.com/users/${searchInput}`)
       .then((resp) => resp.json())
       .then((data) => setAboutUser(data));
-    fetch(`https://api.github.com/users/${searchInput}/repos`)
+    fetch(
+      `https://api.github.com/users/${searchInput}/repos?per_page=${MAX_REPOS}`
+    )
       .then((resp) => resp.json())
       .then((data) => setUserRepos(data));
     fetch(`https://api.github.com/users/${searchInput}/events`)
       .then((resp) => resp.json())
       .then((data) => setUserActivity(data));
   };
+
+  console.log(userRepos);
 
   const stars = !userRepos
     ? null

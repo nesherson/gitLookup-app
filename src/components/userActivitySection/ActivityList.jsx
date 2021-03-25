@@ -15,7 +15,6 @@ const List = Styled.div`
 
 export const ActivityList = (props) => {
   const activities = props.activities;
-  console.log(activities);
   return (
     <List>
       {activities &&
