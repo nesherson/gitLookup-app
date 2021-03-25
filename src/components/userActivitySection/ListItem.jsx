@@ -30,7 +30,7 @@ const Date = Styled.span`
 
 export const ListItem = (props) => {
   return (
-    <Item key={props.key}>
+    <Item>
       <ItemText>
         <Icon src={props.icon} alt='' />
         <Text>{props.children}</Text>

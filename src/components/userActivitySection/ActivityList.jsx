@@ -19,13 +19,14 @@ export const ActivityList = (props) => {
     <List>
       {activities &&
         activities.map((activity, i) => {
+          console.log(activity.id);
           switch (activity.type) {
             case 'WatchEvent':
               return (
                 <ListItem
                   icon={Star}
                   date={activity.created_at}
-                  key={activity.id + i}
+                  key={activity.id}
                 >
                   Starred a repo{' '}
                   <Link url={activity.repo}>{activity.name}</Link>
@@ -34,7 +35,11 @@ export const ActivityList = (props) => {
             case 'IssueCommentEvent':
               const commentUrl = activity.payload.comment.html_url;
               return (
-                <ListItem icon={Comment} date={activity.created_at}>
+                <ListItem
+                  icon={Comment}
+                  date={activity.created_at}
+                  key={activity.id}
+                >
                   Created a <Link url={commentUrl}>comment</Link> on an issue in{' '}
                   <Link url={activity.repo}>{activity.name}</Link>
                 </ListItem>
@@ -42,7 +47,11 @@ export const ActivityList = (props) => {
             case 'IssuesEvent':
               const issueUrl = activity.payload.issue.html_url;
               return (
-                <ListItem icon={Plus} date={activity.created_at}>
+                <ListItem
+                  icon={Plus}
+                  date={activity.created_at}
+                  key={activity.id}
+                >
                   Opened an <Link url={issueUrl}>issue</Link> in{' '}
                   <Link url={activity.repo}>{activity.name}</Link>
                 </ListItem>
@@ -56,7 +65,11 @@ export const ActivityList = (props) => {
               const branchUrl = `https://github.com/${activity.author}/tree/${branch}`;
 
               return (
-                <ListItem icon={Plus} date={activity.created_at}>
+                <ListItem
+                  icon={Plus}
+                  date={activity.created_at}
+                  key={activity.id}
+                >
                   Pushed {pushSize} commit to{' '}
                   <Link url={branchUrl}>{branch}</Link> in{' '}
                   <Link url={activity.repo}>{activity.name}</Link>
@@ -66,7 +79,11 @@ export const ActivityList = (props) => {
             case 'PullRequestEvent':
               const pullReq = activity.payload.pull_request.html_url;
               return (
-                <ListItem icon={Trash} date={activity.created_at}>
+                <ListItem
+                  icon={Trash}
+                  date={activity.created_at}
+                  key={activity.id}
+                >
                   Closed a <Link url={pullReq}>pull request</Link> in{' '}
                   <Link url={activity.repo}>{activity.name}</Link>
                 </ListItem>
@@ -76,14 +93,22 @@ export const ActivityList = (props) => {
                 const ref = activity.payload.ref;
                 const branchUrl = `https://github.com/${activity.author}/tree/${ref}`;
                 return (
-                  <ListItem icon={Branch} date={activity.created_at}>
+                  <ListItem
+                    icon={Branch}
+                    date={activity.created_at}
+                    key={activity.id}
+                  >
                     Created a branch <Link url={branchUrl}>{ref}</Link> in{' '}
                     <Link url={activity.repo}>{activity.name}</Link>
                   </ListItem>
                 );
               } else {
                 return (
-                  <ListItem icon={Plus} date={activity.created_at}>
+                  <ListItem
+                    icon={Plus}
+                    date={activity.created_at}
+                    key={activity.id}
+                  >
                     Created a repository{' '}
                     <Link url={activity.repo}>{activity.name}</Link>
                   </ListItem>
