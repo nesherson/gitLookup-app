@@ -49,7 +49,7 @@ export const UserDates = (props) => {
       </StatsWrapper>
       <StatsWrapper>
         <Heading>Location</Heading>
-        <Text>{userDates && userDates.location}</Text>
+        <LocationText>{userDates && userDates.location}</LocationText>
       </StatsWrapper>
       <TextSpan>Last Updated on {userDates && userDates.updatedAt}</TextSpan>
     </Wrapper>

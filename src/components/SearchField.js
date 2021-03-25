@@ -2,11 +2,6 @@ import React from 'react';
 import { useHistory } from 'react-router-dom';
 import Styled from 'styled-components';
 
-const Header = Styled.header`
-  display: flex;
-  justify-content: space-between;
-`;
-
 const Search = Styled.input`
   padding: 7px;
   font-size: 1.02rem;

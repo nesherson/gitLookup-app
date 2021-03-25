@@ -34,19 +34,22 @@ const Wrapper = Styled.div`
 `;
 
 export const About = (props) => {
-  const userAbout = props.about;
+  const profilePicture = props.about.profilePicture;
+  const userName = props.about.userName;
+  const profileUrl = props.about.profileUrl;
+  const userBlog = props.about.blog;
 
   return (
     <Wrapper>
       <Avatar>
-        <ProfilePicture src={`${userAbout.profilePicture}`} alt={''} />
+        <ProfilePicture src={`${profilePicture}`} alt={''} />
       </Avatar>
       <UserName>
-        <Heading>{userAbout.userName}</Heading>
-        <Link url={userAbout.profileUrl}>↗</Link>
-        {userAbout.blog ? (
-          <Link url={userAbout.blog} type='blog'>
-            {userAbout.blog}
+        <Heading>{userName}</Heading>
+        <Link url={profileUrl}>↗</Link>
+        {userBlog ? (
+          <Link url={userBlog} type='blog'>
+            {userBlog}
           </Link>
         ) : (
           ''
