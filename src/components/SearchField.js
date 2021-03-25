@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import Styled from 'styled-components';
 
@@ -71,13 +71,17 @@ export const SearchField = ({
 }) => {
   const history = useHistory();
 
+  useEffect(() => {
+    if (inputValue && type !== 'result') handleInputChange('');
+  }, []);
+
   const handleChange = (e) => {
-    handleInputChange(e);
+    handleInputChange(e.target.value);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!handleEmptyInput(inputValue)) {
+    if (inputValue) {
       fetchData();
       history.push(`/${inputValue}`);
     } else {

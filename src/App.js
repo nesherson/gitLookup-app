@@ -23,7 +23,7 @@ const Header = Styled.header`
   margin: 35px 15px 15px 15px;
 `;
 
-const FirstSection = Styled.div`
+const SearchPage = Styled.div`
   min-height: calc(100vh - 100px);
   display: flex;
   flex-direction: column;
@@ -31,7 +31,7 @@ const FirstSection = Styled.div`
   align-items: center;  
 `;
 
-const SecondSection = Styled.div`
+const ResultsPage = Styled.div`
   margin: 0 auto;
   max-width: 980px;
 `;
@@ -43,8 +43,8 @@ function App() {
   const [userRepos, setUserRepos] = useState(null);
   const [userActivity, setUserActivity] = useState([]);
 
-  const handleInputChange = ({ target }) => {
-    setSearchInput(target.value);
+  const handleInputChange = (value) => {
+    setSearchInput(value);
   };
 
   const handleEmptyInput = (input) => {
@@ -127,18 +127,20 @@ function App() {
     ? null
     : userActivity.map((activity) => {
         return {
+          id: activity.id,
           author: activity.repo.name,
           type: activity.type,
           name: activity.repo.name,
           repo: `https://github.com/${activity.repo.name}`,
           payload: activity.payload,
+          created_at: activity.payload.created_at,
         };
       });
 
   return (
     <Router>
       <Route exact path='/'>
-        <FirstSection>
+        <SearchPage>
           <Logo />
           <SearchField
             inputValue={searchInput}
@@ -146,13 +148,13 @@ function App() {
             fetchData={fetchData}
             handleEmptyInput={handleEmptyInput}
           />
-        </FirstSection>
+        </SearchPage>
       </Route>
       <Route path='/:id'>
         {isInputEmpty ? (
           <h2>Please enter a username!</h2>
         ) : (
-          <SecondSection>
+          <ResultsPage>
             <Header>
               <Logo type='result' />
               <SearchField
@@ -172,7 +174,7 @@ function App() {
               />
               <UserActivitySection activities={activities} />
             </UserWrapper>
-          </SecondSection>
+          </ResultsPage>
         )}
       </Route>
     </Router>
