@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Styled from 'styled-components';
 import { Logo } from './components/Logo';
 import { SearchField } from './components/SearchField';
 import { UserProfileSection } from './components/userProfileSection/UserProfileSection';
 import { UserActivitySection } from './components/userActivitySection/UserActivitySection';
+import { NotFound } from './components/NotFound';
 
 const UserWrapper = Styled.div`
   display: flex;
@@ -38,7 +39,7 @@ const ResultsPage = Styled.div`
 
 function App() {
   const [searchInput, setSearchInput] = useState('');
-  const [isInputEmpty, setIsInputEmpty] = useState(false);
+  const [userNotFound, setUserNotFound] = useState(false);
   const [aboutUser, setAboutUser] = useState({});
   const [userRepos, setUserRepos] = useState(null);
   const [userActivity, setUserActivity] = useState([]);
@@ -47,21 +48,18 @@ function App() {
     setSearchInput(value);
   };
 
-  const handleEmptyInput = (input) => {
-    if (input === '') {
-      setIsInputEmpty(true);
-      return true;
-    } else {
-      setIsInputEmpty(false);
-      return false;
-    }
-  };
-
   const fetchData = () => {
     const MAX_REPOS = 100;
 
     fetch(`https://api.github.com/users/${searchInput}`)
-      .then((resp) => resp.json())
+      .then((resp) => {
+        if (resp.status === 404) {
+          setUserNotFound(true);
+          return;
+        } else {
+          return resp.json();
+        }
+      })
       .then((data) => setAboutUser(data));
     fetch(
       `https://api.github.com/users/${searchInput}/repos?per_page=${MAX_REPOS}`
@@ -73,22 +71,22 @@ function App() {
       .then((data) => setUserActivity(data));
   };
 
-  console.log(userRepos);
+  console.log(aboutUser);
 
   const stars = !userRepos
-    ? null
+    ? ''
     : userRepos.reduce((acc, repo) => {
         return (acc += repo.stargazers_count);
       }, 0);
 
   const forks = !userRepos
-    ? null
+    ? ''
     : userRepos.reduce((acc, repo) => {
         return (acc += repo.forks_count);
       }, 0);
 
   const languages = !userRepos
-    ? null
+    ? ''
     : userRepos
         .map((repo) => {
           return repo.language;
@@ -100,37 +98,43 @@ function App() {
           return arr.indexOf(lang) === i;
         });
 
-  const user = {
-    userName: aboutUser.name,
-    profilePicture: aboutUser.avatar_url,
-    profileUrl: aboutUser.html_url,
-    blog: aboutUser.blog ? aboutUser.blog : null,
-  };
+  const user = !aboutUser
+    ? ''
+    : {
+        userName: aboutUser.name,
+        profilePicture: aboutUser.avatar_url,
+        profileUrl: aboutUser.html_url,
+        blog: aboutUser.blog ? aboutUser.blog : null,
+      };
 
-  const stats = {
-    followers: aboutUser.followers,
-    following: aboutUser.following,
-    stars: stars,
-    forks: forks,
-  };
+  const stats = !aboutUser
+    ? ''
+    : {
+        followers: aboutUser.followers,
+        following: aboutUser.following,
+        stars: stars,
+        forks: forks,
+      };
 
-  const dates = {
-    createdAt: new Date(aboutUser.created_at).toLocaleDateString('en-GB', {
-      weekday: 'long',
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric',
-    }),
-    location: aboutUser.location,
-    updatedAt: new Date(aboutUser.updated_at).toLocaleDateString('en-GB', {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric',
-    }),
-  };
+  const dates = !userRepos
+    ? ''
+    : {
+        createdAt: new Date(aboutUser.created_at).toLocaleDateString('en-GB', {
+          weekday: 'long',
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric',
+        }),
+        location: aboutUser.location,
+        updatedAt: new Date(aboutUser.updated_at).toLocaleDateString('en-GB', {
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric',
+        }),
+      };
 
   const activities = !userRepos
-    ? null
+    ? ''
     : userActivity.map((activity) => {
         return {
           id: activity.id,
@@ -145,21 +149,18 @@ function App() {
 
   return (
     <Router>
-      <Route exact path='/'>
-        <SearchPage>
-          <Logo />
-          <SearchField
-            inputValue={searchInput}
-            handleInputChange={handleInputChange}
-            fetchData={fetchData}
-            handleEmptyInput={handleEmptyInput}
-          />
-        </SearchPage>
-      </Route>
-      <Route path='/:id'>
-        {isInputEmpty ? (
-          <h2>Please enter a username!</h2>
-        ) : (
+      <Switch>
+        <Route exact path='/'>
+          <SearchPage>
+            <Logo />
+            <SearchField
+              inputValue={searchInput}
+              handleInputChange={handleInputChange}
+              fetchData={fetchData}
+            />
+          </SearchPage>
+        </Route>
+        <Route path='/:id'>
           <ResultsPage>
             <Header>
               <Logo type='result' />
@@ -167,22 +168,25 @@ function App() {
                 inputValue={searchInput}
                 handleInputChange={handleInputChange}
                 fetchData={fetchData}
-                handleEmptyInput={handleEmptyInput}
                 type='result'
               />
             </Header>
-            <UserWrapper>
-              <UserProfileSection
-                about={user}
-                stats={stats}
-                languages={languages}
-                dates={dates}
-              />
-              <UserActivitySection activities={activities} />
-            </UserWrapper>
+            {userNotFound ? (
+              <NotFound />
+            ) : (
+              <UserWrapper>
+                <UserProfileSection
+                  about={user}
+                  stats={stats}
+                  languages={languages}
+                  dates={dates}
+                />
+                <UserActivitySection activities={activities} />
+              </UserWrapper>
+            )}
           </ResultsPage>
-        )}
-      </Route>
+        </Route>
+      </Switch>
     </Router>
   );
 }
