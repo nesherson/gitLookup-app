@@ -71,8 +71,6 @@ function App() {
       .then((data) => setUserActivity(data));
   };
 
-  console.log(aboutUser);
-
   const stars = !userRepos
     ? ''
     : userRepos.reduce((acc, repo) => {
@@ -136,6 +134,7 @@ function App() {
   const activities = !userRepos
     ? ''
     : userActivity.map((activity) => {
+        console.log(activity.payload.created_at);
         return {
           id: activity.id,
           author: activity.repo.name,
@@ -143,7 +142,13 @@ function App() {
           name: activity.repo.name,
           repo: `https://github.com/${activity.repo.name}`,
           payload: activity.payload,
-          created_at: activity.payload.created_at,
+          created_at: new Date(activity.created_at).toLocaleDateString(
+            undefined,
+            {
+              month: 'short',
+              day: 'numeric',
+            }
+          ),
         };
       });
 

@@ -15,11 +15,11 @@ const List = Styled.div`
 
 export const ActivityList = (props) => {
   const activities = props.activities;
+  console.log(activities);
   return (
     <List>
       {activities &&
-        activities.map((activity, i) => {
-          console.log(activity.id);
+        activities.map((activity) => {
           switch (activity.type) {
             case 'WatchEvent':
               return (
