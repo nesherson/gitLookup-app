@@ -6,7 +6,7 @@ import Search from './icons/search.svg';
 const Heading = Styled.h1`
   color: #705df2;
   font-size: 3.2rem;
-  margin: 25px 0;
+  margin: 15px 0;
 `;
 
 const LogoWrapper = Styled.div`
@@ -20,13 +20,13 @@ const Icon = Styled.img`
 `;
 
 const ResultIcon = Styled.img`
-  width: 28px;
+  width: 42px;
   height: auto;
 `;
 
 const ResultHeading = Styled.h1`
   color: #705df2;
-  font-size: 1.65rem;
+  font-size: 1.75rem;
   padding: 0;
   margin: 0;
 `;
@@ -40,6 +40,7 @@ const ResultWrapper = Styled.div``;
 
 const LogoText = Styled.p`
   font-size: 0.85rem;
+  margin: 0;
 `;
 
 const style = {
