@@ -64,7 +64,7 @@ const SearchLabel = Styled.label`
 
 export const SearchField = ({
   handleInputChange,
-  handleEmptyInput,
+  isInputEmpty,
   inputValue,
   fetchData,
   type,
@@ -81,11 +81,12 @@ export const SearchField = ({
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (inputValue) {
+    if (inputValue.length >= 0) {
       fetchData();
+      type !== 'result' && isInputEmpty(false);
       history.push(`/${inputValue}`);
     } else {
-      return;
+      type !== 'result' && isInputEmpty(true);
     }
   };
 
