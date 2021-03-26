@@ -12,7 +12,7 @@ const List = Styled.ul`
 const Item = Styled.span`
     margin: 5px;
     padding: 5px;
-    background-color: #8473f5;
+    background-color: rgba(132, 115, 245, 0.5);
     color: #262626;
     font-size: 0.80rem;
     border-radius: 3px;
