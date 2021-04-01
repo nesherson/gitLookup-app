@@ -4,8 +4,8 @@ import { Logo } from '../Logo';
 import { SearchField } from '../SearchField';
 import { NotFound } from '../NotFound';
 import { Footer } from '../Footer';
-import { UserProfileSection } from '../userProfileSection/UserProfileSection';
-import { UserActivitySection } from '../userActivitySection/UserActivitySection';
+import { UserProfileSection } from './ProfileSection/UserProfileSection';
+import { UserActivitySection } from './ActivitySection/UserActivitySection';
 
 const Wrapper = Styled.div`
   margin: 0 auto;

@@ -1,6 +1,6 @@
 import React from 'react';
 import Styled from 'styled-components';
-import { Link } from '../userActivitySection/Link';
+import { Link } from '../ActivitySection/Link';
 
 const Avatar = Styled.div`
     width: 44px;

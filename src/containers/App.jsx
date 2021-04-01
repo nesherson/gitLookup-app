@@ -57,16 +57,20 @@ function App() {
           />
         </Route>
         <Route path='/:id'>
-          <ResultsPage
-            userProfile={userProfile}
-            userRepos={userRepos}
-            userActivity={userActivity}
-            userNotFound={userNotFound}
-            searchInput={searchInput}
-            handleInputChange={handleInputChange}
-            fetchData={fetchData}
-            setIsInputEmpty={setIsInputEmpty}
-          />
+          {!userProfile ? (
+            <h1>Loading</h1>
+          ) : (
+            <ResultsPage
+              userProfile={userProfile}
+              userRepos={userRepos}
+              userActivity={userActivity}
+              userNotFound={userNotFound}
+              searchInput={searchInput}
+              handleInputChange={handleInputChange}
+              fetchData={fetchData}
+              setIsInputEmpty={setIsInputEmpty}
+            />
+          )}
         </Route>
       </Switch>
     </Router>
