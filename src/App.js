@@ -1,11 +1,17 @@
 import React, { useState } from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+  useHistory,
+} from 'react-router-dom';
 import Styled from 'styled-components';
 import { Logo } from './components/Logo';
 import { SearchField } from './components/SearchField';
 import { UserProfileSection } from './components/userProfileSection/UserProfileSection';
 import { UserActivitySection } from './components/userActivitySection/UserActivitySection';
 import { NotFound } from './components/NotFound';
+import { Footer } from './components/Footer';
 
 const UserWrapper = Styled.div`
   display: flex;
@@ -37,9 +43,14 @@ const ResultsPage = Styled.div`
   max-width: 980px;
 `;
 
+const Warning = Styled.p`
+  color: #ff1a1a;
+`;
+
 function App() {
   const [searchInput, setSearchInput] = useState('');
   const [userNotFound, setUserNotFound] = useState(false);
+  const [isInputEmpty, setIsInputEmpty] = useState(false);
   const [aboutUser, setAboutUser] = useState({});
   const [userRepos, setUserRepos] = useState(null);
   const [userActivity, setUserActivity] = useState([]);
@@ -55,102 +66,120 @@ function App() {
       .then((resp) => {
         if (resp.status === 404) {
           setUserNotFound(true);
-          return;
+          throw new Error('Not Found.');
         } else {
+          setUserNotFound(false);
           return resp.json();
         }
       })
-      .then((data) => setAboutUser(data));
-    fetch(
-      `https://api.github.com/users/${searchInput}/repos?per_page=${MAX_REPOS}`
-    )
-      .then((resp) => resp.json())
-      .then((data) => setUserRepos(data));
-    fetch(`https://api.github.com/users/${searchInput}/events`)
-      .then((resp) => resp.json())
-      .then((data) => setUserActivity(data));
+      .then((data) => {
+        setAboutUser(data);
+        fetch(
+          `https://api.github.com/users/${searchInput}/repos?per_page=${MAX_REPOS}`
+        )
+          .then((resp) => resp.json())
+          .then((data) => setUserRepos(data));
+        fetch(`https://api.github.com/users/${searchInput}/events`)
+          .then((resp) => resp.json())
+          .then((data) => setUserActivity(data));
+      })
+      .catch((err) => console.log(err));
   };
 
-  const stars = !userRepos
-    ? ''
-    : userRepos.reduce((acc, repo) => {
-        return (acc += repo.stargazers_count);
-      }, 0);
+  console.log(userNotFound);
 
-  const forks = !userRepos
-    ? ''
-    : userRepos.reduce((acc, repo) => {
-        return (acc += repo.forks_count);
-      }, 0);
+  const stars =
+    userRepos !== {}
+      ? ''
+      : userRepos.reduce((acc, repo) => {
+          return (acc += repo.stargazers_count);
+        }, 0);
 
-  const languages = !userRepos
-    ? ''
-    : userRepos
-        .map((repo) => {
-          return repo.language;
-        })
-        .filter((lang) => {
-          if (lang !== null) return lang;
-        })
-        .filter((lang, i, arr) => {
-          return arr.indexOf(lang) === i;
-        });
+  const forks =
+    userRepos !== {}
+      ? ''
+      : userRepos.reduce((acc, repo) => {
+          return (acc += repo.forks_count);
+        }, 0);
 
-  const user = !aboutUser
-    ? ''
-    : {
-        userName: aboutUser.name,
-        profilePicture: aboutUser.avatar_url,
-        profileUrl: aboutUser.html_url,
-        blog: aboutUser.blog ? aboutUser.blog : null,
-      };
+  const languages =
+    userRepos !== {}
+      ? ''
+      : userRepos
+          .map((repo) => {
+            return repo.language;
+          })
+          .filter((lang) => {
+            if (lang !== null) return lang;
+          })
+          .filter((lang, i, arr) => {
+            return arr.indexOf(lang) === i;
+          });
 
-  const stats = !aboutUser
-    ? ''
-    : {
-        followers: aboutUser.followers,
-        following: aboutUser.following,
-        stars: stars,
-        forks: forks,
-      };
+  const user =
+    aboutUser !== {}
+      ? ''
+      : {
+          userName: aboutUser.name,
+          profilePicture: aboutUser.avatar_url,
+          profileUrl: aboutUser.html_url,
+          blog: aboutUser.blog ? aboutUser.blog : null,
+        };
 
-  const dates = !userRepos
-    ? ''
-    : {
-        createdAt: new Date(aboutUser.created_at).toLocaleDateString('en-GB', {
-          weekday: 'long',
-          year: 'numeric',
-          month: 'long',
-          day: 'numeric',
-        }),
-        location: aboutUser.location,
-        updatedAt: new Date(aboutUser.updated_at).toLocaleDateString('en-GB', {
-          year: 'numeric',
-          month: 'long',
-          day: 'numeric',
-        }),
-      };
+  const stats =
+    aboutUser !== {}
+      ? ''
+      : {
+          followers: aboutUser.followers,
+          following: aboutUser.following,
+          stars: stars,
+          forks: forks,
+        };
 
-  const activities = !userRepos
-    ? ''
-    : userActivity.map((activity) => {
-        console.log(activity.payload.created_at);
-        return {
-          id: activity.id,
-          author: activity.repo.name,
-          type: activity.type,
-          name: activity.repo.name,
-          repo: `https://github.com/${activity.repo.name}`,
-          payload: activity.payload,
-          created_at: new Date(activity.created_at).toLocaleDateString(
-            undefined,
+  const dates =
+    userRepos !== {}
+      ? ''
+      : {
+          createdAt: new Date(aboutUser.created_at).toLocaleDateString(
+            'en-GB',
             {
-              month: 'short',
+              year: 'numeric',
+              month: 'long',
+              day: 'numeric',
+            }
+          ),
+          location: aboutUser.location,
+          updatedAt: new Date(aboutUser.updated_at).toLocaleDateString(
+            'en-GB',
+            {
+              year: 'numeric',
+              month: 'long',
               day: 'numeric',
             }
           ),
         };
-      });
+
+  const activities =
+    userRepos !== {}
+      ? ''
+      : userActivity.map((activity) => {
+          console.log(activity.payload.created_at);
+          return {
+            id: activity.id,
+            author: activity.repo.name,
+            type: activity.type,
+            name: activity.repo.name,
+            repo: `https://github.com/${activity.repo.name}`,
+            payload: activity.payload,
+            created_at: new Date(activity.created_at).toLocaleDateString(
+              undefined,
+              {
+                month: 'short',
+                day: 'numeric',
+              }
+            ),
+          };
+        });
 
   return (
     <Router>
@@ -162,8 +191,11 @@ function App() {
               inputValue={searchInput}
               handleInputChange={handleInputChange}
               fetchData={fetchData}
+              isInputEmpty={setIsInputEmpty}
             />
+            {isInputEmpty ? <Warning>Please enter a username</Warning> : null}
           </SearchPage>
+          <Footer />
         </Route>
         <Route path='/:id'>
           <ResultsPage>
