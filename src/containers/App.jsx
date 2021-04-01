@@ -1,34 +1,7 @@
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import Styled from 'styled-components';
-import { Logo } from '../components/Logo';
-import { SearchField } from '../components/SearchField';
-import { UserProfileSection } from '../components/userProfileSection/UserProfileSection';
-import { UserActivitySection } from '../components/userActivitySection/UserActivitySection';
-import { NotFound } from '../components/NotFound';
-import { Footer } from '../components/Footer';
 import { Homepage } from '../components/homepage/Homepage';
 import { ResultsPage } from '../components/ResultsPage/ResultsPage';
-
-const UserWrapper = Styled.div`
-  display: flex;
-  align-items: flex-start;
-  @media (max-width: 768px) {
-    flex-direction: column;
-    width: 100%;
-  }
-`;
-
-const Header = Styled.header`
-  display: flex;
-  justify-content: space-between;
-  margin: 35px 15px 15px 15px;
-`;
-
-// const ResultsPage = Styled.div`
-//   margin: 0 auto;
-//   max-width: 980px;
-// `;
 
 function App() {
   const [searchInput, setSearchInput] = useState('');

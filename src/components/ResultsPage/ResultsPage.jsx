@@ -10,6 +10,7 @@ import { UserActivitySection } from '../userActivitySection/UserActivitySection'
 const Wrapper = Styled.div`
   margin: 0 auto;
   max-width: 980px;
+  min-height: calc(100vh - 100px);
 `;
 
 const Header = Styled.header`
@@ -149,8 +150,8 @@ export const ResultsPage = ({
             <UserActivitySection activities={activities} />
           </UserWrapper>
         )}
-        <Footer />
       </Wrapper>
+      <Footer />
     </>
   );
 };
