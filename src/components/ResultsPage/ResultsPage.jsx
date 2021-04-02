@@ -52,16 +52,18 @@ export const ResultsPage = ({
 
   const languages = !userRepos
     ? ''
-    : userRepos
-        .map((repo) => {
+    : (() => {
+        const mappedLang = userRepos.map((repo) => {
           return repo.language;
-        })
-        .filter((lang) => {
-          if (lang !== null) return lang;
-        })
-        .filter((lang, i, arr) => {
+        });
+
+        const filterNull = mappedLang.filter((lang) => lang !== null);
+
+        const filterRepeatedValues = filterNull.filter((lang, i, arr) => {
           return arr.indexOf(lang) === i;
         });
+        return filterRepeatedValues;
+      })();
 
   const user = !userProfile
     ? ''
@@ -123,6 +125,8 @@ export const ResultsPage = ({
           ),
         };
       });
+
+  console.log('lang --> ', languages);
 
   return (
     <>
