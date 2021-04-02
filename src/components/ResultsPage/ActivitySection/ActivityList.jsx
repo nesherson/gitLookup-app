@@ -13,15 +13,21 @@ const List = Styled.div`
     list-style: none;
 `;
 
+const WATCH_EVENT = 'WatchEvent';
+const ISSUE_COMMENT_EVENT = 'IssueCommentEvent';
+const ISSUES_EVENT = 'IssuesEvent';
+const PUSH_EVENT = 'PushEvent';
+const PULL_REQUEST_EVENT = 'PullRequestEvent';
+const CREATE_EVENT = 'CreateEvent';
+
 export const ActivityList = (props) => {
   const activities = props.activities;
-  console.log(activities);
   return (
     <List>
       {activities &&
         activities.map((activity) => {
           switch (activity.type) {
-            case 'WatchEvent':
+            case WATCH_EVENT:
               return (
                 <ListItem
                   icon={Star}
@@ -32,7 +38,7 @@ export const ActivityList = (props) => {
                   <Link url={activity.repo}>{activity.name}</Link>
                 </ListItem>
               );
-            case 'IssueCommentEvent':
+            case ISSUE_COMMENT_EVENT:
               const commentUrl = activity.payload.comment.html_url;
               return (
                 <ListItem
@@ -44,7 +50,7 @@ export const ActivityList = (props) => {
                   <Link url={activity.repo}>{activity.name}</Link>
                 </ListItem>
               );
-            case 'IssuesEvent':
+            case ISSUES_EVENT:
               const issueUrl = activity.payload.issue.html_url;
               return (
                 <ListItem
@@ -56,7 +62,7 @@ export const ActivityList = (props) => {
                   <Link url={activity.repo}>{activity.name}</Link>
                 </ListItem>
               );
-            case 'PushEvent':
+            case PUSH_EVENT:
               const pushSize = activity.payload.size;
               const branch = activity.payload.ref
                 .split('/')
@@ -76,7 +82,7 @@ export const ActivityList = (props) => {
                 </ListItem>
               );
 
-            case 'PullRequestEvent':
+            case PULL_REQUEST_EVENT:
               const pullReq = activity.payload.pull_request.html_url;
               return (
                 <ListItem
@@ -88,7 +94,7 @@ export const ActivityList = (props) => {
                   <Link url={activity.repo}>{activity.name}</Link>
                 </ListItem>
               );
-            case 'CreateEvent':
+            case CREATE_EVENT:
               if (activity.payload.ref_type === 'branch') {
                 const ref = activity.payload.ref;
                 const branchUrl = `https://github.com/${activity.author}/tree/${ref}`;
