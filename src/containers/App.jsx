@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { Homepage } from '../components/homepage/Homepage';
-import { ResultsPage } from '../components/ResultsPage/ResultsPage';
+import { ResultsPage } from '../components/resultsPage/ResultsPage';
 
 function App() {
   const [searchInput, setSearchInput] = useState('');
@@ -18,31 +18,31 @@ function App() {
   const fetchData = () => {
     const MAX_REPOS = 100;
 
-    fetch(`https://api.github.com/users/${searchInput}`)
-      .then((resp) => {
-        if (resp.status === 404) {
-          setUserNotFound(true);
-          throw new Error('Not Found.');
-        } else {
-          setUserNotFound(false);
-          return resp.json();
-        }
-      })
-      .then((data) => {
-        setUserProfile(data);
-        fetch(
-          `https://api.github.com/users/${searchInput}/repos?per_page=${MAX_REPOS}`
-        )
-          .then((resp) => resp.json())
-          .then((data) => setUserRepos(data));
-        fetch(`https://api.github.com/users/${searchInput}/events`)
-          .then((resp) => resp.json())
-          .then((data) => setUserActivity(data));
-      })
-      .catch((err) => console.log(err));
+    setTimeout(() => {
+      fetch(`https://api.github.com/users/${searchInput}`)
+        .then((resp) => {
+          if (resp.status === 404) {
+            setUserNotFound(true);
+            throw new Error('Not Found.');
+          } else {
+            setUserNotFound(false);
+            return resp.json();
+          }
+        })
+        .then((data) => {
+          setUserProfile(data);
+          fetch(
+            `https://api.github.com/users/${searchInput}/repos?per_page=${MAX_REPOS}`
+          )
+            .then((resp) => resp.json())
+            .then((data) => setUserRepos(data));
+          fetch(`https://api.github.com/users/${searchInput}/events`)
+            .then((resp) => resp.json())
+            .then((data) => setUserActivity(data));
+        })
+        .catch((err) => console.log(err));
+    }, 250);
   };
-
-  console.log(userProfile);
 
   return (
     <Router>

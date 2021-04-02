@@ -1,6 +1,6 @@
 import React from 'react';
-import { ActivityList } from './ActivityList';
 import Styled from 'styled-components';
+import { ActivityList } from './ActivityList';
 
 const Heading = Styled.h3`
   font-size: 1.25rem;

@@ -18,6 +18,7 @@ const Warning = Styled.p`
 
 export const Homepage = ({
   searchInput,
+  setSearchInput,
   handleInputChange,
   fetchData,
   setIsInputEmpty,
@@ -28,10 +29,11 @@ export const Homepage = ({
       <SearchPage>
         <Logo />
         <SearchField
-          inputValue={searchInput}
+          searchInput={searchInput}
           handleInputChange={handleInputChange}
           fetchData={fetchData}
           setIsInputEmpty={setIsInputEmpty}
+          setSearchInput={setSearchInput}
         />
         {isInputEmpty ? <Warning>Please enter a username</Warning> : null}
       </SearchPage>

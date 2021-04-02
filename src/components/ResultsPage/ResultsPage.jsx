@@ -33,6 +33,7 @@ export const ResultsPage = ({
   userRepos,
   userActivity,
   searchInput,
+  setSearchInput,
   handleInputChange,
   fetchData,
   setIsInputEmpty,
@@ -126,15 +127,13 @@ export const ResultsPage = ({
         };
       });
 
-  console.log('lang --> ', languages);
-
   return (
     <>
       <Wrapper>
         <Header>
           <Logo type='result' />
           <SearchField
-            inputValue={searchInput}
+            searchInput={searchInput}
             handleInputChange={handleInputChange}
             fetchData={fetchData}
             setIsInputEmpty={setIsInputEmpty}
