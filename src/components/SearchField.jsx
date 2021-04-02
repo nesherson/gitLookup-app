@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useHistory } from 'react-router-dom';
 import Styled from 'styled-components';
 
@@ -65,15 +65,20 @@ const SearchLabel = Styled.label`
 export const SearchField = ({
   handleInputChange,
   setIsInputEmpty,
-  inputValue,
+  searchInput,
   fetchData,
   type,
 }) => {
   const history = useHistory();
 
+  const refHandleInputChange = useRef(handleInputChange);
+  console.log(refHandleInputChange);
+
   useEffect(() => {
-    if (inputValue && type !== 'result') handleInputChange('');
-  }, []);
+    if (type !== 'result') {
+      refHandleInputChange.current('');
+    }
+  }, [type]);
 
   const handleChange = (e) => {
     handleInputChange(e.target.value);
@@ -85,10 +90,10 @@ export const SearchField = ({
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (inputValue) {
+    if (searchInput) {
       fetchData();
       type !== 'result' && handleEmptyInput(false);
-      history.push(`/${inputValue}`);
+      history.push(`/${searchInput}`);
     } else {
       type !== 'result' && handleEmptyInput(true);
     }
@@ -105,7 +110,7 @@ export const SearchField = ({
               id='username'
               name='username'
               placeholder='Enter Github Username'
-              value={inputValue}
+              value={searchInput}
               onChange={handleChange}
             />
             <SearchButton type='submit'>Search</SearchButton>
@@ -118,7 +123,7 @@ export const SearchField = ({
             type='text'
             id='username'
             name='username'
-            value={inputValue}
+            value={searchInput}
             onChange={handleChange}
           />
           <ResultSearchButton type='submit'>Search</ResultSearchButton>
