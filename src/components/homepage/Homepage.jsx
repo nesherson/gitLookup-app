@@ -1,5 +1,4 @@
 import React from 'react';
-import { useLocation } from 'react-router-dom';
 import Styled from 'styled-components';
 import { Logo } from '../Logo';
 import { SearchField } from '../SearchField';
@@ -13,26 +12,14 @@ const SearchPage = Styled.div`
   align-items: center;  
 `;
 
-export const Homepage = ({
-  searchInput,
-  setSearchInput,
-  handleInputChange,
-  fetchData,
-  setIsInputEmpty,
-  isInputEmpty,
-}) => {
-  const location = useLocation();
-
+export const Homepage = ({ setSearchedInput, fetchData }) => {
   return (
     <>
       <SearchPage>
         <Logo />
         <SearchField
-          searchInput={searchInput}
-          handleInputChange={handleInputChange}
+          setSearchedInput={setSearchedInput}
           fetchData={fetchData}
-          setIsInputEmpty={setIsInputEmpty}
-          setSearchInput={setSearchInput}
         />
       </SearchPage>
       <Footer />

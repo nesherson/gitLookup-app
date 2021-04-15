@@ -5,10 +5,10 @@ import { ResultsPage } from '../components/resultsPage/ResultsPage';
 
 function App() {
   const [userNotFound, setUserNotFound] = useState(false);
-  //const [isInputEmpty, setIsInputEmpty] = useState(false);
   const [userProfile, setUserProfile] = useState(null);
   const [userRepos, setUserRepos] = useState(null);
   const [userActivity, setUserActivity] = useState(null);
+  const [searchedInput, setSearchedInput] = useState('');
 
   const fetchData = (input) => {
     const MAX_REPOS = 100;
@@ -43,7 +43,7 @@ function App() {
     <Router>
       <Switch>
         <Route exact path='/'>
-          <Homepage fetchData={fetchData} />
+          <Homepage fetchData={fetchData} setSearchedInput={setSearchedInput} />
         </Route>
         <Route path='/:id'>
           {!userProfile ? (
@@ -55,6 +55,7 @@ function App() {
               userActivity={userActivity}
               userNotFound={userNotFound}
               fetchData={fetchData}
+              searchedInput={searchedInput}
             />
           )}
         </Route>

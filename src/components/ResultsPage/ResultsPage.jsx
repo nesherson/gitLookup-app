@@ -1,7 +1,7 @@
 import React from 'react';
 import Styled from 'styled-components';
 import { Logo } from '../Logo';
-import { SearchField } from '../SearchField';
+import { SearchField } from './SearchField';
 import { NotFound } from '../NotFound';
 import { Footer } from '../Footer';
 import { UserProfileSection } from './ProfileSection/UserProfileSection';
@@ -32,12 +32,9 @@ export const ResultsPage = ({
   userProfile,
   userRepos,
   userActivity,
-  searchInput,
-  setSearchInput,
-  handleInputChange,
   fetchData,
-  setIsInputEmpty,
   userNotFound,
+  searchedInput,
 }) => {
   const stars = !userRepos
     ? ''
@@ -109,7 +106,6 @@ export const ResultsPage = ({
   const activities = !userRepos
     ? ''
     : userActivity.map((activity) => {
-        console.log(activity.payload.created_at);
         return {
           id: activity.id,
           author: activity.repo.name,
@@ -132,13 +128,7 @@ export const ResultsPage = ({
       <Wrapper>
         <Header>
           <Logo type='result' />
-          <SearchField
-            searchInput={searchInput}
-            handleInputChange={handleInputChange}
-            fetchData={fetchData}
-            setIsInputEmpty={setIsInputEmpty}
-            type='result'
-          />
+          <SearchField fetchData={fetchData} searchedInput={searchedInput} />
         </Header>
         {userNotFound ? (
           <NotFound />

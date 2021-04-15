@@ -41,7 +41,7 @@ const Warning = Styled.p`
   text-align: center;
 `;
 
-export const SearchField = ({ fetchData }) => {
+export const SearchField = ({ fetchData, setSearchedInput }) => {
   const [searchInput, setSearchInput] = useState('');
   const [isInputEmpty, setIsInputEmpty] = useState(false);
   const history = useHistory();
@@ -54,6 +54,7 @@ export const SearchField = ({ fetchData }) => {
     e.preventDefault();
     if (searchInput) {
       fetchData(searchInput);
+      setSearchedInput(searchInput);
       setIsInputEmpty(false);
       history.push(`/${searchInput}`);
     } else {
