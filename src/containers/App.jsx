@@ -4,22 +4,17 @@ import { Homepage } from '../components/homepage/Homepage';
 import { ResultsPage } from '../components/resultsPage/ResultsPage';
 
 function App() {
-  const [searchInput, setSearchInput] = useState('');
   const [userNotFound, setUserNotFound] = useState(false);
-  const [isInputEmpty, setIsInputEmpty] = useState(false);
+  //const [isInputEmpty, setIsInputEmpty] = useState(false);
   const [userProfile, setUserProfile] = useState(null);
   const [userRepos, setUserRepos] = useState(null);
   const [userActivity, setUserActivity] = useState(null);
 
-  const handleInputChange = (value) => {
-    setSearchInput(value);
-  };
-
-  const fetchData = () => {
+  const fetchData = (input) => {
     const MAX_REPOS = 100;
 
     setTimeout(() => {
-      fetch(`https://api.github.com/users/${searchInput}`)
+      fetch(`https://api.github.com/users/${input}`)
         .then((resp) => {
           if (resp.status === 404) {
             setUserNotFound(true);
@@ -32,11 +27,11 @@ function App() {
         .then((data) => {
           setUserProfile(data);
           fetch(
-            `https://api.github.com/users/${searchInput}/repos?per_page=${MAX_REPOS}`
+            `https://api.github.com/users/${input}/repos?per_page=${MAX_REPOS}`
           )
             .then((resp) => resp.json())
             .then((data) => setUserRepos(data));
-          fetch(`https://api.github.com/users/${searchInput}/events`)
+          fetch(`https://api.github.com/users/${input}/events`)
             .then((resp) => resp.json())
             .then((data) => setUserActivity(data));
         })
@@ -48,13 +43,7 @@ function App() {
     <Router>
       <Switch>
         <Route exact path='/'>
-          <Homepage
-            searchInput={searchInput}
-            handleInputChange={handleInputChange}
-            fetchData={fetchData}
-            setIsInputEmpty={setIsInputEmpty}
-            isInputEmpty={isInputEmpty}
-          />
+          <Homepage fetchData={fetchData} />
         </Route>
         <Route path='/:id'>
           {!userProfile ? (
@@ -65,10 +54,7 @@ function App() {
               userRepos={userRepos}
               userActivity={userActivity}
               userNotFound={userNotFound}
-              searchInput={searchInput}
-              handleInputChange={handleInputChange}
               fetchData={fetchData}
-              setIsInputEmpty={setIsInputEmpty}
             />
           )}
         </Route>

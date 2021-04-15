@@ -1,4 +1,5 @@
 import React from 'react';
+import { useLocation } from 'react-router-dom';
 import Styled from 'styled-components';
 import { Logo } from '../Logo';
 import { SearchField } from '../SearchField';
@@ -12,10 +13,6 @@ const SearchPage = Styled.div`
   align-items: center;  
 `;
 
-const Warning = Styled.p`
-  color: #ff1a1a;
-`;
-
 export const Homepage = ({
   searchInput,
   setSearchInput,
@@ -24,6 +21,8 @@ export const Homepage = ({
   setIsInputEmpty,
   isInputEmpty,
 }) => {
+  const location = useLocation();
+
   return (
     <>
       <SearchPage>
@@ -35,7 +34,6 @@ export const Homepage = ({
           setIsInputEmpty={setIsInputEmpty}
           setSearchInput={setSearchInput}
         />
-        {isInputEmpty ? <Warning>Please enter a username</Warning> : null}
       </SearchPage>
       <Footer />
     </>
