@@ -1,3 +1,5 @@
+import { parseDate, timeSince } from './helpers';
+
 const url = 'https://api.github.com/users/';
 
 export const fetchUser = async (username) => {
@@ -10,6 +12,7 @@ export const fetchUser = async (username) => {
       throw new Error(response.statusText, response.status);
     })
     .then((jsonResponse) => {
+      console.log(jsonResponse);
       const userData = {
         name: jsonResponse.name,
         avatar_url: jsonResponse.avatar_url,
@@ -20,6 +23,7 @@ export const fetchUser = async (username) => {
         created_at: jsonResponse.created_at,
         updated_at: jsonResponse.updated_at,
         location: jsonResponse.location,
+        repo_count: jsonResponse.public_repos,
       };
 
       return userData;
@@ -56,11 +60,9 @@ export const fetchActivities = async (username) => {
       if (response.ok) {
         return response.json();
       }
-
       throw new Error(response.statusText, response.status);
     })
     .then((jsonResponse) => {
-      console.log(jsonResponse);
       return jsonResponse.map((activity) => {
         return {
           id: activity.id,
@@ -69,13 +71,7 @@ export const fetchActivities = async (username) => {
           name: activity.repo.name,
           repo: `https://github.com/${activity.repo.name}`,
           payload: activity.payload,
-          created_at: new Date(activity.created_at).toLocaleDateString(
-            undefined,
-            {
-              month: 'short',
-              day: 'numeric',
-            }
-          ),
+          created_at: timeSince(new Date(activity.created_at)),
         };
       });
     })

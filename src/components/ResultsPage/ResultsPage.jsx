@@ -1,5 +1,6 @@
 import React from 'react';
 import Styled from 'styled-components';
+import { parseDate } from '../../util/helpers.js';
 import { Logo } from '../Logo';
 import { SearchField } from './SearchField';
 import { NotFound } from '../NotFound';
@@ -84,23 +85,23 @@ export const ResultsPage = ({
   const dates = !userProfile
     ? ''
     : {
-        createdAt: new Date(userProfile.created_at).toLocaleDateString(
+        createdAt: parseDate(userProfile.created_at, [
           'en-GB',
           {
             year: 'numeric',
             month: 'long',
             day: 'numeric',
-          }
-        ),
+          },
+        ]),
         location: userProfile.location,
-        updatedAt: new Date(userProfile.updated_at).toLocaleDateString(
+        updatedAt: parseDate(userProfile.updated_at, [
           'en-GB',
           {
             year: 'numeric',
             month: 'long',
             day: 'numeric',
-          }
-        ),
+          },
+        ]),
       };
 
   return (
