@@ -81,7 +81,7 @@ export const ResultsPage = ({
         forks: forks,
       };
 
-  const dates = !userRepos
+  const dates = !userProfile
     ? ''
     : {
         createdAt: new Date(userProfile.created_at).toLocaleDateString(
@@ -103,26 +103,6 @@ export const ResultsPage = ({
         ),
       };
 
-  const activities = !userRepos
-    ? ''
-    : userActivity.map((activity) => {
-        return {
-          id: activity.id,
-          author: activity.repo.name,
-          type: activity.type,
-          name: activity.repo.name,
-          repo: `https://github.com/${activity.repo.name}`,
-          payload: activity.payload,
-          created_at: new Date(activity.created_at).toLocaleDateString(
-            undefined,
-            {
-              month: 'short',
-              day: 'numeric',
-            }
-          ),
-        };
-      });
-
   return (
     <>
       <Wrapper>
@@ -132,6 +112,8 @@ export const ResultsPage = ({
         </Header>
         {userNotFound ? (
           <NotFound />
+        ) : user === '' ? (
+          <h1>Loading</h1>
         ) : (
           <UserWrapper>
             <UserProfileSection
@@ -140,7 +122,7 @@ export const ResultsPage = ({
               languages={languages}
               dates={dates}
             />
-            <UserActivitySection activities={activities} />
+            <UserActivitySection activities={userActivity} />
           </UserWrapper>
         )}
       </Wrapper>

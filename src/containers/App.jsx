@@ -1,66 +1,64 @@
 import React, { useState } from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import Styled from 'styled-components';
+import { fetchUser, fetchRepos, fetchActivities } from '../util/fetchData.js';
+import { Route, Switch } from 'react-router-dom';
 import { Homepage } from '../components/homepage/Homepage';
 import { ResultsPage } from '../components/resultsPage/ResultsPage';
+
+const Loading = Styled.h1`
+font-size: 1.55rem;
+display: flex;
+align-items: center;
+justify-content: center;
+`;
 
 function App() {
   const [userNotFound, setUserNotFound] = useState(false);
   const [userProfile, setUserProfile] = useState(null);
   const [userRepos, setUserRepos] = useState(null);
-  const [userActivity, setUserActivity] = useState(null);
+  const [userActivities, setUserActivities] = useState(null);
   const [searchedInput, setSearchedInput] = useState('');
 
   const fetchData = (input) => {
-    const MAX_REPOS = 100;
+    fetchUser(input).then((data) => {
+      if (data.fileName === '404') {
+        setUserNotFound(true);
+      } else {
+        setUserProfile(data);
+        setUserNotFound(false);
+      }
+    });
 
-    setTimeout(() => {
-      fetch(`https://api.github.com/users/${input}`)
-        .then((resp) => {
-          if (resp.status === 404) {
-            setUserNotFound(true);
-            throw new Error('Not Found.');
-          } else {
-            setUserNotFound(false);
-            return resp.json();
-          }
-        })
-        .then((data) => {
-          setUserProfile(data);
-          fetch(
-            `https://api.github.com/users/${input}/repos?per_page=${MAX_REPOS}`
-          )
-            .then((resp) => resp.json())
-            .then((data) => setUserRepos(data));
-          fetch(`https://api.github.com/users/${input}/events`)
-            .then((resp) => resp.json())
-            .then((data) => setUserActivity(data));
-        })
-        .catch((err) => console.log(err));
-    }, 250);
+    fetchRepos(input).then((data) => {
+      setUserRepos(data);
+    });
+
+    fetchActivities(input).then((data) => {
+      setUserActivities(data);
+    });
   };
 
   return (
-    <Router>
-      <Switch>
-        <Route exact path='/'>
-          <Homepage fetchData={fetchData} setSearchedInput={setSearchedInput} />
-        </Route>
-        <Route path='/:id'>
-          {!userProfile ? (
-            <h1>Loading</h1>
-          ) : (
-            <ResultsPage
-              userProfile={userProfile}
-              userRepos={userRepos}
-              userActivity={userActivity}
-              userNotFound={userNotFound}
-              fetchData={fetchData}
-              searchedInput={searchedInput}
-            />
-          )}
-        </Route>
-      </Switch>
-    </Router>
+    <Switch>
+      <Route exact path='/'>
+        <Homepage fetchData={fetchData} setSearchedInput={setSearchedInput} />
+      </Route>
+
+      <Route path='/:id'>
+        {!userProfile ? (
+          <Loading>Loading...</Loading>
+        ) : (
+          <ResultsPage
+            userProfile={userProfile}
+            userRepos={userRepos}
+            userActivity={userActivities}
+            userNotFound={userNotFound}
+            fetchData={fetchData}
+            searchedInput={searchedInput}
+          />
+        )}
+      </Route>
+    </Switch>
   );
 }
 

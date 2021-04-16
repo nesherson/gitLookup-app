@@ -36,8 +36,6 @@ const SearchLabel = Styled.label`
 `;
 
 export const SearchField = ({ fetchData, searchedInput }) => {
-  console.log('results search');
-  console.log(searchedInput);
   const [searchInput, setSearchInput] = useState(searchedInput);
 
   const history = useHistory();
