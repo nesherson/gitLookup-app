@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Styled from 'styled-components';
 import { fetchUser, fetchRepos, fetchActivities } from '../util/fetchData.js';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, useLocation, Redirect } from 'react-router-dom';
 import { Homepage } from '../components/homepage/Homepage';
 import { ResultsPage } from '../components/resultsPage/ResultsPage';
 
@@ -18,6 +18,15 @@ function App() {
   const [userRepos, setUserRepos] = useState(null);
   const [userActivities, setUserActivities] = useState(null);
   const [searchedInput, setSearchedInput] = useState('');
+
+  const location = useLocation();
+
+  useEffect(() => {
+    if (location.pathname !== '/') {
+      const input = location.pathname.slice(1);
+      fetchData(input);
+    }
+  }, [location.pathname]);
 
   const fetchData = (input) => {
     fetchUser(input).then((data) => {
@@ -43,7 +52,6 @@ function App() {
       <Route exact path='/'>
         <Homepage fetchData={fetchData} setSearchedInput={setSearchedInput} />
       </Route>
-
       <Route path='/:id'>
         {!userProfile ? (
           <Loading>Loading...</Loading>
