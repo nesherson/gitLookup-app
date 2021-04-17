@@ -1,8 +1,8 @@
 import React from 'react';
 import Styled from 'styled-components';
-import { Logo } from '../Logo';
-import { SearchField } from '../SearchField';
-import { Footer } from '../Footer';
+import { Logo } from '../Logo/Logo';
+import { SearchField } from './SearchField';
+import { Footer } from '../Footer/Footer';
 
 const SearchPage = Styled.div`
   min-height: calc(100vh - 100px);

@@ -1,10 +1,10 @@
 import React from 'react';
 import Styled from 'styled-components';
-import Star from '../../icons/star.svg';
-import Comment from '../../icons/comment.svg';
-import Plus from '../../icons/plus.svg';
-import Trash from '../../icons/trash.svg';
-import Branch from '../../icons/branch.svg';
+import Star from '../../../assets/icons/star.svg';
+import Comment from '../../../assets/icons/comment.svg';
+import Plus from '../../../assets/icons/icons/plus.svg';
+import Trash from '../../../assets/icons/icons/trash.svg';
+import Branch from '../../../assets/icons/icons/branch.svg';
 import { ListItem } from './ListItem';
 import { Link } from './Link';
 

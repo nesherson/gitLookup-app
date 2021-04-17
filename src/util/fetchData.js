@@ -1,4 +1,4 @@
-import { parseDate, timeSince } from './helpers';
+import { timeSince } from './helpers';
 
 const url = 'https://api.github.com/users/';
 
@@ -8,8 +8,8 @@ export const fetchUser = async (username) => {
       if (response.ok) {
         return response.json();
       }
-
-      throw new Error(response.statusText, response.status);
+      // response.statusText, response.status
+      throw new Error('Request failed!');
     })
     .then((jsonResponse) => {
       console.log(jsonResponse);
@@ -26,7 +26,7 @@ export const fetchUser = async (username) => {
         repo_count: jsonResponse.public_repos,
       };
 
-      return userData;
+      return userData || {};
     })
     .catch((error) => {
       return error;
@@ -64,7 +64,7 @@ export const fetchActivities = async (username) => {
     })
     .then((jsonResponse) => {
       return jsonResponse.map((activity) => {
-        return {
+        const userActivities = {
           id: activity.id,
           author: activity.repo.name,
           type: activity.type,
@@ -73,6 +73,7 @@ export const fetchActivities = async (username) => {
           payload: activity.payload,
           created_at: timeSince(new Date(activity.created_at)),
         };
+        return userActivities;
       });
     })
     .catch((error) => {

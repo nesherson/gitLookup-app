@@ -1,9 +1,9 @@
 import React from 'react';
 import Styled from 'styled-components';
 import { About } from './About';
-import { UserStats } from './UserStats';
-import { UserLanguages } from './UserLanguages';
-import { UserDates } from './UserDates';
+import { UserStats } from './Stats';
+import { UserLanguages } from './Languages';
+import { UserDates } from './Dates';
 
 const Wrapper = Styled.div`
     border: 1px solid #d9d9d9;

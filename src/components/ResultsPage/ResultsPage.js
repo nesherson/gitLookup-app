@@ -1,12 +1,13 @@
 import React from 'react';
 import Styled from 'styled-components';
+import { getCount } from '../../util/helpers.js';
 import { parseDate } from '../../util/helpers.js';
-import { Logo } from '../Logo';
-import { SearchField } from './SearchField';
-import { NotFound } from '../NotFound';
-import { Footer } from '../Footer';
-import { UserProfileSection } from './ProfileSection/UserProfileSection';
-import { UserActivitySection } from './ActivitySection/UserActivitySection';
+import { Logo } from '../Logo/Logo';
+import { SearchField } from './SearchField/SearchField';
+import { NotFound } from '../NotFound/NotFound';
+import { Footer } from '../Footer/Footer';
+import { UserProfileSection } from './ProfileSection/ProfileSection';
+import { UserActivitySection } from './ActivitySection/ActivitySection';
 
 const Wrapper = Styled.div`
   margin: 0 auto;
@@ -37,19 +38,10 @@ export const ResultsPage = ({
   userNotFound,
   searchedInput,
 }) => {
-  const stars = !userRepos
-    ? ''
-    : userRepos.reduce((acc, repo) => {
-        return (acc += repo.stargazers_count);
-      }, 0);
+  const stars = getCount(userRepos, userNotFound);
+  const forks = getCount(userRepos, userNotFound);
 
-  const forks = !userRepos
-    ? ''
-    : userRepos.reduce((acc, repo) => {
-        return (acc += repo.forks_count);
-      }, 0);
-
-  const languages = !userRepos
+  const languages = userNotFound
     ? ''
     : (() => {
         const mappedLang = userRepos.map((repo) => {
@@ -64,7 +56,7 @@ export const ResultsPage = ({
         return filterRepeatedValues;
       })();
 
-  const user = !userProfile
+  const user = userNotFound
     ? ''
     : {
         userName: userProfile.name,
@@ -73,7 +65,7 @@ export const ResultsPage = ({
         blog: userProfile.blog ? userProfile.blog : null,
       };
 
-  const stats = !userProfile
+  const stats = userNotFound
     ? ''
     : {
         followers: userProfile.followers,
@@ -82,7 +74,7 @@ export const ResultsPage = ({
         forks: forks,
       };
 
-  const dates = !userProfile
+  const dates = userNotFound
     ? ''
     : {
         createdAt: parseDate(userProfile.created_at, [
@@ -123,7 +115,7 @@ export const ResultsPage = ({
               languages={languages}
               dates={dates}
             />
-            <UserActivitySection activities={userActivity} />
+            <ActivitySection activities={userActivity} />
           </UserWrapper>
         )}
       </Wrapper>
