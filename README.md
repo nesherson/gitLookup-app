@@ -1,6 +1,6 @@
 # gitLookup
 
-![alt text](https://github.com/nesherson/gitLookup-app/docs/images/screenshot.png)
+![alt text](https://github.com/nesherson/gitLookup-app/blob/master/docs/images/screenshot.png)
 
 ## Discover who's upto what on Github
 
