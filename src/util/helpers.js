@@ -28,3 +28,9 @@ export const timeSince = (date) => {
   }
   return Math.floor(seconds) + ' seconds ago';
 };
+
+export const getCount = (repo) => {
+  return !repo
+    ? ''
+    : repo.reduce((acc, repo) => (acc += repo.stargazers_count), 0);
+};
