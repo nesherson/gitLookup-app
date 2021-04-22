@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Styled from 'styled-components';
-import Search from './icons/search.svg';
+import Search from '../../assets/icons/search.svg';
 
 const Heading = Styled.h1`
   color: #705df2;

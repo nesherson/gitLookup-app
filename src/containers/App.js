@@ -14,6 +14,7 @@ justify-content: center;
 
 function App() {
   const [userNotFound, setUserNotFound] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [userProfile, setUserProfile] = useState(null);
   const [userRepos, setUserRepos] = useState(null);
   const [userActivities, setUserActivities] = useState(null);
@@ -29,14 +30,26 @@ function App() {
   }, [location.pathname]);
 
   const fetchData = (input) => {
+
+    setIsLoading(true);
+
+    if (userProfile || userRepos || userActivities) {
+      setUserProfile(null);
+      setUserRepos(null);
+      setUserActivities(null);
+      setUserNotFound(false);
+    }
+
+    setTimeout(() => {
     fetchUser(input).then((data) => {
       if (data.name === 'Error') {
         setUserNotFound(true);
-        console.log('fetchData func -->', data.name);
+        setIsLoading(false);
         return;
       } else {
         setUserProfile(data);
         setUserNotFound(false);
+        setIsLoading(false);
       }
     });
 
@@ -47,29 +60,26 @@ function App() {
     fetchActivities(input).then((data) => {
       setUserActivities(data);
     });
+  }, 600);
   };
-
-  console.log('userProfile --> ', userProfile);
-  console.log('userNotFound --> ', userNotFound);
 
   return (
     <Switch>
       <Route exact path='/'>
         <Homepage fetchData={fetchData} setSearchedInput={setSearchedInput} />
       </Route>
-      <Route path='/:id'>
-        {!userProfile ? (
-          <Loading>Loading...</Loading>
-        ) : (
+      <Route path='/:id'>   
+     { isLoading ? <h1>Loading...</h1>:
           <ResultsPage
             userProfile={userProfile}
             userRepos={userRepos}
-            userActivity={userActivities}
+            userActivities={userActivities}
             userNotFound={userNotFound}
             fetchData={fetchData}
             searchedInput={searchedInput}
+            isLoading={isLoading}
           />
-        )}
+     }
       </Route>
     </Switch>
   );

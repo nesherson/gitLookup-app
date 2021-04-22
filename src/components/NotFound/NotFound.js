@@ -19,7 +19,6 @@ const Text = Styled.p`
 `;
 
 export const NotFound = () => {
-  console.log('Not found');
   return (
     <Wrapper>
       <Heading>Username not found.</Heading>

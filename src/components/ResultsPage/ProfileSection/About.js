@@ -33,23 +33,30 @@ const Wrapper = Styled.div`
     padding: 14px;
 `;
 
-export const About = (props) => {
-  const profilePicture = props.about.profilePicture;
-  const userName = props.about.userName;
-  const profileUrl = props.about.profileUrl;
-  const userBlog = props.about.blog;
+export const About = ({about}) => {
+
+  // const user = userNotFound
+  //   ? ''
+  //   : {
+  //       userName: userProfile.name,
+  //       profilePicture: userProfile.avatar_url,
+  //       profileUrl: userProfile.html_url,
+  //       blog: userProfile.blog ? userProfile.blog : null,
+  //     };
+
+  console.log('About.js/userProfile --> ', about);
 
   return (
     <Wrapper>
       <Avatar>
-        <ProfilePicture src={`${profilePicture}`} alt={''} />
+        <ProfilePicture src={`${about.profilePicture}`} alt={''} />
       </Avatar>
       <UserName>
-        <Heading>{userName}</Heading>
-        <Link url={profileUrl}>↗</Link>
-        {userBlog ? (
-          <Link url={userBlog} type='blog'>
-            {userBlog}
+        <Heading>{about.userName}</Heading>
+        <Link url={about.profileUrl}>↗</Link>
+        {about.userBlog ? (
+          <Link url={about.userBlog} type='blog'>
+            {about.userBlog}
           </Link>
         ) : (
           ''

@@ -1,5 +1,6 @@
 import React from 'react';
 import Styled from 'styled-components';
+import { parseDate } from '../../../util/helpers.js';
 
 const Heading = Styled.h4`
     font-size: 0.80rem;
@@ -34,24 +35,18 @@ const Wrapper = Styled.div`
     padding: 12px;
 `;
 
-export const UserDates = (props) => {
-  const userDates =
-    props.dates.createdAt === 'Invalid Date' ||
-    props.dates.updatedAt === 'Invalid Date'
-      ? null
-      : props.dates;
-
+export const UserDates = ({dates}) => {
   return (
     <Wrapper>
       <StatsWrapper>
         <Heading>Joined</Heading>
-        <Text>{userDates && userDates.createdAt}</Text>
+        <Text>{dates.createdAt}</Text>
       </StatsWrapper>
       <StatsWrapper>
         <Heading>Location</Heading>
-        <LocationText>{userDates && userDates.location}</LocationText>
+        <LocationText>{dates.location}</LocationText>
       </StatsWrapper>
-      <TextSpan>Last Updated on {userDates && userDates.updatedAt}</TextSpan>
+      <TextSpan>Last Updated on {dates.updatedAt}</TextSpan>
     </Wrapper>
   );
 };

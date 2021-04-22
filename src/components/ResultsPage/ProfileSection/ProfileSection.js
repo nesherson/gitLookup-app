@@ -1,5 +1,6 @@
 import React from 'react';
 import Styled from 'styled-components';
+import { getCount, parseDate} from '../../../util/helpers.js';
 import { About } from './About';
 import { UserStats } from './Stats';
 import { UserLanguages } from './Languages';
@@ -19,18 +20,68 @@ const Wrapper = Styled.div`
   }
 `;
 
-export const UserProfileSection = (props) => {
-  const userAbout = props.about;
-  const userStats = props.stats;
-  const languages = props.languages;
-  const userDates = props.dates;
+export const ProfileSection = ({profile, repos}) => {
+
+   const about = {
+         userName: profile.name,
+         profilePicture: profile.avatar_url,
+         profileUrl: profile.html_url,
+         blog: profile.blog ? profile.blog : null,
+       };
+
+
+   const stars = getCount(repos);
+   const forks = getCount(repos);
+   const stats =  {
+         followers: profile.followers,
+         following: profile.following,
+         stars: stars,
+         forks: forks,
+       };
+
+       const getLanguages = () => {
+        const mappedLang = repos.map((repo) => {
+          return repo.language;
+        });
+  
+        const filterNull = mappedLang.filter((lang) => lang !== null);
+  
+        const filterRepeatedValues = filterNull.filter((lang, i, arr) => {
+          return arr.indexOf(lang) === i;
+        });
+        console.log('ProfileSection/languages()/returnValue --> ', filterRepeatedValues);
+        return filterRepeatedValues;
+       }
+
+       const languages = getLanguages();
+
+      
+   const dates = {
+       createdAt: parseDate(profile.created_at, [
+         'en-GB',
+         {
+           year: 'numeric',
+           month: 'long',
+           day: 'numeric',
+         },
+       ]),
+       location: profile.location,
+       updatedAt: parseDate(profile.updated_at, [
+         'en-GB',
+         {
+           year: 'numeric',
+           month: 'long',
+           day: 'numeric',
+         },
+       ]),
+     };
 
   return (
     <Wrapper>
-      <About about={userAbout} />
-      <UserStats stats={userStats} />
+      <About about={about} />
+      <UserStats stats={stats} />
       <UserLanguages languages={languages} />
-      <UserDates dates={userDates} />
+      <UserDates dates={dates} />
     </Wrapper>
   );
 };

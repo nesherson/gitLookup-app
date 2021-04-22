@@ -23,7 +23,7 @@ const Wrapper = Styled.div`
   }
 `;
 
-export const UserActivitySection = (props) => {
+export const ActivitySection = (props) => {
   const activities = props.activities;
 
   return (

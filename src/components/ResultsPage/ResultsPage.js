@@ -1,13 +1,11 @@
 import React from 'react';
 import Styled from 'styled-components';
-import { getCount } from '../../util/helpers.js';
-import { parseDate } from '../../util/helpers.js';
 import { Logo } from '../Logo/Logo';
 import { SearchField } from './SearchField/SearchField';
 import { NotFound } from '../NotFound/NotFound';
 import { Footer } from '../Footer/Footer';
-import { UserProfileSection } from './ProfileSection/ProfileSection';
-import { UserActivitySection } from './ActivitySection/ActivitySection';
+import { ProfileSection } from './ProfileSection/ProfileSection';
+import { ActivitySection } from './ActivitySection/ActivitySection';
 
 const Wrapper = Styled.div`
   margin: 0 auto;
@@ -33,69 +31,12 @@ const UserWrapper = Styled.div`
 export const ResultsPage = ({
   userProfile,
   userRepos,
-  userActivity,
+  userActivities,
   fetchData,
   userNotFound,
   searchedInput,
 }) => {
-  const stars = getCount(userRepos, userNotFound);
-  const forks = getCount(userRepos, userNotFound);
-
-  const languages = userNotFound
-    ? ''
-    : (() => {
-        const mappedLang = userRepos.map((repo) => {
-          return repo.language;
-        });
-
-        const filterNull = mappedLang.filter((lang) => lang !== null);
-
-        const filterRepeatedValues = filterNull.filter((lang, i, arr) => {
-          return arr.indexOf(lang) === i;
-        });
-        return filterRepeatedValues;
-      })();
-
-  const user = userNotFound
-    ? ''
-    : {
-        userName: userProfile.name,
-        profilePicture: userProfile.avatar_url,
-        profileUrl: userProfile.html_url,
-        blog: userProfile.blog ? userProfile.blog : null,
-      };
-
-  const stats = userNotFound
-    ? ''
-    : {
-        followers: userProfile.followers,
-        following: userProfile.following,
-        stars: stars,
-        forks: forks,
-      };
-
-  const dates = userNotFound
-    ? ''
-    : {
-        createdAt: parseDate(userProfile.created_at, [
-          'en-GB',
-          {
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric',
-          },
-        ]),
-        location: userProfile.location,
-        updatedAt: parseDate(userProfile.updated_at, [
-          'en-GB',
-          {
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric',
-          },
-        ]),
-      };
-
+  
   return (
     <>
       <Wrapper>
@@ -105,17 +46,15 @@ export const ResultsPage = ({
         </Header>
         {userNotFound ? (
           <NotFound />
-        ) : user === '' ? (
+        ) : !userProfile || !userRepos || !userActivities ? (
           <h1>Loading</h1>
         ) : (
           <UserWrapper>
-            <UserProfileSection
-              about={user}
-              stats={stats}
-              languages={languages}
-              dates={dates}
+            <ProfileSection
+              profile={userProfile}
+              repos={userRepos}
             />
-            <ActivitySection activities={userActivity} />
+            <ActivitySection activities={userActivities} />
           </UserWrapper>
         )}
       </Wrapper>

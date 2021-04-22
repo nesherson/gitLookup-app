@@ -18,9 +18,7 @@ const Item = Styled.span`
     border-radius: 3px;
 `;
 
-export const UserLanguages = (props) => {
-  const languages = props.languages;
-
+export const UserLanguages = ({languages}) => {
   return (
     <List>
       {languages &&

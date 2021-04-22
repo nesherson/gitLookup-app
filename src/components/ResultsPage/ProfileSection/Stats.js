@@ -1,5 +1,6 @@
 import React from 'react';
 import Styled from 'styled-components';
+import {getCount} from '../../../util/helpers.js';
 
 const Stat = Styled.h3`
   font-size: 1rem;
@@ -23,29 +24,27 @@ const Wrapper = Styled.div`
   border-bottom: 1px solid #d9d9d9;
 `;
 
-export const UserStats = (props) => {
-  const userStats = props.stats;
-
+export const UserStats = ({stats}) => {
   return (
     <Wrapper>
       <StatsWrapper>
         <Stat>Followers</Stat>
-        <StatNumber>{userStats.followers}</StatNumber>
+        <StatNumber>{stats.followers}</StatNumber>
       </StatsWrapper>
 
       <StatsWrapper>
         <Stat>Following</Stat>
-        <StatNumber>{userStats.following}</StatNumber>
+        <StatNumber>{stats.following}</StatNumber>
       </StatsWrapper>
 
       <StatsWrapper>
         <Stat>Stars received</Stat>
-        <StatNumber>{userStats.stars}</StatNumber>
+        <StatNumber>{stats.stars}</StatNumber>
       </StatsWrapper>
 
       <StatsWrapper>
         <Stat>Forks By Users</Stat>
-        <StatNumber>{userStats.forks}</StatNumber>
+        <StatNumber>{stats.forks}</StatNumber>
       </StatsWrapper>
     </Wrapper>
   );

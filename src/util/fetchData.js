@@ -2,17 +2,18 @@ import { timeSince } from './helpers';
 
 const url = 'https://api.github.com/users/';
 
+
 export const fetchUser = async (username) => {
+
   return fetch(`${url}${username}`)
     .then((response) => {
       if (response.ok) {
-        return response.json();
+        return response.json(); 
       }
       // response.statusText, response.status
       throw new Error('Request failed!');
     })
     .then((jsonResponse) => {
-      console.log(jsonResponse);
       const userData = {
         name: jsonResponse.name,
         avatar_url: jsonResponse.avatar_url,
@@ -25,7 +26,6 @@ export const fetchUser = async (username) => {
         location: jsonResponse.location,
         repo_count: jsonResponse.public_repos,
       };
-
       return userData || {};
     })
     .catch((error) => {
@@ -35,7 +35,7 @@ export const fetchUser = async (username) => {
 
 export const fetchRepos = async (username) => {
   const MAX_REPOS = 100;
-  const urlToFetch = `${url}${username}/repos?per_page=${MAX_REPOS}`;
+   const urlToFetch = `${url}${username}/repos?per_page=${MAX_REPOS}`;
   return fetch(urlToFetch)
     .then((response) => {
       if (response.ok) {
@@ -45,6 +45,7 @@ export const fetchRepos = async (username) => {
       throw new Error(response.statusText, response.status);
     })
     .then((jsonResponse) => {
+     
       return jsonResponse;
     })
     .catch((error) => {
@@ -53,8 +54,7 @@ export const fetchRepos = async (username) => {
 };
 
 export const fetchActivities = async (username) => {
-  const urlToFetch = `${url}${username}/events`;
-
+   const urlToFetch = `${url}${username}/events`;
   return fetch(urlToFetch)
     .then((response) => {
       if (response.ok) {
