@@ -51,7 +51,7 @@ export const SearchField = ({ fetchData, searchedInput }) => {
   };
   return (
     <form onSubmit={handleSubmit}>
-      <SearchLabel htmlFor=''>github.com/</SearchLabel>
+      <SearchLabel htmlFor='username'>github.com/</SearchLabel>
       <Search
         type='text'
         id='username'

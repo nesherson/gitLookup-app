@@ -66,7 +66,7 @@ export const SearchField = ({ fetchData, setSearchedInput }) => {
     <>
       <div>
         <form onSubmit={handleSubmit}>
-          <SearchLabel htmlFor=''>github.com/</SearchLabel>
+          <SearchLabel htmlFor='username'>github.com/</SearchLabel>
           <Search
             type='text'
             id='username'
