@@ -69,7 +69,7 @@ function App() {
         <Homepage fetchData={fetchData} setSearchedInput={setSearchedInput} />
       </Route>
       <Route path='/:id'>   
-     { isLoading ? <h1>Loading...</h1>:
+     { isLoading ? <Loading>Loading...</Loading>:
           <ResultsPage
             userProfile={userProfile}
             userRepos={userRepos}

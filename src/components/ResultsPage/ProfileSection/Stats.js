@@ -1,6 +1,5 @@
 import React from 'react';
 import Styled from 'styled-components';
-import {getCount} from '../../../util/helpers.js';
 
 const Stat = Styled.h3`
   font-size: 1rem;

@@ -1,6 +1,5 @@
 import React from 'react';
 import Styled from 'styled-components';
-import { parseDate } from '../../../util/helpers.js';
 
 const Heading = Styled.h4`
     font-size: 0.80rem;
