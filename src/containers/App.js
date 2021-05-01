@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Styled from 'styled-components';
 import { Route, Switch, useLocation } from 'react-router-dom';
+import { TransitionGroup, CSSTransition } from 'react-transition-group';
 
 import { fetchUser, fetchRepos, fetchActivities } from '../util/fetchData.js';
 import { Homepage } from '../components/Homepage/Homepage';
@@ -66,7 +67,7 @@ function App() {
   };
 
   return (
-    <Switch>
+    <Switch location={location}>
       <Route exact path='/'>
         <Homepage fetchData={fetchData} setSearchedInput={setSearchedInput} />
       </Route>

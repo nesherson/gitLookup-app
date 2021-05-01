@@ -26,6 +26,9 @@ const Header = Styled.header`
   display: flex;
   justify-content: space-between;
   margin: 35px 15px 15px 15px;
+  @media (max-width: 768px) {
+    margin: 35px 35px 15px 35px;
+  }
 `;
 
 const Profile = Styled.div`
