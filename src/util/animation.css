@@ -1,0 +1,56 @@
+#Oval, #Path-inside {
+    animation: pulse-move-faster 1.5s infinite;
+}
+
+#Oval-d {
+    animation: pulse-move-slower 2.5s infinite;
+}
+
+@keyframes pulse-move-faster {
+    0% {
+        fill: #E1DFDD;
+        transform: translateX(0);
+    }
+    25%{
+        fill: #d5d0fb;
+        transform: translateX(2%);
+    }
+    50%{
+        fill :#aba0f8;
+        transform: translateX(0%);
+    }
+    75% {
+        fill: #9788f6;
+        transform: translateX(-2%);
+    }
+    100% {
+        fill: #9788f6;
+        transform: translateX(0);
+    }
+}
+
+@keyframes pulse-move-slower {
+    0% {
+        fill: #eae7fd;
+        transform: translateX(0);
+    }
+    25%{
+        fill: #d6d0fb;
+        transform: translateX(3%);
+    }
+    50%{
+        fill :#aca1f7;
+        transform: translateX(0%);
+    }
+    75% {
+        fill: #8371f4;
+        transform: translateX(-3%);
+    }
+    100% {
+        fill: #6e5af2;
+        transform: translateX(0);
+    }
+}
+
+
+
