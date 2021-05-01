@@ -34,18 +34,6 @@ const Wrapper = Styled.div`
 `;
 
 export const About = ({about}) => {
-
-  // const user = userNotFound
-  //   ? ''
-  //   : {
-  //       userName: userProfile.name,
-  //       profilePicture: userProfile.avatar_url,
-  //       profileUrl: userProfile.html_url,
-  //       blog: userProfile.blog ? userProfile.blog : null,
-  //     };
-
-  console.log('About.js/userProfile --> ', about);
-
   return (
     <Wrapper>
       <Avatar>
@@ -54,9 +42,9 @@ export const About = ({about}) => {
       <UserName>
         <Heading>{about.userName}</Heading>
         <Link url={about.profileUrl}>↗</Link>
-        {about.userBlog ? (
-          <Link url={about.userBlog} type='blog'>
-            {about.userBlog}
+        {about.blog ? (
+          <Link url={about.blog} type='blog'>
+            {about.blog}
           </Link>
         ) : (
           ''
