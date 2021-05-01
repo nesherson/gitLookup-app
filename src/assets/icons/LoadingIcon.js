@@ -1,6 +1,6 @@
 import React from 'react';
+import Styled from 'styled-components';
 import '../../util/animation.css'; 
-
 
 export const LoadingIcon = (props) => {
   return (

@@ -1,15 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import Styled from 'styled-components';
-import { fetchUser, fetchRepos, fetchActivities } from '../util/fetchData.js';
 import { Route, Switch, useLocation } from 'react-router-dom';
+
+import { fetchUser, fetchRepos, fetchActivities } from '../util/fetchData.js';
 import { Homepage } from '../components/Homepage/Homepage';
 import { ResultsPage } from '../components/ResultsPage/ResultsPage';
+import { LoadingIcon } from '../assets/icons/LoadingIcon';
 
-const Loading = Styled.h1`
-font-size: 1.55rem;
-display: flex;
-align-items: center;
-justify-content: center;
+const LoadingScreen = Styled.div`
+  min-height: calc(100vh - 100px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
 function App() {
@@ -69,7 +71,12 @@ function App() {
         <Homepage fetchData={fetchData} setSearchedInput={setSearchedInput} />
       </Route>
       <Route path='/:id'>   
-     { isLoading ? <Loading>Loading...</Loading>:
+     { isLoading ?
+      <LoadingScreen>
+        <LoadingIcon />
+      </LoadingScreen>
+       : null }
+      { !isLoading && userProfile ? 
           <ResultsPage
             userProfile={userProfile}
             userRepos={userRepos}
@@ -79,7 +86,7 @@ function App() {
             searchedInput={searchedInput}
             isLoading={isLoading}
           />
-     }
+       : null}
       </Route>
     </Switch>
   );
