@@ -10,7 +10,6 @@ export const fetchUser = async (username) => {
       if (response.ok) {
         return response.json(); 
       }
-      // response.statusText, response.status
       throw new Error('Request failed!');
     })
     .then((jsonResponse) => {
