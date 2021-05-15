@@ -8,7 +8,7 @@ import {
 } from '../../util/fetchData.js';
 import { getSearchedInput } from '../../util/helpers.js';
 
-import { Logo } from '../Logo/Logo';
+import { Logo } from '../UI/Logo/Logo';
 import { SearchField } from './SearchField/SearchField';
 import { NotFound } from '../NotFound/NotFound';
 import { Footer } from '../Footer/Footer';
@@ -56,30 +56,29 @@ export const ResultsPage = () => {
   const location = useLocation();
   const searchedInput = getSearchedInput(location.pathname);
 
-  const fetchData = () => {
-    const input = getSearchedInput(location.pathname);
-    fetchUser(input).then((data) => {
-      if (data.name === 'Error') {
-        setUserNotFound(true);
-        return;
-      } else {
-        setUserProfile(data);
-        setUserNotFound(false);
-      }
-    });
-
-    fetchRepos(input).then((data) => {
-      setUserRepos(data);
-    });
-
-    fetchActivities(input).then((data) => {
-      setUserActivities(data);
-    });
-  };
-
   useEffect(() => {
+    const fetchData = () => {
+      const input = getSearchedInput(location.pathname);
+      fetchUser(input).then((data) => {
+        if (data.name === 'Error') {
+          setUserNotFound(true);
+          return;
+        } else {
+          setUserProfile(data);
+          setUserNotFound(false);
+        }
+      });
+
+      fetchRepos(input).then((data) => {
+        setUserRepos(data);
+      });
+
+      fetchActivities(input).then((data) => {
+        setUserActivities(data);
+      });
+    };
     fetchData();
-  }, []);
+  }, [location.pathname]);
 
   const userLoaded =
     !userProfile || !userRepos || !userActivities ? false : true;
@@ -98,7 +97,7 @@ export const ResultsPage = () => {
     <>
       <Wrapper>
         <Header>
-          <Logo type='result' />
+          <Logo />
           <SearchField searchedInput={searchedInput} />
         </Header>
         {userPending}

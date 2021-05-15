@@ -2,17 +2,7 @@ import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import Styled from 'styled-components';
 
-const Search = Styled.input`
-  padding: 7px;
-  font-size: 1.02rem;
-  border: 1px solid #d9d9d9;
-  border-radius: 3px;
-  min-width: 120px;
-  &:focus {
-    outline: none;
-    border-color: #705df2;
-  }
-`;
+import { InputField } from '../../UI/InputField/InputField';
 
 const SearchButton = Styled.button`
   font-size: 1rem;
@@ -28,38 +18,23 @@ const SearchButton = Styled.button`
   }
 `;
 
-const SearchLabel = Styled.label`
-  padding: 7px;
-  @media (max-width: 768px) {
-    display: none;
-  }
-`;
-
 export const SearchField = ({ searchedInput }) => {
   const [searchInput, setSearchInput] = useState(searchedInput);
 
   const history = useHistory();
 
-  const handleChange = ({ target }) => {
+  const handleOnChange = ({ target }) => {
     setSearchInput(target.value);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    //fetchData(searchInput);
     history.push(`/${searchInput}`);
   };
 
   return (
     <form onSubmit={handleSubmit}>
-      <SearchLabel htmlFor='username'>github.com/</SearchLabel>
-      <Search
-        type='text'
-        id='username'
-        name='username'
-        value={searchInput}
-        onChange={handleChange}
-      />
+      <InputField searchInput={searchInput} onChange={handleOnChange} />
       <SearchButton type='submit'>Search</SearchButton>
     </form>
   );

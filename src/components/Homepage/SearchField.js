@@ -2,18 +2,7 @@ import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import Styled from 'styled-components';
 
-const Search = Styled.input`
-  padding: 7px;
-  font-size: 1.02rem;
-  border: 1px solid #d9d9d9;
-  border-radius: 3px;
-  width: 350px;
-  min-width: 280px;
-  &:focus {
-    outline: none;
-    border-color: #705df2;
-  }
-`;
+import { InputField } from '../UI/InputField/InputField';
 
 const SearchButton = Styled.button`
   font-size: 1rem;
@@ -29,13 +18,6 @@ const SearchButton = Styled.button`
   }
 `;
 
-const SearchLabel = Styled.label`
-  padding: 7px;
-  @media (max-width: 768px) {
-    display: none;
-  }
-`;
-
 const Warning = Styled.p`
   color: #ff1a1a;
   text-align: center;
@@ -46,11 +28,11 @@ export const SearchField = () => {
   const [isInputEmpty, setIsInputEmpty] = useState(false);
   const history = useHistory();
 
-  const handleChange = ({ target }) => {
+  const handleOnChange = ({ target }) => {
     setSearchInput(target.value);
   };
 
-  const handleSubmit = (e) => {
+  const handleOnSubmit = (e) => {
     e.preventDefault();
     if (searchInput) {
       setIsInputEmpty(false);
@@ -63,15 +45,11 @@ export const SearchField = () => {
   return (
     <>
       <div>
-        <form onSubmit={handleSubmit}>
-          <SearchLabel htmlFor='username'>github.com/</SearchLabel>
-          <Search
-            type='text'
-            id='username'
-            name='username'
-            placeholder='Enter Github Username'
-            value={searchInput}
-            onChange={handleChange}
+        <form onSubmit={handleOnSubmit}>
+          <InputField
+            primary
+            searchInput={searchInput}
+            onChange={handleOnChange}
           />
           <SearchButton type='submit'>Search</SearchButton>
         </form>

@@ -1,6 +1,6 @@
 import React from 'react';
 import Styled from 'styled-components';
-import { Logo } from '../Logo/Logo';
+import { Logo } from '../UI/Logo/Logo';
 import { SearchField } from './SearchField';
 import { Footer } from '../Footer/Footer';
 
@@ -12,15 +12,12 @@ const SearchPage = Styled.div`
   align-items: center;  
 `;
 
-export const Homepage = ({ setSearchedInput, fetchData }) => {
+export const Homepage = () => {
   return (
     <>
       <SearchPage>
-        <Logo />
-        <SearchField
-          setSearchedInput={setSearchedInput}
-          //fetchData={fetchData}
-        />
+        <Logo primary />
+        <SearchField />
       </SearchPage>
       <Footer />
     </>
