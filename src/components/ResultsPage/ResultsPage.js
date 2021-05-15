@@ -48,9 +48,19 @@ export const ResultsPage = ({
   userNotFound,
   searchedInput,
 }) => {
+  const userLoaded =
+    !userProfile || !userRepos || !userActivities ? false : true;
 
-  const userLoaded = !userProfile || !userRepos || !userActivities ? false : true;
-  
+  let userPending = (
+    <LoadingScreen>
+      <LoadingIcon />
+    </LoadingScreen>
+  );
+
+  if (userNotFound) {
+    userPending = <NotFound />;
+  }
+
   return (
     <>
       <Wrapper>
@@ -58,45 +68,15 @@ export const ResultsPage = ({
           <Logo type='result' />
           <SearchField fetchData={fetchData} searchedInput={searchedInput} />
         </Header>
-        { userNotFound ? <NotFound /> : null }
-        { !userProfile || !userRepos || !userActivities ? 
-        <LoadingScreen>
-          <LoadingIcon />
-        </LoadingScreen>
-           : null }
-        {!userNotFound && userLoaded ? 
+        {userPending}
+        {!userNotFound && userLoaded ? (
           <Profile>
-            <ProfileSection
-              profile={userProfile}
-              repos={userRepos}
-            />
+            <ProfileSection profile={userProfile} repos={userRepos} />
             <ActivitySection activities={userActivities} />
           </Profile>
-        : null }
-       
+        ) : null}
       </Wrapper>
       <Footer />
     </>
   );
 };
-
-/*
-<Content>
-        { userNotFound ? <NotFound /> : null }
-        { !userProfile || !userRepos || !userActivities ? 
-        <LoadingScreen>
-          <LoadingIcon />
-        </LoadingScreen>
-           : null }
-        {!userNotFound && userLoaded ? 
-          <Profile>
-            <ProfileSection
-              profile={userProfile}
-              repos={userRepos}
-            />
-            <ActivitySection activities={userActivities} />
-          </Profile>
-        : null }
-        </Content>
-
-*/
