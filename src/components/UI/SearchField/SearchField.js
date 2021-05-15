@@ -2,12 +2,12 @@ import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import Styled from 'styled-components';
 
-import { InputField } from '../UI/InputField/InputField';
+import { InputField } from '../InputField/InputField';
 
 const SearchButton = Styled.button`
   font-size: 1rem;
   letter-spacing: 1px;
-  padding: 8px 30px;
+  padding: ${(props) => (props.primary ? '8px 30px' : '8px 15px')};
   border: none;
   border-radius: 3px;
   background-color: #705df2;
@@ -23,8 +23,14 @@ const Warning = Styled.p`
   text-align: center;
 `;
 
-export const SearchField = () => {
-  const [searchInput, setSearchInput] = useState('');
+const checkSearchedInput = (searchedInput) => {
+  return typeof searchedInput === 'undefined' ? '' : searchedInput;
+};
+
+export const SearchField = ({ primary, searchedInput }) => {
+  const [searchInput, setSearchInput] = useState(
+    checkSearchedInput(searchedInput)
+  );
   const [isInputEmpty, setIsInputEmpty] = useState(false);
   const history = useHistory();
 
@@ -42,18 +48,24 @@ export const SearchField = () => {
     }
   };
 
+  const emptyInputWarning = primary ? (
+    <Warning>Please enter a username</Warning>
+  ) : null;
+
   return (
     <>
       <div>
         <form onSubmit={handleOnSubmit}>
           <InputField
-            primary
+            primary={primary}
             searchInput={searchInput}
             onChange={handleOnChange}
           />
-          <SearchButton type='submit'>Search</SearchButton>
+          <SearchButton primary={primary} type='submit'>
+            Search
+          </SearchButton>
         </form>
-        {isInputEmpty ? <Warning>Please enter a username</Warning> : null}
+        {isInputEmpty && emptyInputWarning}
       </div>
     </>
   );

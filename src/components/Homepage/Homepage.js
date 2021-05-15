@@ -1,7 +1,7 @@
 import React from 'react';
 import Styled from 'styled-components';
 import { Logo } from '../UI/Logo/Logo';
-import { SearchField } from './SearchField';
+import { SearchField } from '../UI/SearchField/SearchField';
 import { Footer } from '../Footer/Footer';
 
 const SearchPage = Styled.div`
@@ -17,7 +17,7 @@ export const Homepage = () => {
     <>
       <SearchPage>
         <Logo primary />
-        <SearchField />
+        <SearchField primary />
       </SearchPage>
       <Footer />
     </>

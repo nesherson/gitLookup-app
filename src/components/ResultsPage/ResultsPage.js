@@ -9,7 +9,7 @@ import {
 import { getSearchedInput } from '../../util/helpers.js';
 
 import { Logo } from '../UI/Logo/Logo';
-import { SearchField } from './SearchField/SearchField';
+import { SearchField } from '../UI/SearchField/SearchField';
 import { NotFound } from '../NotFound/NotFound';
 import { Footer } from '../Footer/Footer';
 import { ProfileSection } from './ProfileSection/ProfileSection';
