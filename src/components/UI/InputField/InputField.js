@@ -36,15 +36,3 @@ export const InputField = ({ primary, searchInput, onChange }) => {
     </>
   );
 };
-
-// const Search = Styled.input`
-//   padding: 7px;
-//   font-size: 1.02rem;
-//   border: 1px solid #d9d9d9;
-//   border-radius: 3px;
-//   min-width: 120px;
-//   &:focus {
-//     outline: none;
-//     border-color: #705df2;
-//   }
-// `;
