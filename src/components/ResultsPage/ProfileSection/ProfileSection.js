@@ -1,6 +1,6 @@
 import React from 'react';
 import Styled from 'styled-components';
-import { getCount, parseDate} from '../../../util/helpers.js';
+import { getCount, parseDate } from '../../../util/helpers.js';
 import { About } from './About';
 import { UserStats } from './Stats';
 import { UserLanguages } from './Languages';
@@ -20,61 +20,57 @@ const Wrapper = Styled.div`
   }
 `;
 
-export const ProfileSection = ({profile, repos}) => {
+export const ProfileSection = ({ profile, repos }) => {
+  const about = {
+    userName: profile.name,
+    profilePicture: profile.avatar_url,
+    profileUrl: profile.html_url,
+    blog: profile.blog ? profile.blog : null,
+  };
 
-   const about = {
-         userName: profile.name,
-         profilePicture: profile.avatar_url,
-         profileUrl: profile.html_url,
-         blog: profile.blog ? profile.blog : null,
-       };
+  const stars = getCount(repos);
+  const forks = getCount(repos);
+  const stats = {
+    followers: profile.followers,
+    following: profile.following,
+    stars: stars,
+    forks: forks,
+  };
 
+  const getLanguages = () => {
+    const mappedLang = repos.map((repo) => {
+      return repo.language;
+    });
 
-   const stars = getCount(repos);
-   const forks = getCount(repos);
-   const stats =  {
-         followers: profile.followers,
-         following: profile.following,
-         stars: stars,
-         forks: forks,
-       };
+    const filterNull = mappedLang.filter((lang) => lang !== null);
 
-       const getLanguages = () => {
-        const mappedLang = repos.map((repo) => {
-          return repo.language;
-        });
-  
-        const filterNull = mappedLang.filter((lang) => lang !== null);
-  
-        const filterRepeatedValues = filterNull.filter((lang, i, arr) => {
-          return arr.indexOf(lang) === i;
-        });
-        console.log('ProfileSection/languages()/returnValue --> ', filterRepeatedValues);
-        return filterRepeatedValues;
-       }
+    const filterRepeatedValues = filterNull.filter((lang, i, arr) => {
+      return arr.indexOf(lang) === i;
+    });
+    return filterRepeatedValues;
+  };
 
-       const languages = getLanguages();
+  const languages = getLanguages();
 
-      
-   const dates = {
-       createdAt: parseDate(profile.created_at, [
-         'en-GB',
-         {
-           year: 'numeric',
-           month: 'long',
-           day: 'numeric',
-         },
-       ]),
-       location: profile.location,
-       updatedAt: parseDate(profile.updated_at, [
-         'en-GB',
-         {
-           year: 'numeric',
-           month: 'long',
-           day: 'numeric',
-         },
-       ]),
-     };
+  const dates = {
+    createdAt: parseDate(profile.created_at, [
+      'en-GB',
+      {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+      },
+    ]),
+    location: profile.location,
+    updatedAt: parseDate(profile.updated_at, [
+      'en-GB',
+      {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+      },
+    ]),
+  };
 
   return (
     <Wrapper>

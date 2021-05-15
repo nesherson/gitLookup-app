@@ -1,5 +1,12 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Styled from 'styled-components';
+import { useLocation } from 'react-router-dom';
+import {
+  fetchUser,
+  fetchRepos,
+  fetchActivities,
+} from '../../util/fetchData.js';
+import { getSearchedInput } from '../../util/helpers.js';
 
 import { Logo } from '../Logo/Logo';
 import { SearchField } from './SearchField/SearchField';
@@ -40,22 +47,48 @@ const Profile = Styled.div`
   }
 `;
 
-export const ResultsPage = ({
-  userProfile,
-  userRepos,
-  userActivities,
-  fetchData,
-  userNotFound,
-  searchedInput,
-}) => {
+export const ResultsPage = () => {
+  const [userNotFound, setUserNotFound] = useState(false);
+  const [userProfile, setUserProfile] = useState(null);
+  const [userRepos, setUserRepos] = useState(null);
+  const [userActivities, setUserActivities] = useState(null);
+
+  const location = useLocation();
+  const searchedInput = getSearchedInput(location.pathname);
+
+  const fetchData = () => {
+    const input = getSearchedInput(location.pathname);
+    fetchUser(input).then((data) => {
+      if (data.name === 'Error') {
+        setUserNotFound(true);
+        return;
+      } else {
+        setUserProfile(data);
+        setUserNotFound(false);
+      }
+    });
+
+    fetchRepos(input).then((data) => {
+      setUserRepos(data);
+    });
+
+    fetchActivities(input).then((data) => {
+      setUserActivities(data);
+    });
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
   const userLoaded =
     !userProfile || !userRepos || !userActivities ? false : true;
 
-  let userPending = (
+  let userPending = !userLoaded ? (
     <LoadingScreen>
       <LoadingIcon />
     </LoadingScreen>
-  );
+  ) : null;
 
   if (userNotFound) {
     userPending = <NotFound />;
@@ -66,7 +99,7 @@ export const ResultsPage = ({
       <Wrapper>
         <Header>
           <Logo type='result' />
-          <SearchField fetchData={fetchData} searchedInput={searchedInput} />
+          <SearchField searchedInput={searchedInput} />
         </Header>
         {userPending}
         {!userNotFound && userLoaded ? (

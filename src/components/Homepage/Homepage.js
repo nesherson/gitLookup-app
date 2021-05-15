@@ -19,7 +19,7 @@ export const Homepage = ({ setSearchedInput, fetchData }) => {
         <Logo />
         <SearchField
           setSearchedInput={setSearchedInput}
-          fetchData={fetchData}
+          //fetchData={fetchData}
         />
       </SearchPage>
       <Footer />

@@ -32,3 +32,7 @@ export const timeSince = (date) => {
 export const getCount = (repo) => {
   return repo.reduce((acc, repo) => (acc += repo.stargazers_count), 0);
 };
+
+export const getSearchedInput = (str) => {
+  return str ? str.slice(1) : '';
+};

@@ -35,7 +35,7 @@ const SearchLabel = Styled.label`
   }
 `;
 
-export const SearchField = ({ fetchData, searchedInput }) => {
+export const SearchField = ({ searchedInput }) => {
   const [searchInput, setSearchInput] = useState(searchedInput);
 
   const history = useHistory();
@@ -46,9 +46,10 @@ export const SearchField = ({ fetchData, searchedInput }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    fetchData(searchInput);
+    //fetchData(searchInput);
     history.push(`/${searchInput}`);
   };
+
   return (
     <form onSubmit={handleSubmit}>
       <SearchLabel htmlFor='username'>github.com/</SearchLabel>
