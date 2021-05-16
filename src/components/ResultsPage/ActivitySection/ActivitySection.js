@@ -9,6 +9,7 @@ const Heading = Styled.h3`
   padding: 12px 25px;
   border-bottom: 1px solid #d9d9d9;
   color: #333333;
+  text-transform: uppercase;
 `;
 
 const Wrapper = Styled.div`
@@ -23,12 +24,10 @@ const Wrapper = Styled.div`
   }
 `;
 
-export const ActivitySection = (props) => {
-  const activities = props.activities;
-
+export const ActivitySection = ({ activities }) => {
   return (
     <Wrapper>
-      <Heading>LATEST ACTIVITIES</Heading>
+      <Heading>Latest activities</Heading>
       <ActivityList activities={activities} />
     </Wrapper>
   );

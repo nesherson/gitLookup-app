@@ -1,6 +1,6 @@
 import React from 'react';
 import Styled from 'styled-components';
-import { Link } from '../ActivitySection/Link';
+import { Link } from '../../UI/Link/Link';
 
 const Avatar = Styled.div`
     width: 44px;
@@ -18,6 +18,7 @@ const ProfilePicture = Styled.img`
     width: 44px;
     height: auto;
     border-radius: 50%;
+    border: 1px solid rgba(0, 0, 0, 0.2);
 `;
 
 const UserName = Styled.div`
@@ -33,7 +34,7 @@ const Wrapper = Styled.div`
     padding: 14px;
 `;
 
-export const About = ({about}) => {
+export const About = ({ about }) => {
   return (
     <Wrapper>
       <Avatar>

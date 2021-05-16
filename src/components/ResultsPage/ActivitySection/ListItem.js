@@ -25,7 +25,7 @@ const Icon = Styled.img`
 `;
 
 const Date = Styled.span`
-  color: #ccc
+  color: #ccc;
 `;
 
 export const ListItem = (props) => {

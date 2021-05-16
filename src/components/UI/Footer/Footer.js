@@ -5,6 +5,7 @@ const Wrapper = Styled.div`
     text-align: center;
     font-size: 0.85rem;
     color: #aaa;
+    margin: 20px 0 15px 0;
 `;
 
 const Link = Styled.a`

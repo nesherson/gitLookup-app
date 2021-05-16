@@ -10,8 +10,8 @@ import { getSearchedInput } from '../../util/helpers.js';
 
 import { Logo } from '../UI/Logo/Logo';
 import { SearchField } from '../UI/SearchField/SearchField';
-import { NotFound } from '../NotFound/NotFound';
-import { Footer } from '../Footer/Footer';
+import { NotFound } from '../UI/NotFound/NotFound';
+import { Footer } from '../UI/Footer/Footer';
 import { ProfileSection } from './ProfileSection/ProfileSection';
 import { ActivitySection } from './ActivitySection/ActivitySection';
 import { LoadingIcon } from '../../assets/icons/LoadingIcon';

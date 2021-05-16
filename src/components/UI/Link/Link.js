@@ -6,7 +6,7 @@ const Anchor = Styled.a`
   text-decoration: none;
 `;
 
-const BlogAnchor = Styled(Anchor)`
+const BlogLink = Styled(Anchor)`
   margin: 0 5px;
   font-size: 0.85rem;   
 `;
@@ -15,9 +15,9 @@ export const Link = (props) => {
   return (
     <>
       {props.type === 'blog' ? (
-        <BlogAnchor href={props.url} target='_blank' rel='noopener noreferrer'>
+        <BlogLink href={props.url} target='_blank' rel='noopener noreferrer'>
           {props.children}
-        </BlogAnchor>
+        </BlogLink>
       ) : (
         <Anchor href={props.url} target='_blank' rel='noopener noreferrer'>
           {props.children}

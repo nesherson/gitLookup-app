@@ -6,7 +6,7 @@ import Plus from '../../../assets/icons/plus.svg';
 import Trash from '../../../assets/icons/trash.svg';
 import Branch from '../../../assets/icons/branch.svg';
 import { ListItem } from './ListItem';
-import { Link } from './Link';
+import { Link } from '../../UI/Link/Link';
 
 const List = Styled.div`
     padding: 15px 0 25px 0;
@@ -64,12 +64,9 @@ export const ActivityList = (props) => {
               );
             case PUSH_EVENT:
               const pushSize = activity.payload.size;
-              const branch = activity.payload.ref
-                .split('/')
-                .filter((item) => item === 'master')
-                .join();
+              const lastIndex = activity.payload.ref.split('/').length - 1;
+              const branch = activity.payload.ref.split('/')[lastIndex];
               const branchUrl = `https://github.com/${activity.author}/tree/${branch}`;
-
               return (
                 <ListItem
                   icon={Plus}
