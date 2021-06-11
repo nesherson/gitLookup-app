@@ -4,8 +4,7 @@ Discover who's upto what on Github
 
 ## Description
 
-Gitstalk is a Web app that allows you to sneak peek into the recent activities of other GitHub users.
-This is just a copy of the Web app that is based upon. The point of this project is to exercise programming skills.
+GitLookup is a Web app that allows you to sneak peek into the recent activities of other GitHub users.
 
 ## Images of the app
 
