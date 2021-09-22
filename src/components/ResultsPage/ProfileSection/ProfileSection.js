@@ -11,12 +11,15 @@ const Wrapper = Styled.div`
     width: 28%;
     min-width: 280px;
     border-radius: 5px;
-    box-shadow: 0px 50px 60px rgba(0,0,0,0.1);
+    box-shadow:
+  1.9px 5.1px 5.3px -4px rgba(0, 0, 0, 0.028),
+  6.5px 17.2px 19.7px -4px rgba(0, 0, 0, 0.038),
+  29px 77px 93px -4px rgba(0, 0, 0, 0.07)
+;
     margin: 0 10px 0 15px;
     @media (max-width: 768px) {
     width: 90%;
     margin: 0 30px 10px 30px;
-    box-shadow: 0px 15px 60px rgba(0,0,0,0.1);
   }
 `;
 
