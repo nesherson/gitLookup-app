@@ -9,7 +9,8 @@ const SearchButton = Styled.button`
   letter-spacing: 1px;
   padding: ${(props) => (props.primary ? '8px 30px' : '8px 15px')};
   border: none;
-  border-radius: 3px;
+  border-top-right-radius: 3px;
+  border-bottom-right-radius: 3px;
   background-color: #705df2;
   color: #fff;
   @media (max-width: 768px) {

@@ -5,7 +5,8 @@ const Input = Styled.input`
   padding: 7px;
   font-size: 1.02rem;
   border: 1px solid #d9d9d9;
-  border-radius: 3px;
+  border-top-left-radius: 3px;
+  border-bottom-left-radius: 3px;
   width: ${(props) => (props.primary ? '350px' : '')};
   min-width: ${(props) => (props.primary ? '280px' : '')};
   &:focus {
