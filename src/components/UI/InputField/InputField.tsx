@@ -1,7 +1,7 @@
 import React from 'react';
 import Styled from 'styled-components';
 
-const Input = Styled.input`
+const Input = Styled.input<{primary: boolean}>`
   padding: 7px;
   font-size: 1.02rem;
   border: 1px solid #d9d9d9;
@@ -22,7 +22,13 @@ const InputLabel = Styled.label`
   }
 `;
 
-export const InputField = ({ primary, searchInput, onChange }) => {
+interface Props {
+  primary: boolean,
+  searchInput: string,
+  onChange: (target: object) => void
+}
+
+export const InputField:React.FC<Props> = ({ primary, searchInput, onChange }) => {
   return (
     <>
       {primary ? <InputLabel htmlFor='username'>github.com/</InputLabel> : null}
@@ -33,6 +39,7 @@ export const InputField = ({ primary, searchInput, onChange }) => {
         name='username'
         value={searchInput}
         onChange={onChange}
+        placeholder='Enter Username'
       />
     </>
   );
