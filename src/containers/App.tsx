@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Route, Switch, useLocation } from 'react-router-dom';
+import { Route, Routes, useLocation } from 'react-router-dom';
 
 import { Homepage } from '../components/Homepage/Homepage';
 import { ResultsPage } from '../components/ResultsPage/ResultsPage';
@@ -9,14 +9,14 @@ function App() {
   const location = useLocation();
 
   return (
-    <Switch location={location}>
-      <Route exact path='/'>
-        <Homepage />
+    <Routes location={location}>
+      <Route path='/*' element={<Homepage />}>
+        
       </Route>
-      <Route path='/:id'>
+      <Route path='/temp/:id'>
         <ResultsPage />
       </Route>
-    </Switch>
+    </Routes>
   );
 }
 

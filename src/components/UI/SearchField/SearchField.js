@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import Styled from 'styled-components';
 
 import { InputField } from '../InputField/InputField';
@@ -33,7 +33,7 @@ export const SearchField = ({ primary, searchedInput }) => {
     checkSearchedInput(searchedInput)
   );
   const [isInputEmpty, setIsInputEmpty] = useState(false);
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const handleOnChange = ({ target }) => {
     setSearchInput(target.value);
@@ -43,7 +43,7 @@ export const SearchField = ({ primary, searchedInput }) => {
     e.preventDefault();
     if (searchInput) {
       setIsInputEmpty(false);
-      history.push(`/${searchInput}`);
+      navigate(`/${searchInput}`);
     } else {
       setIsInputEmpty(true);
     }
