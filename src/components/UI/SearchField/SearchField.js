@@ -43,7 +43,7 @@ export const SearchField = ({ primary, searchedInput }) => {
     e.preventDefault();
     if (searchInput) {
       setIsInputEmpty(false);
-      navigate(`/${searchInput}`);
+      navigate(`/${searchInput}`, { replace: true });
     } else {
       setIsInputEmpty(true);
     }
