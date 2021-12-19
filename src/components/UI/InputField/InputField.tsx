@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ChangeEventHandler} from 'react';
 import Styled from 'styled-components';
 
 const Input = Styled.input<{primary: boolean}>`
@@ -25,7 +25,7 @@ const InputLabel = Styled.label`
 interface Props {
   primary: boolean,
   searchInput: string,
-  onChange: (target: object) => void
+  onChange: ChangeEventHandler<HTMLInputElement>
 }
 
 export const InputField:React.FC<Props> = ({ primary, searchInput, onChange }) => {
