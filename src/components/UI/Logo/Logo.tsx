@@ -3,12 +3,12 @@ import { NavLink } from 'react-router-dom';
 import Styled from 'styled-components';
 import Search from '../../../assets/icons/search.svg';
 
-const Wrapper = Styled.div`
+const Wrapper = Styled.div<{primary: boolean}>`
   text-align: center;
   margin-bottom: ${(props) => (props.primary ? '35px' : '0')};
 `;
 
-const Heading = Styled.h1`
+const Heading = Styled.h1<{primary: boolean}>`
   color: #705df2;
   font-size: ${(props) => (props.primary ? '3.2rem' : '1.75rem')};
   margin: ${(props) => (props.primary ? '15px 0' : '0')};
@@ -26,7 +26,7 @@ const LogoWrapper = Styled.div`
   align-items: center;
 `;
 
-const Icon = Styled.img`
+const Icon = Styled.img<{primary: boolean}>`
   width: ${(props) => (props.primary ? '62px' : '42px')};
   height: auto;
 `;
@@ -36,7 +36,11 @@ const LogoText = Styled.p`
   margin: 0;
 `;
 
-export const Logo = ({ primary }) => {
+interface Props {
+  primary: boolean
+}
+
+export const Logo:React.FC<Props> = ({ primary }) => {
   let logo = (
     <>
       <Heading primary={primary}>gitL</Heading>
