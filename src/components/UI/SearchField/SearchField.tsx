@@ -4,7 +4,7 @@ import Styled from 'styled-components';
 
 import { InputField } from '../InputField/InputField';
 
-const SearchButton = Styled.button`
+const SearchButton = Styled.button<{primary: boolean}>`
   font-size: 1rem;
   letter-spacing: 1px;
   padding: ${(props) => (props.primary ? '8px 30px' : '8px 15px')};
@@ -24,26 +24,32 @@ const Warning = Styled.p`
   text-align: center;
 `;
 
-const checkSearchedInput = (searchedInput) => {
+const checkSearchedInput = (searchedInput: string) => {
   return typeof searchedInput === 'undefined' ? '' : searchedInput;
 };
 
-export const SearchField = ({ primary, searchedInput }) => {
+interface Props {
+  primary: boolean,
+  searchedInput: string
+}
+
+export const SearchField:React.FC<Props> = ({ primary, searchedInput }) => {
   const [searchInput, setSearchInput] = useState(
     checkSearchedInput(searchedInput)
   );
   const [isInputEmpty, setIsInputEmpty] = useState(false);
   const navigate = useNavigate();
 
-  const handleOnChange = ({ target }) => {
-    setSearchInput(target.value);
+  const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchInput(e.target.value);
   };
 
-  const handleOnSubmit = (e) => {
+  const handleOnSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+
     if (searchInput) {
       setIsInputEmpty(false);
-      navigate(`/${searchInput}`, { replace: true });
+      navigate(`/${searchInput}`);
     } else {
       setIsInputEmpty(true);
     }
