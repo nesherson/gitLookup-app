@@ -12,7 +12,7 @@ const SearchPage = Styled.div`
   align-items: center;  
 `;
 
-export const Homepage = () => {
+export const Homepage:React.FC = () => {
   return (
     <>
       <SearchPage>

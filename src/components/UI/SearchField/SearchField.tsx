@@ -24,19 +24,13 @@ const Warning = Styled.p`
   text-align: center;
 `;
 
-const checkSearchedInput = (searchedInput: string) => {
-  return typeof searchedInput === 'undefined' ? '' : searchedInput;
-};
-
 interface Props {
   primary: boolean,
-  searchedInput: string
+  searchedInput?: string
 }
 
-export const SearchField:React.FC<Props> = ({ primary, searchedInput }) => {
-  const [searchInput, setSearchInput] = useState(
-    checkSearchedInput(searchedInput)
-  );
+export const SearchField:React.FC<Props> = ({ primary, searchedInput = '' }) => {
+  const [searchInput, setSearchInput] = useState<string>(searchedInput);
   const [isInputEmpty, setIsInputEmpty] = useState(false);
   const navigate = useNavigate();
 

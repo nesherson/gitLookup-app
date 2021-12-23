@@ -24,7 +24,7 @@ const InputLabel = Styled.label`
 
 interface Props {
   primary: boolean,
-  searchInput: string,
+  searchInput?: string,
   onChange: ChangeEventHandler<HTMLInputElement>
 }
 
