@@ -20,8 +20,26 @@ const PUSH_EVENT = 'PushEvent';
 const PULL_REQUEST_EVENT = 'PullRequestEvent';
 const CREATE_EVENT = 'CreateEvent';
 
-export const ActivityList = (props) => {
-  const activities = props.activities;
+interface IActivity {
+  id: number,
+  author: string,
+  type: string,
+  name: string,
+  repo: string,
+  payload: IPayload,
+  created_at: string
+}
+
+interface IPayload {
+  comment: any,
+  issue: any,
+  size: number,
+  ref_type: string,
+  ref: string,
+  pull_request: any,
+}
+
+export const ActivityList:React.FC<{activities: IActivity[]}> = ({activities}) => {
   return (
     <List>
       {activities &&
