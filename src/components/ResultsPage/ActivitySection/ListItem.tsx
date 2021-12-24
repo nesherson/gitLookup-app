@@ -28,14 +28,20 @@ const Date = Styled.span`
   color: #ccc;
 `;
 
-export const ListItem = (props) => {
+interface IProps {
+  icon: string,
+  date: string,
+  children: React.ReactNode
+};
+
+export const ListItem:React.FC<IProps> = ({icon, date, children}) => {
   return (
     <Item>
       <ItemText>
-        <Icon src={props.icon} alt='' />
-        <Text>{props.children}</Text>
+        <Icon src={icon} alt='' />
+        <Text>{children}</Text>
       </ItemText>
-      <Date>{props.date}</Date>
+      <Date>{date}</Date>
     </Item>
   );
 };
