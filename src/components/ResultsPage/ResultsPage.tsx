@@ -47,11 +47,31 @@ const Profile = Styled.div`
   }
 `;
 
+
+export interface IActivity {
+  id: number,
+  author: string,
+  type: string,
+  name: string,
+  repo: string,
+  payload: IPayload,
+  created_at: string
+}
+
+interface IPayload {
+  comment: any,
+  issue: any,
+  size: number,
+  ref_type: string,
+  ref: string,
+  pull_request: any,
+}
+
 export const ResultsPage = () => {
   const [userNotFound, setUserNotFound] = useState(false);
   const [userProfile, setUserProfile] = useState(null);
   const [userRepos, setUserRepos] = useState(null);
-  const [userActivities, setUserActivities] = useState(null);
+  const [userActivities, setUserActivities] = useState<IActivity[]>([]);
 
   const location = useLocation();
   const searchedInput = getSearchedInput(location.pathname);

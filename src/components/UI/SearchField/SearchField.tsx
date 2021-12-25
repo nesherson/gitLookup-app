@@ -4,7 +4,7 @@ import Styled from 'styled-components';
 
 import { InputField } from '../InputField/InputField';
 
-const SearchButton = Styled.button<{primary: boolean}>`
+const SearchButton = Styled.button<{primary?: boolean}>`
   font-size: 1rem;
   letter-spacing: 1px;
   padding: ${(props) => (props.primary ? '8px 30px' : '8px 15px')};
@@ -25,7 +25,7 @@ const Warning = Styled.p`
 `;
 
 interface Props {
-  primary: boolean,
+  primary?: boolean,
   searchedInput?: string
 }
 

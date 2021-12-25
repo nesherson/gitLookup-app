@@ -1,6 +1,7 @@
 import React from 'react';
 import Styled from 'styled-components';
 import { ActivityList } from './ActivityList';
+import { IActivity } from '../ResultsPage';
 
 const Heading = Styled.h3`
   font-size: 1.25rem;
@@ -28,7 +29,7 @@ const Wrapper = Styled.div`
   }
 `;
 
-export const ActivitySection = ({ activities }) => {
+export const ActivitySection:React.FC<{activities: IActivity[]}> = ({ activities }) => {
   return (
     <Wrapper>
       <Heading>Latest activities</Heading>

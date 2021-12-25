@@ -1,7 +1,7 @@
 import React, { ChangeEventHandler} from 'react';
 import Styled from 'styled-components';
 
-const Input = Styled.input<{primary: boolean}>`
+const Input = Styled.input<{primary?: boolean}>`
   padding: 7px;
   font-size: 1.02rem;
   border: 1px solid #d9d9d9;
@@ -23,7 +23,7 @@ const InputLabel = Styled.label`
 `;
 
 interface Props {
-  primary: boolean,
+  primary?: boolean,
   searchInput?: string,
   onChange: ChangeEventHandler<HTMLInputElement>
 }

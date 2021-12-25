@@ -7,6 +7,7 @@ import Trash from '../../../assets/icons/trash.svg';
 import Branch from '../../../assets/icons/branch.svg';
 import { ListItem } from './ListItem';
 import { Link } from '../../UI/Link/Link';
+import { IActivity } from '../ResultsPage';
 
 const List = Styled.div`
     padding: 15px 0 25px 0;
@@ -19,25 +20,6 @@ const ISSUES_EVENT = 'IssuesEvent';
 const PUSH_EVENT = 'PushEvent';
 const PULL_REQUEST_EVENT = 'PullRequestEvent';
 const CREATE_EVENT = 'CreateEvent';
-
-interface IActivity {
-  id: number,
-  author: string,
-  type: string,
-  name: string,
-  repo: string,
-  payload: IPayload,
-  created_at: string
-}
-
-interface IPayload {
-  comment: any,
-  issue: any,
-  size: number,
-  ref_type: string,
-  ref: string,
-  pull_request: any,
-}
 
 export const ActivityList:React.FC<{activities: IActivity[]}> = ({activities}) => {
   return (
