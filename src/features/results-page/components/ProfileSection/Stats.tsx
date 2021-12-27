@@ -1,7 +1,7 @@
 import React from 'react';
 import Styled from 'styled-components';
 
-const Stat = Styled.h3`
+const H3 = Styled.h3`
   font-size: 1rem;
   font-weight: 500;
   margin: 5px 10px;
@@ -34,22 +34,22 @@ const UserStats: React.FC<Props> = ({ followers, following, stars, forks }) => {
   return (
     <Wrapper>
       <StatsWrapper>
-        <Stat>Followers</Stat>
+        <H3>Followers</H3>
         <StatNumber>{followers}</StatNumber>
       </StatsWrapper>
 
       <StatsWrapper>
-        <Stat>Following</Stat>
+        <H3>Following</H3>
         <StatNumber>{following}</StatNumber>
       </StatsWrapper>
 
       <StatsWrapper>
-        <Stat>Stars received</Stat>
+        <H3>Stars received</H3>
         <StatNumber>{stars}</StatNumber>
       </StatsWrapper>
 
       <StatsWrapper>
-        <Stat>Forks By Users</Stat>
+        <H3>Forks By Users</H3>
         <StatNumber>{forks}</StatNumber>
       </StatsWrapper>
     </Wrapper>

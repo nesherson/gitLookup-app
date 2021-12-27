@@ -1,6 +1,7 @@
 import React from 'react';
 import Styled from 'styled-components';
-import Link from '../../../../components/Link/Link';
+
+import Link from 'src/components/Link/Link';
 
 const Avatar = Styled.div`
     width: 44px;
@@ -50,17 +51,15 @@ const About: React.FC<Props> = ({
   return (
     <Wrapper>
       <Avatar>
-        <ProfilePicture src={`${profilePicture}`} alt={''} />
+        <ProfilePicture src={`${profilePicture}`} alt={'Profile picture'} />
       </Avatar>
       <UserName>
         <Heading>{userName}</Heading>
         <Link url={profileUrl}>↗</Link>
-        {blog ? (
+        {blog && (
           <Link url={blog} type='blog'>
             {blog}
           </Link>
-        ) : (
-          ''
         )}
       </UserName>
     </Wrapper>
