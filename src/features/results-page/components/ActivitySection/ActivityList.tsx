@@ -9,19 +9,21 @@ import Branch from 'src/assets/icons/branch.svg';
 import ListItem from './ListItem';
 import Link from 'src/components/Link/Link';
 
+import {
+  WATCH_EVENT,
+  ISSUE_COMMENT_EVENT,
+  ISSUES_EVENT,
+  PUSH_EVENT,
+  PULL_REQUEST_EVENT,
+  CREATE_EVENT,
+} from '../../constants/activityEvents';
+
 import { IActivity } from '../ResultsPage';
 
 const List = Styled.div`
     padding: 15px 0 25px 0;
     list-style: none;
 `;
-
-const WATCH_EVENT = 'WatchEvent';
-const ISSUE_COMMENT_EVENT = 'IssueCommentEvent';
-const ISSUES_EVENT = 'IssuesEvent';
-const PUSH_EVENT = 'PushEvent';
-const PULL_REQUEST_EVENT = 'PullRequestEvent';
-const CREATE_EVENT = 'CreateEvent';
 
 export const ActivityList: React.FC<{ activities: IActivity[] }> = ({
   activities,
