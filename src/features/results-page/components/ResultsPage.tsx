@@ -2,20 +2,16 @@ import React, { useEffect, useState } from 'react';
 import Styled from 'styled-components';
 import { useLocation } from 'react-router-dom';
 
-import {
-  fetchUser,
-  fetchRepos,
-  fetchActivities,
-} from '../../../util/fetchData.js';
-import { getSearchedInput } from '../../../util/helpers.js';
+import { fetchUser, fetchRepos, fetchActivities } from 'src/util/fetchData.js';
+import { getSearchedInput } from 'src/util/helpers.js';
 
-import Logo from '../../../components/Logo/Logo';
-import SearchField from '../../../components/SearchField/SearchField';
-import NotFound from '../../../components/NotFound/NotFound';
-import Footer from '../../../components/Layout/Footer/Footer';
+import Logo from 'src/components/Logo/Logo';
+import SearchField from 'src/components/SearchField/SearchField';
+import NotFound from 'src/components/NotFound/NotFound';
+import Footer from 'src/components/Layout/Footer/Footer';
 import ProfileSection from './ProfileSection/ProfileSection';
 import ActivitySection from './ActivitySection/ActivitySection';
-import LoadingIcon from '../../../assets/icons/LoadingIcon';
+import LoadingIcon from 'src/assets/icons/LoadingIcon';
 
 const Wrapper = Styled.div`
   margin: 0 auto;
