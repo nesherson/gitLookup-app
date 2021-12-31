@@ -8,7 +8,6 @@ export const fetchUser = async (username) => {
       if (response.ok) {
         return response.json();
       }
-      //throw new Error('Request failed!');
       throw new Error(response.statusText, response.status);
     })
     .then((jsonResponse) => {
