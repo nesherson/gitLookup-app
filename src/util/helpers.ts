@@ -1,9 +1,11 @@
-export const parseDate = (date, [locale, options]) => {
+import { Repo } from "src/features/results-page/types";
+
+export const parseDate = (date: string, locale: string, options: object) => {
   return new Date(date).toLocaleDateString(locale, options);
 };
 
-export const timeSince = (date) => {
-  let seconds = Math.floor((new Date() - date) / 1000);
+export const timeSince = (date: Date): string => {
+  let seconds = Math.floor((new Date().getMilliseconds() - date.getMilliseconds()) / 1000);
 
   let interval = seconds / 31536000;
 
@@ -29,10 +31,10 @@ export const timeSince = (date) => {
   return Math.floor(seconds) + ' seconds ago';
 };
 
-export const getCount = (repo) => {
-  return repo.reduce((acc, repo) => (acc += repo.stargazers_count), 0);
+export const getCount = (repos: Repo[]) => {
+  return repos.reduce((acc, repo) => (acc += repo.stargazers_count), 0);
 };
 
-export const getSearchedInput = (str) => {
+export const getSearchQuery = (str: string) => {
   return str ? str.slice(1) : '';
 };
