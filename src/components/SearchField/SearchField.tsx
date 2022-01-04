@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import Styled from 'styled-components';
+
+import { getSearchQuery } from 'src/util/helpers';
 
 import InputField from '../InputField/InputField';
 
@@ -26,13 +28,17 @@ const Warning = Styled.p`
 
 interface Props {
   primary?: boolean;
-  searchedInput?: string;
+  searchQuery?: string;
 }
 
-const SearchField: React.FC<Props> = ({ primary, searchedInput = '' }) => {
-  const [searchInput, setSearchInput] = useState<string>(searchedInput);
-  const [isInputEmpty, setIsInputEmpty] = useState(false);
+const SearchField: React.FC<Props> = ({ primary }) => {
+  const location = useLocation();
   const navigate = useNavigate();
+
+  const searchQuery = getSearchQuery(location.pathname);
+
+  const [searchInput, setSearchInput] = useState(searchQuery);
+  const [isInputEmpty, setIsInputEmpty] = useState(false);
 
   const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchInput(e.target.value);
@@ -59,7 +65,7 @@ const SearchField: React.FC<Props> = ({ primary, searchedInput = '' }) => {
         <form onSubmit={handleOnSubmit}>
           <InputField
             primary={primary}
-            searchInput={searchInput}
+            searchInput={searchQuery}
             onChange={handleOnChange}
           />
           <SearchButton primary={primary} type='submit'>

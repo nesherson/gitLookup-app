@@ -2,8 +2,15 @@ import React, { useEffect, useState } from 'react';
 import Styled from 'styled-components';
 import { useLocation } from 'react-router-dom';
 
-import { fetchUser, fetchRepos, fetchActivities } from 'src/util/fetchData.js';
-import { getSearchedInput } from 'src/util/helpers.js';
+import { User, Repo, Activity } from '../types';
+
+import {
+  getUser,
+  getRepos,
+  getActivities,
+} from 'src/features/results-page/api/api';
+
+import { getSearchQuery } from 'src/util/helpers.js';
 
 import Logo from 'src/components/Logo/Logo';
 import SearchField from 'src/components/SearchField/SearchField';
@@ -81,57 +88,52 @@ export interface IRepo {
 }
 
 const ResultsPage = () => {
-  const [userNotFound, setUserNotFound] = useState(false);
-  const [userProfile, setUserProfile] = useState<IProfile | null>(null);
-  const [userRepos, setUserRepos] = useState<IRepo[] | null>(null);
-  const [userActivities, setUserActivities] = useState<IActivity[]>([]);
+  const [notFound, setNotFound] = useState(false);
+  const [userProfile, setUserProfile] = useState<User | null>(null);
+  const [userRepos, setUserRepos] = useState<Repo | null>();
+  const [userActivities, setUserActivities] = useState<Activity[] | null>(null);
 
   const location = useLocation();
-  const searchedInput = getSearchedInput(location.pathname);
 
   useEffect(() => {
-    const fetchData = () => {
-      const input = getSearchedInput(location.pathname);
-      fetchUser(input).then((data) => {
-        if (data.name === 'Error') {
-          setUserNotFound(true);
-          return;
-        } else {
-          setUserProfile(data);
-          setUserNotFound(false);
-        }
-      });
+    const fetchData = async () => {
+      try {
+        const searchQuery = getSearchQuery(location.pathname);
 
-      fetchRepos(input).then((data) => {
-        setUserRepos(data);
-      });
+        const user = await getUser(searchQuery);
+        const repos = await getRepos(searchQuery);
+        const activities = await getActivities(searchQuery);
 
-      fetchActivities(input).then((data) => {
-        setUserActivities(data);
-      });
+        setUserProfile(user);
+        setUserRepos(repos);
+        setUserActivities(activities);
+      } catch (error) {
+        setNotFound(true);
+      }
     };
+
     fetchData();
   }, [location.pathname]);
 
-  const userLoaded =
-    !userProfile || !userRepos || !userActivities ? false : true;
+  // const userLoaded =
+  //   !userProfile || !userRepos || !userActivities ? false : true;
 
-  let userPending = !userLoaded ? (
-    <LoadingScreen>
-      <LoadingIcon />
-    </LoadingScreen>
-  ) : null;
+  // let userPending = !userLoaded ? (
+  //   <LoadingScreen>
+  //     <LoadingIcon />
+  //   </LoadingScreen>
+  // ) : null;
 
-  if (userNotFound) {
-    userPending = <NotFound />;
-  }
+  // if (userNotFound) {
+  //   userPending = <NotFound />;
+  // }
 
   return (
     <>
-      <Wrapper>
+      {/* <Wrapper>
         <Header>
           <Logo />
-          <SearchField searchedInput={searchedInput} />
+          <SearchField />
         </Header>
         {userPending}
         {!userNotFound && userLoaded ? (
@@ -141,7 +143,7 @@ const ResultsPage = () => {
           </Profile>
         ) : null}
       </Wrapper>
-      <Footer />
+      <Footer /> */}
     </>
   );
 };

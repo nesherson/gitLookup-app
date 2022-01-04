@@ -1,6 +1,8 @@
 import React from 'react';
 import Styled from 'styled-components';
 
+import { Repo } from '../../types';
+
 import { getCount, parseDate } from '../../../../util/helpers';
 import { IProfile, IRepo } from '../ResultsPage';
 
@@ -27,8 +29,8 @@ const Wrapper = Styled.div`
 `;
 
 const ProfileSection: React.FC<{
-  profile: IProfile | null;
-  repos: IRepo[] | null;
+  profile: IProfile;
+  repos: Repo[];
 }> = ({ profile, repos }) => {
   const about = {
     userName: profile?.name,
@@ -63,23 +65,17 @@ const ProfileSection: React.FC<{
   const languages = getLanguages();
 
   const dates = {
-    createdAt: parseDate(profile?.created_at, [
-      'en-GB',
-      {
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric',
-      },
-    ]),
+    createdAt: parseDate(profile.created_at, 'en-GB', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+    }),
     location: profile?.location,
-    updatedAt: parseDate(profile?.updated_at, [
-      'en-GB',
-      {
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric',
-      },
-    ]),
+    updatedAt: parseDate(profile.updated_at, 'en-GB', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+    }),
   };
 
   return (
