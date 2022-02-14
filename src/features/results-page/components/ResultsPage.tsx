@@ -1,20 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import Styled from 'styled-components';
 import { useLocation } from 'react-router-dom';
+
 import {
   fetchUser,
   fetchRepos,
   fetchActivities,
-} from '../../util/fetchData.js';
-import { getSearchedInput } from '../../util/helpers.js';
+} from '../../../util/fetchData.js';
+import { getSearchedInput } from '../../../util/helpers.js';
 
-import { Logo } from '../UI/Logo/Logo';
-import { SearchField } from '../UI/SearchField/SearchField';
-import { NotFound } from '../UI/NotFound/NotFound';
-import { Footer } from '../UI/Footer/Footer';
-import { ProfileSection } from './ProfileSection/ProfileSection';
-import { ActivitySection } from './ActivitySection/ActivitySection';
-import { LoadingIcon } from '../../assets/icons/LoadingIcon';
+import Logo from '../../../components/Logo/Logo';
+import SearchField from '../../../components/SearchField/SearchField';
+import NotFound from '../../../components/NotFound/NotFound';
+import Footer from '../../../components/Layout/Footer/Footer';
+import ProfileSection from './ProfileSection/ProfileSection';
+import ActivitySection from './ActivitySection/ActivitySection';
+import LoadingIcon from '../../../assets/icons/LoadingIcon';
 
 const Wrapper = Styled.div`
   margin: 0 auto;
@@ -47,30 +48,46 @@ const Profile = Styled.div`
   }
 `;
 
-
 export interface IActivity {
-  id: number,
-  author: string,
-  type: string,
-  name: string,
-  repo: string,
-  payload: IPayload,
-  created_at: string
+  id: number;
+  author: string;
+  type: string;
+  name: string;
+  repo: string;
+  payload: IPayload;
+  created_at: string;
 }
 
 interface IPayload {
-  comment: any,
-  issue: any,
-  size: number,
-  ref_type: string,
-  ref: string,
-  pull_request: any,
+  comment: any;
+  issue: any;
+  size: number;
+  ref_type: string;
+  ref: string;
+  pull_request: any;
 }
 
-export const ResultsPage = () => {
+export interface IProfile {
+  name: string;
+  avatar_url: string;
+  html_url: string;
+  blog?: string;
+  followers: number;
+  following: number;
+  created_at: string;
+  updated_at: string;
+  location: string;
+}
+
+export interface IRepo {
+  language: any;
+  stargazers_count: number;
+}
+
+const ResultsPage = () => {
   const [userNotFound, setUserNotFound] = useState(false);
-  const [userProfile, setUserProfile] = useState(null);
-  const [userRepos, setUserRepos] = useState(null);
+  const [userProfile, setUserProfile] = useState<IProfile | null>(null);
+  const [userRepos, setUserRepos] = useState<IRepo[] | null>(null);
   const [userActivities, setUserActivities] = useState<IActivity[]>([]);
 
   const location = useLocation();
@@ -132,3 +149,5 @@ export const ResultsPage = () => {
     </>
   );
 };
+
+export default ResultsPage;

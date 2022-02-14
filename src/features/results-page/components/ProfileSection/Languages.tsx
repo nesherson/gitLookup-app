@@ -18,7 +18,9 @@ const Item = Styled.span`
     border-radius: 3px;
 `;
 
-export const UserLanguages = ({languages}) => {
+const UserLanguages: React.FC<{ languages?: string[] | null }> = ({
+  languages,
+}) => {
   return (
     <List>
       {languages &&
@@ -28,3 +30,5 @@ export const UserLanguages = ({languages}) => {
     </List>
   );
 };
+
+export default UserLanguages;

@@ -1,7 +1,7 @@
 import React from 'react';
 import '../../util/animation.css';
 
-export const LoadingIcon = (props) => {
+const LoadingIcon = (props) => {
   return (
     <svg width='120px' height='120px' viewBox='0 0 120 120'>
       <title>illustration_search</title>
@@ -144,3 +144,5 @@ export const LoadingIcon = (props) => {
     </svg>
   );
 };
+
+export default LoadingIcon;

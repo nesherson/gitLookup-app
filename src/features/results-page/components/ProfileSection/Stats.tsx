@@ -23,28 +23,37 @@ const Wrapper = Styled.div`
   border-bottom: 1px solid #d9d9d9;
 `;
 
-export const UserStats = ({stats}) => {
+interface Props {
+  followers?: number | null;
+  following?: number | null;
+  stars?: number | null;
+  forks?: number | null;
+}
+
+const UserStats: React.FC<Props> = ({ followers, following, stars, forks }) => {
   return (
     <Wrapper>
       <StatsWrapper>
         <Stat>Followers</Stat>
-        <StatNumber>{stats.followers}</StatNumber>
+        <StatNumber>{followers}</StatNumber>
       </StatsWrapper>
 
       <StatsWrapper>
         <Stat>Following</Stat>
-        <StatNumber>{stats.following}</StatNumber>
+        <StatNumber>{following}</StatNumber>
       </StatsWrapper>
 
       <StatsWrapper>
         <Stat>Stars received</Stat>
-        <StatNumber>{stats.stars}</StatNumber>
+        <StatNumber>{stars}</StatNumber>
       </StatsWrapper>
 
       <StatsWrapper>
         <Stat>Forks By Users</Stat>
-        <StatNumber>{stats.forks}</StatNumber>
+        <StatNumber>{forks}</StatNumber>
       </StatsWrapper>
     </Wrapper>
   );
 };
+
+export default UserStats;

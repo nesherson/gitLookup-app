@@ -1,12 +1,14 @@
 import React from 'react';
 import Styled from 'styled-components';
-import Star from '../../../assets/icons/star.svg';
-import Comment from '../../../assets/icons/comment.svg';
-import Plus from '../../../assets/icons/plus.svg';
-import Trash from '../../../assets/icons/trash.svg';
-import Branch from '../../../assets/icons/branch.svg';
-import { ListItem } from './ListItem';
-import { Link } from '../../UI/Link/Link';
+
+import Star from '../../../../assets/icons/star.svg';
+import Comment from '../../../../assets/icons/comment.svg';
+import Plus from '../../../../assets/icons/plus.svg';
+import Trash from '../../../../assets/icons/trash.svg';
+import Branch from '../../../../assets/icons/branch.svg';
+import ListItem from './ListItem';
+import Link from '../../../../components/Link/Link';
+
 import { IActivity } from '../ResultsPage';
 
 const List = Styled.div`
@@ -21,7 +23,9 @@ const PUSH_EVENT = 'PushEvent';
 const PULL_REQUEST_EVENT = 'PullRequestEvent';
 const CREATE_EVENT = 'CreateEvent';
 
-export const ActivityList:React.FC<{activities: IActivity[]}> = ({activities}) => {
+export const ActivityList: React.FC<{ activities: IActivity[] }> = ({
+  activities,
+}) => {
   return (
     <List>
       {activities &&

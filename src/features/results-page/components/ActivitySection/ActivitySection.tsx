@@ -29,7 +29,9 @@ const Wrapper = Styled.div`
   }
 `;
 
-export const ActivitySection:React.FC<{activities: IActivity[]}> = ({ activities }) => {
+const ActivitySection: React.FC<{ activities: IActivity[] }> = ({
+  activities,
+}) => {
   return (
     <Wrapper>
       <Heading>Latest activities</Heading>
@@ -37,3 +39,5 @@ export const ActivitySection:React.FC<{activities: IActivity[]}> = ({ activities
     </Wrapper>
   );
 };
+
+export default ActivitySection;

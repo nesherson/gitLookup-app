@@ -1,6 +1,6 @@
 import React from 'react';
 import Styled from 'styled-components';
-import { Link } from '../../UI/Link/Link';
+import Link from '../../../../components/Link/Link';
 
 const Avatar = Styled.div`
     width: 44px;
@@ -34,18 +34,30 @@ const Wrapper = Styled.div`
     padding: 14px;
 `;
 
-export const About = ({ about }) => {
+interface Props {
+  profilePicture?: string;
+  userName?: string;
+  profileUrl?: string;
+  blog?: string | null;
+}
+
+const About: React.FC<Props> = ({
+  profilePicture,
+  userName,
+  profileUrl,
+  blog,
+}) => {
   return (
     <Wrapper>
       <Avatar>
-        <ProfilePicture src={`${about.profilePicture}`} alt={''} />
+        <ProfilePicture src={`${profilePicture}`} alt={''} />
       </Avatar>
       <UserName>
-        <Heading>{about.userName}</Heading>
-        <Link url={about.profileUrl}>↗</Link>
-        {about.blog ? (
-          <Link url={about.blog} type='blog'>
-            {about.blog}
+        <Heading>{userName}</Heading>
+        <Link url={profileUrl}>↗</Link>
+        {blog ? (
+          <Link url={blog} type='blog'>
+            {blog}
           </Link>
         ) : (
           ''
@@ -54,3 +66,5 @@ export const About = ({ about }) => {
     </Wrapper>
   );
 };
+
+export default About;

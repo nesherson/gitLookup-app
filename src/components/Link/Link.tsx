@@ -12,12 +12,12 @@ const BlogLink = Styled(Anchor)`
 `;
 
 interface Props {
-  type?: string,
-  url: string,
-  children: string
+  type?: string;
+  url?: string;
+  children: string;
 }
 
-export const Link:React.FC<Props> = ({type, url, children}) => {
+const Link: React.FC<Props> = ({ type, url, children }) => {
   return (
     <>
       {type === 'blog' ? (
@@ -32,3 +32,5 @@ export const Link:React.FC<Props> = ({type, url, children}) => {
     </>
   );
 };
+
+export default Link;

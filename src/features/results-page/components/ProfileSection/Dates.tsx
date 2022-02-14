@@ -34,18 +34,26 @@ const Wrapper = Styled.div`
     padding: 12px;
 `;
 
-export const UserDates = ({dates}) => {
+interface Props {
+  createdAt?: string | null;
+  updatedAt?: string | null;
+  location?: string | null;
+}
+
+const UserDates: React.FC<Props> = ({ createdAt, updatedAt, location }) => {
   return (
     <Wrapper>
       <StatsWrapper>
         <Heading>Joined</Heading>
-        <Text>{dates.createdAt}</Text>
+        <Text>{createdAt}</Text>
       </StatsWrapper>
       <StatsWrapper>
         <Heading>Location</Heading>
-        <LocationText>{dates.location}</LocationText>
+        <LocationText>{location}</LocationText>
       </StatsWrapper>
-      <TextSpan>Last Updated on {dates.updatedAt}</TextSpan>
+      <TextSpan>Last Updated on {updatedAt}</TextSpan>
     </Wrapper>
   );
 };
+
+export default UserDates;

@@ -29,12 +29,12 @@ const Date = Styled.span`
 `;
 
 interface IProps {
-  icon: string,
-  date: string,
-  children: React.ReactNode
-};
+  icon: string;
+  date: string;
+  children: React.ReactNode;
+}
 
-export const ListItem:React.FC<IProps> = ({icon, date, children}) => {
+const ListItem: React.FC<IProps> = ({ icon, date, children }) => {
   return (
     <Item>
       <ItemText>
@@ -45,3 +45,5 @@ export const ListItem:React.FC<IProps> = ({icon, date, children}) => {
     </Item>
   );
 };
+
+export default ListItem;

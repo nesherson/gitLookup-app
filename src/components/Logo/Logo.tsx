@@ -1,7 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import Styled from 'styled-components';
-import Search from '../../../assets/icons/search.svg';
+import Search from '../../assets/icons/search.svg';
 
 const Wrapper = Styled.div<{ primary?: boolean }>`
   text-align: center;

@@ -12,7 +12,7 @@ const Wrapper = Styled.div`
   align-items: center;  
 `;
 
-export const SearchPage: React.FC = () => {
+const SearchPage: React.FC = () => {
   return (
     <>
       <Wrapper>
@@ -23,3 +23,5 @@ export const SearchPage: React.FC = () => {
     </>
   );
 };
+
+export default SearchPage;
