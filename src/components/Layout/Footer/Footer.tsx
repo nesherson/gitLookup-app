@@ -17,7 +17,7 @@ const Text = Styled.p`
     margin: 7px;
 `;
 
-export const Footer:React.FC = () => {
+const Footer: React.FC = () => {
   return (
     <Wrapper>
       <Text>This project is based on gitstalk</Text>
@@ -31,3 +31,5 @@ export const Footer:React.FC = () => {
     </Wrapper>
   );
 };
+
+export default Footer;

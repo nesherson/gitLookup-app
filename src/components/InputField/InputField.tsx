@@ -1,7 +1,7 @@
-import React, { ChangeEventHandler} from 'react';
+import React, { ChangeEventHandler } from 'react';
 import Styled from 'styled-components';
 
-const Input = Styled.input<{primary?: boolean}>`
+const Input = Styled.input<{ primary?: boolean }>`
   padding: 7px;
   font-size: 1.02rem;
   border: 1px solid #d9d9d9;
@@ -23,12 +23,12 @@ const InputLabel = Styled.label`
 `;
 
 interface Props {
-  primary?: boolean,
-  searchInput?: string,
-  onChange: ChangeEventHandler<HTMLInputElement>
+  primary?: boolean;
+  searchInput?: string;
+  onChange: ChangeEventHandler<HTMLInputElement>;
 }
 
-export const InputField:React.FC<Props> = ({ primary, searchInput, onChange }) => {
+const InputField: React.FC<Props> = ({ primary, searchInput, onChange }) => {
   return (
     <>
       {primary ? <InputLabel htmlFor='username'>github.com/</InputLabel> : null}
@@ -44,3 +44,5 @@ export const InputField:React.FC<Props> = ({ primary, searchInput, onChange }) =
     </>
   );
 };
+
+export default InputField;

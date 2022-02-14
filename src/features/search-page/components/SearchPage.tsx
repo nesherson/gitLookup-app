@@ -1,10 +1,10 @@
 import React from 'react';
 import Styled from 'styled-components';
-import { Logo } from '../UI/Logo/Logo';
-import { SearchField } from '../UI/SearchField/SearchField';
-import { Footer } from '../UI/Footer/Footer';
+import Logo from '../../../components/Logo/Logo';
+import SearchField from '../../../components/SearchField/SearchField';
+import Footer from '../../../components/Layout/Footer/Footer';
 
-const SearchPage = Styled.div`
+const Wrapper = Styled.div`
   min-height: calc(100vh - 100px);
   display: flex;
   flex-direction: column;
@@ -12,13 +12,13 @@ const SearchPage = Styled.div`
   align-items: center;  
 `;
 
-export const Homepage:React.FC = () => {
+export const SearchPage: React.FC = () => {
   return (
     <>
-      <SearchPage>
+      <Wrapper>
         <Logo primary />
         <SearchField primary />
-      </SearchPage>
+      </Wrapper>
       <Footer />
     </>
   );
