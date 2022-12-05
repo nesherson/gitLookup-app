@@ -18,16 +18,20 @@ import {
   CREATE_EVENT,
 } from '../../constants/activityEvents';
 
-import { IActivity } from '../ResultsPage';
+import { Activity } from 'src/types';
 
 const List = Styled.div`
     padding: 15px 0 25px 0;
     list-style: none;
 `;
 
-export const ActivityList: React.FC<{ activities: IActivity[] }> = ({
-  activities,
-}) => {
+type ActivityListProps = {
+  activities: Activity[]
+}
+
+function ActivityList ({
+  activities
+}: ActivityListProps) {
   return (
     <List>
       {activities &&
@@ -130,3 +134,5 @@ export const ActivityList: React.FC<{ activities: IActivity[] }> = ({
     </List>
   );
 };
+
+export default ActivityList;

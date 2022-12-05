@@ -1,4 +1,4 @@
-import { Repo } from "src/features/results-page/types";
+import { Repo } from "src/types";
 
 export const parseDate = (date: string, locale: string, options: object) => {
   return new Date(date).toLocaleDateString(locale, options);

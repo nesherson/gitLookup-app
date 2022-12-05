@@ -4,9 +4,9 @@ import Styled from 'styled-components';
 
 import { getSearchQuery } from 'src/util/helpers';
 
-import InputField from '../InputField/InputField';
+import TextInput from '../TextInput/TextInput';
 
-const SearchButton = Styled.button<{ primary?: boolean }>`
+const StyledButton = Styled.button<{ primary?: boolean }>`
   font-size: 1rem;
   letter-spacing: 1px;
   padding: ${(props) => (props.primary ? '8px 30px' : '8px 15px')};
@@ -31,7 +31,7 @@ interface Props {
   searchQuery?: string;
 }
 
-const SearchField: React.FC<Props> = ({ primary }) => {
+function Search({ primary }: Props) {
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -40,9 +40,8 @@ const SearchField: React.FC<Props> = ({ primary }) => {
   const [searchInput, setSearchInput] = useState(searchQuery);
   const [isInputEmpty, setIsInputEmpty] = useState(false);
 
-  const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) =>
     setSearchInput(e.target.value);
-  };
 
   const handleOnSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -63,14 +62,14 @@ const SearchField: React.FC<Props> = ({ primary }) => {
     <>
       <div>
         <form onSubmit={handleOnSubmit}>
-          <InputField
+          <TextInput
             primary={primary}
-            searchInput={searchQuery}
+            searchInput={searchInput}
             onChange={handleOnChange}
           />
-          <SearchButton primary={primary} type='submit'>
+          <StyledButton primary={primary} type='submit'>
             Search
-          </SearchButton>
+          </StyledButton>
         </form>
         {isInputEmpty && emptyInputWarning}
       </div>
@@ -78,4 +77,4 @@ const SearchField: React.FC<Props> = ({ primary }) => {
   );
 };
 
-export default SearchField;
+export default Search;

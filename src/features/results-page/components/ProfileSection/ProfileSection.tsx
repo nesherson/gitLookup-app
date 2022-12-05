@@ -1,15 +1,14 @@
-import React from 'react';
-import Styled from 'styled-components';
+import React from "react";
+import Styled from "styled-components";
 
-import { Repo } from '../../types';
+import { User, Repo } from "src/types";
 
-import { getCount, parseDate } from '../../../../util/helpers';
-import { IProfile, IRepo } from '../ResultsPage';
+import { getCount, parseDate } from "../../../../util/helpers";
 
-import About from './About';
-import UserStats from './Stats';
-import UserLanguages from './Languages';
-import UserDates from './Dates';
+import About from "./About";
+import UserStats from "./Stats";
+import UserLanguages from "./Languages";
+import UserDates from "./Dates";
 
 const Wrapper = Styled.div`
     border: 1px solid #d9d9d9;
@@ -28,22 +27,24 @@ const Wrapper = Styled.div`
   }
 `;
 
-const ProfileSection: React.FC<{
-  profile: IProfile;
+type ProfileSectionProps = {
+  profile: User;
   repos: Repo[];
-}> = ({ profile, repos }) => {
+};
+
+function ProfileSection({ profile, repos }: ProfileSectionProps) {
   const about = {
-    userName: profile?.name,
-    profilePicture: profile?.avatar_url,
-    profileUrl: profile?.html_url,
-    blog: profile?.blog ? profile.blog : null,
+    userName: profile.name,
+    profilePicture: profile.avatar_url,
+    profileUrl: profile.html_url,
+    blog: profile.blog
   };
 
   const stars: number = getCount(repos);
   const forks: number = getCount(repos);
   const stats = {
-    followers: profile?.followers,
-    following: profile?.following,
+    followers: profile.followers,
+    following: profile.following,
     stars: stars,
     forks: forks,
   };
@@ -86,6 +87,6 @@ const ProfileSection: React.FC<{
       <UserDates {...dates} />
     </Wrapper>
   );
-};
+}
 
 export default ProfileSection;

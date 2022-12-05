@@ -9,6 +9,12 @@ export type User = {
     updated_at: string,
     location: string,
     repo_count: number,
+    fetchedAt: string
+}
+
+export type UserJsonResponse = {
+    data?: User,
+    errors?: Array<{ message: string }>
 }
 
 export type Repo = {
@@ -34,4 +40,3 @@ export type Payload =  {
     ref: string,
     pull_request: any,
   }
-

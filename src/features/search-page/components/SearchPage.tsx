@@ -2,7 +2,7 @@ import React from 'react';
 import Styled from 'styled-components';
 
 import Logo from 'src/components/Logo/Logo';
-import SearchField from 'src/components/SearchField/SearchField';
+import SearchField from 'src/components/SearchField/Search';
 import Footer from 'src/components/Layout/Footer/Footer';
 
 const Wrapper = Styled.div`
@@ -13,7 +13,7 @@ const Wrapper = Styled.div`
   align-items: center;  
 `;
 
-const SearchPage: React.FC = () => {
+function SearchPage() {
   return (
     <>
       <Wrapper>

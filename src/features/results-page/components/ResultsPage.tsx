@@ -2,22 +2,16 @@ import React, { useEffect, useState } from 'react';
 import Styled from 'styled-components';
 import { useLocation } from 'react-router-dom';
 
-import { User, Repo, Activity } from '../types';
-
-import {
-  getUser,
-  getRepos,
-  getActivities,
-} from 'src/features/results-page/api/api';
-
-import { getSearchQuery } from 'src/util/helpers.js';
+import { User, Repo, Activity } from 'src/types';
+import { fetchUser, fetchRepos, fetchActivities } from "src/util/fetchData";
+import { getSearchQuery } from 'src/util/helpers';
 
 import Logo from 'src/components/Logo/Logo';
-import SearchField from 'src/components/SearchField/SearchField';
+import SearchField from 'src/components/SearchField/Search';
 import NotFound from 'src/components/NotFound/NotFound';
 import Footer from 'src/components/Layout/Footer/Footer';
-import ProfileSection from './ProfileSection/ProfileSection';
-import ActivitySection from './ActivitySection/ActivitySection';
+import ProfileSection from 'src/features/results-page/components/ProfileSection/ProfileSection';
+import ActivitySection from 'src/features/results-page/components/ActivitySection/ActivitySection';
 import LoadingIcon from 'src/assets/icons/LoadingIcon';
 
 const Wrapper = Styled.div`
@@ -51,47 +45,11 @@ const Profile = Styled.div`
   }
 `;
 
-export interface IActivity {
-  id: number;
-  author: string;
-  type: string;
-  name: string;
-  repo: string;
-  payload: IPayload;
-  created_at: string;
-}
-
-interface IPayload {
-  comment: any;
-  issue: any;
-  size: number;
-  ref_type: string;
-  ref: string;
-  pull_request: any;
-}
-
-export interface IProfile {
-  name: string;
-  avatar_url: string;
-  html_url: string;
-  blog?: string;
-  followers: number;
-  following: number;
-  created_at: string;
-  updated_at: string;
-  location: string;
-}
-
-export interface IRepo {
-  language: any;
-  stargazers_count: number;
-}
-
 const ResultsPage = () => {
   const [notFound, setNotFound] = useState(false);
-  const [userProfile, setUserProfile] = useState<User | null>(null);
-  const [userRepos, setUserRepos] = useState<Repo | null>();
-  const [userActivities, setUserActivities] = useState<Activity[] | null>(null);
+  const [userProfile, setUserProfile] = useState<User>({} as User);
+  const [userRepos, setUserRepos] = useState<Repo[]>([]);
+  const [userActivities, setUserActivities] = useState<Activity[]>([]);
 
   const location = useLocation();
 
@@ -100,9 +58,9 @@ const ResultsPage = () => {
       try {
         const searchQuery = getSearchQuery(location.pathname);
 
-        const user = await getUser(searchQuery);
-        const repos = await getRepos(searchQuery);
-        const activities = await getActivities(searchQuery);
+        const user = await fetchUser(searchQuery);
+        const repos = await fetchRepos(searchQuery);
+        const activities = await fetchActivities(searchQuery);
 
         setUserProfile(user);
         setUserRepos(repos);
@@ -115,35 +73,35 @@ const ResultsPage = () => {
     fetchData();
   }, [location.pathname]);
 
-  // const userLoaded =
-  //   !userProfile || !userRepos || !userActivities ? false : true;
+  const userLoaded =
+    !userProfile || !userRepos || !userActivities ? false : true;
 
-  // let userPending = !userLoaded ? (
-  //   <LoadingScreen>
-  //     <LoadingIcon />
-  //   </LoadingScreen>
-  // ) : null;
+  let userPending = !userLoaded ? (
+    <LoadingScreen>
+      <LoadingIcon />
+    </LoadingScreen>
+  ) : null;
 
-  // if (userNotFound) {
-  //   userPending = <NotFound />;
-  // }
+  if (notFound) {
+    userPending = <NotFound />;
+  }
 
   return (
     <>
-      {/* <Wrapper>
+      <Wrapper>
         <Header>
           <Logo />
           <SearchField />
         </Header>
         {userPending}
-        {!userNotFound && userLoaded ? (
+        {!notFound && userLoaded ? (
           <Profile>
             <ProfileSection profile={userProfile} repos={userRepos} />
             <ActivitySection activities={userActivities} />
           </Profile>
         ) : null}
       </Wrapper>
-      <Footer /> */}
+      <Footer />
     </>
   );
 };
