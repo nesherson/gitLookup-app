@@ -1,4 +1,4 @@
-import { User, Repo, Activity} from "src/types";
+import { User, Repo, Activity } from "src/types";
 
 const url = "https://api.github.com/users/";
 
@@ -33,14 +33,13 @@ export async function fetchRepos(username: string): Promise<Repo[]> {
       return Promise.reject(
         new Error(`No repos for user with the username "${username}"`)
       );
-  }
-  else {
+  } else {
     const error = new Error(response.statusText);
     return Promise.reject(error);
   }
 }
 
-export async  function fetchActivities (username: string) {
+export async function fetchActivities(username: string) {
   const urlToFetch = `${url}${username}/events`;
   const response = await fetch(urlToFetch);
 
@@ -52,9 +51,8 @@ export async  function fetchActivities (username: string) {
       return Promise.reject(
         new Error(`No activities for user with the username "${username}"`)
       );
-  }
-  else {
+  } else {
     const error = new Error(response.statusText);
     return Promise.reject(error);
   }
-};
+}
