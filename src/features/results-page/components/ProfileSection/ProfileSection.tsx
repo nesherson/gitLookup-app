@@ -37,7 +37,7 @@ function ProfileSection({ profile, repos }: ProfileSectionProps) {
     userName: profile.name,
     profilePicture: profile.avatar_url,
     profileUrl: profile.html_url,
-    blog: profile.blog
+    blog: profile.blog,
   };
 
   const stars: number = getCount(repos);
@@ -66,16 +66,16 @@ function ProfileSection({ profile, repos }: ProfileSectionProps) {
   const languages = getLanguages();
 
   const dates = {
-    createdAt: parseDate(profile.created_at, 'en-GB', {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric',
+    createdAt: parseDate(profile.created_at, "en-GB", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
     }),
     location: profile?.location,
-    updatedAt: parseDate(profile.updated_at, 'en-GB', {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric',
+    updatedAt: parseDate(profile.updated_at, "en-GB", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
     }),
   };
 

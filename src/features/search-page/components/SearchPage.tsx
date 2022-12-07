@@ -1,12 +1,11 @@
-import React from 'react';
-import Styled from 'styled-components';
+import React from "react";
+import Styled from "styled-components";
 
-import Logo from 'src/components/Logo/Logo';
-import SearchField from 'src/components/SearchField/Search';
-import Footer from 'src/components/Layout/Footer/Footer';
+import { Logo } from "src/components";
+import { Search } from "src/components";
 
-const Wrapper = Styled.div`
-  min-height: calc(100vh - 100px);
+const Container = Styled.section`
+  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -15,14 +14,11 @@ const Wrapper = Styled.div`
 
 function SearchPage() {
   return (
-    <>
-      <Wrapper>
-        <Logo primary />
-        <SearchField primary />
-      </Wrapper>
-      <Footer />
-    </>
+    <Container>
+      <Logo primary />
+      <Search primary />
+    </Container>
   );
-};
+}
 
 export default SearchPage;

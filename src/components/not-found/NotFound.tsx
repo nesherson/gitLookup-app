@@ -18,7 +18,7 @@ const Text = Styled.p`
     color: #ccc;
 `;
 
-const NotFound: React.FC = () => {
+function NotFound() {
   return (
     <Wrapper>
       <Heading>Username not found.</Heading>

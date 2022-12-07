@@ -7,7 +7,9 @@ import Plus from 'src/assets/icons/plus.svg';
 import Trash from 'src/assets/icons/trash.svg';
 import Branch from 'src/assets/icons/branch.svg';
 import ListItem from './ListItem';
-import Link from 'src/components/Link/Link';
+import Link from 'src/components/link/Link';
+
+import { timeSince } from 'src/util/helpers';
 
 import {
   WATCH_EVENT,
@@ -35,95 +37,97 @@ function ActivityList ({
   return (
     <List>
       {activities &&
-        activities.map((activity) => {
-          switch (activity.type) {
+        activities.map((a) => {
+          const createdAt = timeSince(new Date(a.created_at));
+
+          switch (a.type) {
             case WATCH_EVENT:
               return (
                 <ListItem
                   icon={Star}
-                  date={activity.created_at}
-                  key={activity.id}
+                  date={createdAt}
+                  key={a.id}
                 >
                   Starred a repo{' '}
-                  <Link url={activity.repo}>{activity.name}</Link>
+                  <Link url={a.repo}>{a.name}</Link>
                 </ListItem>
               );
             case ISSUE_COMMENT_EVENT:
-              const commentUrl = activity.payload.comment.html_url;
+              const commentUrl = a.payload.comment.html_url;
               return (
                 <ListItem
                   icon={Comment}
-                  date={activity.created_at}
-                  key={activity.id}
+                  date={createdAt}
+                  key={a.id}
                 >
                   Created a <Link url={commentUrl}>comment</Link> on an issue in{' '}
-                  <Link url={activity.repo}>{activity.name}</Link>
+                  <Link url={a.repo}>{a.name}</Link>
                 </ListItem>
               );
             case ISSUES_EVENT:
-              const issueUrl = activity.payload.issue.html_url;
+              const issueUrl = a.payload.issue.html_url;
               return (
                 <ListItem
                   icon={Plus}
-                  date={activity.created_at}
-                  key={activity.id}
+                  date={createdAt}
+                  key={a.id}
                 >
                   Opened an <Link url={issueUrl}>issue</Link> in{' '}
-                  <Link url={activity.repo}>{activity.name}</Link>
+                  <Link url={a.repo}>{a.name}</Link>
                 </ListItem>
               );
             case PUSH_EVENT:
-              const pushSize = activity.payload.size;
-              const lastIndex = activity.payload.ref.split('/').length - 1;
-              const branch = activity.payload.ref.split('/')[lastIndex];
-              const branchUrl = `https://github.com/${activity.author}/tree/${branch}`;
+              const pushSize = a.payload.size;
+              const lastIndex = a.payload.ref.split('/').length - 1;
+              const branch = a.payload.ref.split('/')[lastIndex];
+              const branchUrl = `https://github.com/${a.author}/tree/${branch}`;
               return (
                 <ListItem
                   icon={Plus}
-                  date={activity.created_at}
-                  key={activity.id}
+                  date={createdAt}
+                  key={a.id}
                 >
                   Pushed {pushSize} commit to{' '}
                   <Link url={branchUrl}>{branch}</Link> in{' '}
-                  <Link url={activity.repo}>{activity.name}</Link>
+                  <Link url={a.repo}>{a.name}</Link>
                 </ListItem>
               );
 
             case PULL_REQUEST_EVENT:
-              const pullReq = activity.payload.pull_request.html_url;
+              const pullReq = a.payload.pull_request.html_url;
               return (
                 <ListItem
                   icon={Trash}
-                  date={activity.created_at}
-                  key={activity.id}
+                  date={createdAt}
+                  key={a.id}
                 >
                   Closed a <Link url={pullReq}>pull request</Link> in{' '}
-                  <Link url={activity.repo}>{activity.name}</Link>
+                  <Link url={a.repo}>{a.name}</Link>
                 </ListItem>
               );
             case CREATE_EVENT:
-              if (activity.payload.ref_type === 'branch') {
-                const ref = activity.payload.ref;
-                const branchUrl = `https://github.com/${activity.author}/tree/${ref}`;
+              if (a.payload.ref_type === 'branch') {
+                const ref = a.payload.ref;
+                const branchUrl = `https://github.com/${a.author}/tree/${ref}`;
                 return (
                   <ListItem
                     icon={Branch}
-                    date={activity.created_at}
-                    key={activity.id}
+                    date={createdAt}
+                    key={a.id}
                   >
                     Created a branch <Link url={branchUrl}>{ref}</Link> in{' '}
-                    <Link url={activity.repo}>{activity.name}</Link>
+                    <Link url={a.repo}>{a.name}</Link>
                   </ListItem>
                 );
               } else {
                 return (
                   <ListItem
                     icon={Plus}
-                    date={activity.created_at}
-                    key={activity.id}
+                    date={createdAt}
+                    key={a.id}
                   >
                     Created a repository{' '}
-                    <Link url={activity.repo}>{activity.name}</Link>
+                    <Link url={a.repo}>{a.name}</Link>
                   </ListItem>
                 );
               }

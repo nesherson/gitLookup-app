@@ -11,13 +11,13 @@ const BlogLink = Styled(Anchor)`
   font-size: 0.85rem;   
 `;
 
-interface Props {
+interface LinkProps {
   type?: string;
   url?: string;
   children: string;
 }
 
-const Link: React.FC<Props> = ({ type, url, children }) => {
+function Link({ type, url, children }: LinkProps) {
   return (
     <>
       {type === 'blog' ? (

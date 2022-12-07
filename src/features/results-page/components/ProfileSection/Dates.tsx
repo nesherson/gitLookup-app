@@ -1,5 +1,5 @@
-import React from 'react';
-import Styled from 'styled-components';
+import React from "react";
+import Styled from "styled-components";
 
 const Container = Styled.div`
     padding: 12px;
@@ -22,28 +22,28 @@ const Paragraph = Styled.p<{ color: string }>`
     color: ${(props) => props.color};
 `;
 
-interface Props {
+type UserDatesProps = {
   createdAt?: string | null;
   updatedAt?: string | null;
   location?: string | null;
-}
+};
 
-const UserDates: React.FC<Props> = ({ createdAt, updatedAt, location }) => {
+function UserDates({ createdAt, updatedAt, location }: UserDatesProps) {
   return (
     <Container>
       <Wrapper>
         <HeadingH4>Joined</HeadingH4>
-        <Paragraph color='#333333'>{createdAt}</Paragraph>
+        <Paragraph color="#333333">{createdAt}</Paragraph>
       </Wrapper>
       {location && (
         <Wrapper>
           <HeadingH4>Location</HeadingH4>
-          <Paragraph color='#705df2'>{location}</Paragraph>
+          <Paragraph color="#705df2">{location}</Paragraph>
         </Wrapper>
       )}
-      <Paragraph color='#aaaaaa'>Last Updated on {updatedAt}</Paragraph>
+      <Paragraph color="#aaaaaa">Last Updated on {updatedAt}</Paragraph>
     </Container>
   );
-};
+}
 
 export default UserDates;

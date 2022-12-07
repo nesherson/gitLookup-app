@@ -4,7 +4,7 @@ import Styled from 'styled-components';
 
 import { getSearchQuery } from 'src/util/helpers';
 
-import TextInput from '../TextInput/TextInput';
+import TextInput from '../text-input/TextInput';
 
 const StyledButton = Styled.button<{ primary?: boolean }>`
   font-size: 1rem;
@@ -59,7 +59,6 @@ function Search({ primary }: Props) {
   ) : null;
 
   return (
-    <>
       <div>
         <form onSubmit={handleOnSubmit}>
           <TextInput
@@ -73,7 +72,6 @@ function Search({ primary }: Props) {
         </form>
         {isInputEmpty && emptyInputWarning}
       </div>
-    </>
   );
 };
 

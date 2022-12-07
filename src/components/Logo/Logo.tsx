@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 import Styled from 'styled-components';
 import Search from '../../assets/icons/search.svg';
 
-const Wrapper = Styled.div<{ primary?: boolean }>`
+const Container = Styled.div<{ primary?: boolean }>`
   text-align: center;
   margin-bottom: ${(props) => (props.primary ? '35px' : '0')};
 `;
@@ -36,11 +36,11 @@ const LogoText = Styled.p`
   margin: 0;
 `;
 
-interface Props {
+interface LogoProps {
   primary?: boolean;
 }
 
-const Logo: React.FC<Props> = ({ primary }) => {
+function Logo({ primary }: LogoProps) {
   let logo = (
     <>
       <Heading primary={primary}>gitL</Heading>
@@ -63,10 +63,10 @@ const Logo: React.FC<Props> = ({ primary }) => {
 
   return (
     <div>
-      <Wrapper primary={primary}>
+      <Container primary={primary}>
         <LogoWrapper>{logo}</LogoWrapper>
         {primary ? <LogoText>Discover who's upto what...</LogoText> : null}
-      </Wrapper>
+      </Container>
     </div>
   );
 };

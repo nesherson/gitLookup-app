@@ -1,26 +1,24 @@
-import React, { useEffect, useState } from 'react';
-import Styled from 'styled-components';
-import { useLocation } from 'react-router-dom';
+import React, { useEffect, useState } from "react";
+import Styled from "styled-components";
+import { useLocation } from "react-router-dom";
 
-import { User, Repo, Activity } from 'src/types';
+import { User, Repo, Activity } from "src/types";
 import { fetchUser, fetchRepos, fetchActivities } from "src/util/fetchData";
-import { getSearchQuery } from 'src/util/helpers';
+import { getSearchQuery } from "src/util/helpers";
 
-import Logo from 'src/components/Logo/Logo';
-import SearchField from 'src/components/SearchField/Search';
-import NotFound from 'src/components/NotFound/NotFound';
-import Footer from 'src/components/Layout/Footer/Footer';
-import ProfileSection from 'src/features/results-page/components/ProfileSection/ProfileSection';
-import ActivitySection from 'src/features/results-page/components/ActivitySection/ActivitySection';
-import LoadingIcon from 'src/assets/icons/LoadingIcon';
+import { Logo } from "src/components";
+import { Search } from "src/components";
+import { NotFound } from "src/components";
+import { ProfileSection } from "src/features/results-page";
+import { ActivitySection } from "src/features/results-page";
+import LoadingIcon from "src/assets/icons/LoadingIcon";
 
-const Wrapper = Styled.div`
+const Container = Styled.div`
   margin: 0 auto;
   max-width: 980px;
-  min-height: calc(100vh - 100px);
 `;
 
-const LoadingScreen = Styled.div`
+const Loader = Styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -46,10 +44,11 @@ const Profile = Styled.div`
 `;
 
 const ResultsPage = () => {
-  const [notFound, setNotFound] = useState(false);
   const [userProfile, setUserProfile] = useState<User>({} as User);
   const [userRepos, setUserRepos] = useState<Repo[]>([]);
   const [userActivities, setUserActivities] = useState<Activity[]>([]);
+  const [notFound, setNotFound] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   const location = useLocation();
 
@@ -58,6 +57,9 @@ const ResultsPage = () => {
       try {
         const searchQuery = getSearchQuery(location.pathname);
 
+        setIsLoading(true);
+        setNotFound(false);
+
         const user = await fetchUser(searchQuery);
         const repos = await fetchRepos(searchQuery);
         const activities = await fetchActivities(searchQuery);
@@ -65,7 +67,10 @@ const ResultsPage = () => {
         setUserProfile(user);
         setUserRepos(repos);
         setUserActivities(activities);
+
+        setIsLoading(false);
       } catch (error) {
+        setIsLoading(false);
         setNotFound(true);
       }
     };
@@ -73,36 +78,25 @@ const ResultsPage = () => {
     fetchData();
   }, [location.pathname]);
 
-  const userLoaded =
-    !userProfile || !userRepos || !userActivities ? false : true;
-
-  let userPending = !userLoaded ? (
-    <LoadingScreen>
-      <LoadingIcon />
-    </LoadingScreen>
-  ) : null;
-
-  if (notFound) {
-    userPending = <NotFound />;
-  }
-
   return (
-    <>
-      <Wrapper>
-        <Header>
-          <Logo />
-          <SearchField />
-        </Header>
-        {userPending}
-        {!notFound && userLoaded ? (
-          <Profile>
-            <ProfileSection profile={userProfile} repos={userRepos} />
-            <ActivitySection activities={userActivities} />
-          </Profile>
-        ) : null}
-      </Wrapper>
-      <Footer />
-    </>
+    <Container>
+      <Header>
+        <Logo />
+        <Search />
+      </Header>
+      {isLoading && (
+        <Loader>
+          <LoadingIcon />
+        </Loader>
+      )}
+      {!isLoading && !notFound && (
+        <Profile>
+          <ProfileSection profile={userProfile} repos={userRepos} />
+          <ActivitySection activities={userActivities} />
+        </Profile>
+      )}
+      {notFound && <NotFound />}
+    </Container>
   );
 };
 

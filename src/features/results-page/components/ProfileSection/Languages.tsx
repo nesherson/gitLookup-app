@@ -1,5 +1,5 @@
-import React from 'react';
-import Styled from 'styled-components';
+import React from "react";
+import Styled from "styled-components";
 
 const List = Styled.ul`
     margin: 0;
@@ -18,9 +18,11 @@ const Item = Styled.span`
     border-radius: 3px;
 `;
 
-const UserLanguages: React.FC<{ languages?: string[] | null }> = ({
-  languages,
-}) => {
+type UserLanguagesProps = {
+  languages: string[] | null;
+};
+
+function UserLanguages({ languages }: UserLanguagesProps) {
   return (
     <List>
       {languages &&
@@ -29,6 +31,6 @@ const UserLanguages: React.FC<{ languages?: string[] | null }> = ({
         })}
     </List>
   );
-};
+}
 
 export default UserLanguages;

@@ -23,14 +23,14 @@ const Wrapper = Styled.div`
   border-bottom: 1px solid #d9d9d9;
 `;
 
-interface Props {
+type UserStatsProps =  {
   followers?: number | null;
   following?: number | null;
   stars?: number | null;
   forks?: number | null;
 }
 
-const UserStats: React.FC<Props> = ({ followers, following, stars, forks }) => {
+function UserStats({ followers, following, stars, forks }: UserStatsProps) {
   return (
     <Wrapper>
       <StatsWrapper>

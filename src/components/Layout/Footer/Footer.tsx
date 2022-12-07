@@ -1,11 +1,11 @@
 import React from 'react';
 import Styled from 'styled-components';
 
-const Wrapper = Styled.div`
+const StyledFooter = Styled.footer`
+    height: 60px;
     text-align: center;
     font-size: 0.85rem;
-    color: #aaa;
-    margin: 20px 0 15px 0;
+    margin: 20px 0;
 `;
 
 const Link = Styled.a`
@@ -15,11 +15,12 @@ const Link = Styled.a`
 
 const Text = Styled.p`
     margin: 7px;
+    color: #aaa;
 `;
 
-const Footer: React.FC = () => {
+function Footer() {
   return (
-    <Wrapper>
+    <StyledFooter>
       <Text>This project is based on gitstalk</Text>
       <Link
         href='https://github.com/thelittlewonder/gitstalk'
@@ -28,7 +29,7 @@ const Footer: React.FC = () => {
       >
         thelittlewonder/gitstalk
       </Link>
-    </Wrapper>
+    </StyledFooter>
   );
 };
 
