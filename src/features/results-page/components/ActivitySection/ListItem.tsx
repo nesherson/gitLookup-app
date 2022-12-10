@@ -1,10 +1,10 @@
 import React from 'react';
 import Styled from 'styled-components';
 
-const Item = Styled.li`
-    border-bottom: 1px solid #d9d9d9;
+const StyledListItem = Styled.li<{isLast: boolean}>`
+    border-bottom: ${(props) => (props.isLast ? "" : " 1px solid rgba(217, 217, 217, 0.5)")};
     padding-bottom: 10px;
-    margin: 20px;
+    margin-top: 20px;
     color: #4d4d4d;
     display: flex;
     justify-content: space-between;
@@ -14,7 +14,7 @@ const ItemText = Styled.div`
   flex: 1;
 `;
 
-const Text = Styled.p`
+const StyledParagraph = Styled.p`
   margin: 5px 0;
   display: inline;
 `;
@@ -32,17 +32,18 @@ type ListItemProps = {
   icon: string;
   date?: string;
   children: React.ReactNode;
+  isLast: boolean
 }
 
-function ListItem({ icon, date, children }: ListItemProps) {
+function ListItem({ icon, date, children, isLast }: ListItemProps) {
   return (
-    <Item>
+    <StyledListItem isLast={isLast}>
       <ItemText>
         <Icon src={icon} alt='' />
-        <Text>{children}</Text>
+        <StyledParagraph>{children}</StyledParagraph>
       </ItemText>
       { date && <Date>{date}</Date> }
-    </Item>
+    </StyledListItem>
   );
 };
 

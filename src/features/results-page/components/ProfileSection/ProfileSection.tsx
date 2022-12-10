@@ -7,7 +7,7 @@ import { getCount, parseDate } from "../../../../util/helpers";
 
 import About from "./About";
 import UserStats from "./Stats";
-import UserLanguages from "./Languages";
+import UserLanguages from "./UserLanguages";
 import UserDates from "./Dates";
 
 const Wrapper = Styled.div`
@@ -16,9 +16,9 @@ const Wrapper = Styled.div`
     min-width: 280px;
     border-radius: 5px;
     box-shadow:
-  1.9px 5.1px 5.3px -4px rgba(0, 0, 0, 0.028),
-  6.5px 17.2px 19.7px -4px rgba(0, 0, 0, 0.038),
-  29px 77px 93px -4px rgba(0, 0, 0, 0.07)
+  0px 0.7px 2.1px -3px rgba(0, 0, 0, 0.028),
+  0px 2.2px 7.1px -3px rgba(0, 0, 0, 0.042),
+  0px 10px 32px -3px rgba(0, 0, 0, 0.07)
 ;
     margin: 0 10px 0 15px;
     @media (max-width: 768px) {
@@ -49,21 +49,10 @@ function ProfileSection({ profile, repos }: ProfileSectionProps) {
     forks: forks,
   };
 
-  const getLanguages = () => {
-    const mappedLang = repos?.map((repo) => {
-      return repo.language;
-    });
-
-    const filterNull = mappedLang?.filter((lang) => lang !== null);
-
-    const filterRepeatedValues = filterNull?.filter((lang, i, arr) => {
-      return arr.indexOf(lang) === i;
-    });
-
-    return filterRepeatedValues;
-  };
-
-  const languages = getLanguages();
+  const languages = repos
+    ?.map((repo) => repo.language)
+    ?.filter((lang) => lang !== null)
+    ?.filter((lang, i, arr) => arr.indexOf(lang) === i);
 
   const dates = {
     createdAt: parseDate(profile.created_at, "en-GB", {

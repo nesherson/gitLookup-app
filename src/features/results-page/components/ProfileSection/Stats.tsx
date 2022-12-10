@@ -20,7 +20,7 @@ const StatsWrapper = Styled.div`
 
 const Wrapper = Styled.div`
   padding: 12px;
-  border-bottom: 1px solid #d9d9d9;
+  border-bottom: 1px solid rgba(217, 217, 217, 0.5);
 `;
 
 type UserStatsProps =  {

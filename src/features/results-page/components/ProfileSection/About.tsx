@@ -31,7 +31,7 @@ const UserName = Styled.div`
 const Wrapper = Styled.div`
     display: flex;
     flex-direction: row;
-    border-bottom: 1px solid #d9d9d9;
+    border-bottom: 1px solid rgba(217, 217, 217, 0.5);
     padding: 14px;
 `;
 

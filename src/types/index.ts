@@ -24,13 +24,23 @@ export type Repo = {
 
 export type Activity = {
   id: number;
-  author: string;
+  actor: ActivityActor;
   type: string;
   name: string;
-  repo: string;
+  repo: ActivityRepo;
   payload: Payload;
   created_at: string;
 };
+
+type ActivityRepo = {
+  id: number,
+  name: string,
+  url: string
+}
+
+type ActivityActor = {
+  login: string
+}
 
 export type Payload = {
   comment: any;

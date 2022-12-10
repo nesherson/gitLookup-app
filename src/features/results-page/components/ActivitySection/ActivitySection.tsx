@@ -9,8 +9,8 @@ import ActivityList from './ActivityList';
 const Heading = Styled.h3`
   font-size: 1.25rem;
   font-weight: 500;
-  margin: 10px 0 0 0;
-  padding: 12px 25px;
+  margin: 0;
+  padding: 12px 30px;
   border-bottom: 1px solid #d9d9d9;
   color: #333333;
   text-transform: uppercase;
@@ -21,9 +21,9 @@ const Wrapper = Styled.div`
     margin: 0px 15px 0 10px;  
     border-radius: 5px;
     box-shadow:
-  1.9px 5.1px 5.3px -4px rgba(0, 0, 0, 0.028),
-  6.5px 17.2px 19.7px -4px rgba(0, 0, 0, 0.038),
-  29px 77px 93px -4px rgba(0, 0, 0, 0.07)
+  0px 0.7px 2.1px -3px rgba(0, 0, 0, 0.028),
+  0px 2.2px 7.1px -3px rgba(0, 0, 0, 0.042),
+  0px 10px 32px -3px rgba(0, 0, 0, 0.07)
 ;
     width: 70%;
     @media (max-width: 768px) {
